@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:spell": "cspell \"**/*.{ts,tsx,js,jsx,md}\""
   },
   "dependencies": {
     "react": "^18",
