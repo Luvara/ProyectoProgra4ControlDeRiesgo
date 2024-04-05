@@ -10,7 +10,7 @@
     "lint:spell": "cspell \"**/*.{ts,tsx,js,jsx,md}\""
   },
   "dependencies": {
-    "@prisma/client": "^5.11.0",
+    "@prisma/client": "^5.12.1",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18"
@@ -23,7 +23,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8",
-    "prisma": "^5.11.0",
+    "prisma": "^5.12.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
