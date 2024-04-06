@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model prueba {
-  idprueba Int @id @default(autoincrement())
+model users {
+  usu_id               Int     @id @default(autoincrement())
+  usu_cedula           String? @db.VarChar(30)
+  usu_nombre           String? @db.VarChar(30)
+  usu_primer_apellido  String? @db.VarChar(30)
+  usu_segundo_apellido String? @db.VarChar(30)
+  usu_correo           String? @db.VarChar(100)
 }
