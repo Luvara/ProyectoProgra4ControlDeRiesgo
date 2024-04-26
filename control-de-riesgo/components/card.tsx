@@ -1,4 +1,4 @@
-const HomePageCard = ({ title, description, icon }: { title: string, description: string, icon: JSX.Element }) => {
+const Card = ({ title, description, icon }: { title: string, description: string, icon: JSX.Element }) => {
   return (
     <div className="xl:w-60 md:w-56 p-2">
       <div className="border h-full border-gray-200 p-6 rounded-lg">
@@ -16,4 +16,4 @@ const HomePageCard = ({ title, description, icon }: { title: string, description
   );
 };
 
-export default HomePageCard;
+export default Card;

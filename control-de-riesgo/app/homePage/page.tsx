@@ -3,9 +3,9 @@ import HomePage from "@/components/homePage";
 function page() {
   return (
     <>
-    <HomePage/>
+      <HomePage />
     </>
-  )
+  );
 }
 
 export default page;

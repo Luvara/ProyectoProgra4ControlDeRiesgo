@@ -1,24 +1,50 @@
-import CardBody from "./cardBody";
+import SurveyOverview from "./surveyOverview";
+import UserResponseChart from "./userResponseChart";
+import DepartmentCompletionChart from "./departmentCompletionChart";
+
+const departmentData = [
+  { name: "Department A", percentage: 75 },
+  { name: "Department B", percentage: 60 },
+  { name: "Department C", percentage: 90 },
+  { name: "Department D", percentage: 50 },
+  { name: "Department F", percentage: 80 },
+];
+
+const userData = [
+  { name: "Alice", responses: 5 },
+  { name: "Bob", responses: 14 },
+  { name: "Charlie", responses: 6 },
+  { name: "David", responses: 5 },
+  { name: "Alice", responses: 2 },
+  { name: "Bob", responses: 1 },
+  { name: "Charlie", responses: 8 },
+  { name: "David", responses: 11 },
+  { name: "Alice", responses: 7 },
+  { name: "Bob", responses: 4 },
+  { name: "Charlie", responses: 3 },
+  { name: "David", responses: 8 },
+];
 
 const BodyHomePage: React.FC = () => {
-    return (
-        <section className="text-gray-600 body-font">
-            <div className="container px-5 py-24 mx-auto">
-                <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
-                    <h1 className="md:text-5xl text-3xl font-bold title-font mb-2 text-white">Modulo de autoevaluación</h1>
-                </div>
-                <div className="justify-center flex flex-wrap -m-4">
-                    <CardBody title="Autoevaluación" description="Realiza una autoevaluación de tu empresa para determinar el nivel de riesgo de contagio de COVID-19." icon={<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>}/>
-                    <CardBody title="Resultados" description="Obten los resultados de la autoevaluación y descarga el certificado de cumplimiento de medidas de seguridad." icon={<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>}/>
-                    <CardBody title="Reportes" description="Visualiza los reportes de autoevaluación y descarga los certificados de cumplimiento de medidas de seguridad." icon={<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>}/>
-                    <CardBody title="Contacto" description="Contacta a un asesor para obtener más información sobre el modulo de autoevaluación." icon={<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>}/>
-                    <CardBody title="Acerca de" description="Conoce más sobre el modulo de autoevaluación y las medidas de seguridad para prevenir el contagio de COVID-19." icon={<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-6 h-6" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>}/>
-                </div>
-                <div className="justify-center flex flex-wrap -m-4">
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
+      <div className="flex flex-wrap w-full mb-10 flex-col items-center text-center">
+        <h1 className="md:text-5xl text-3xl font-bold title-font mb-2 text-white">
+          Self-assessment module
+        </h1>
+      </div>
+      <div className="flex flex-col md:flex-row justify-between items-center md:flex-wrap">
+        <SurveyOverview
+          completed={120}
+          total={200}
+          lastRespondents={["Alice", "Bob", "Charlie", "Diana", "Eve"]}
+        />
+        <UserResponseChart userData={userData} />
+
+        <DepartmentCompletionChart departmentData={departmentData} />
+      </div>
+    </div>
+  );
 };
 
 export default BodyHomePage;
