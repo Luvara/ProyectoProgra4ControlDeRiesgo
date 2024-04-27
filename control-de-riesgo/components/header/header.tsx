@@ -54,7 +54,7 @@ const Header = () => {
           >
             <li>
               <a
-                href="#"
+                href="/homePage"
                 className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
                 Home
@@ -88,7 +88,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/form"
                 className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
                 Complete form

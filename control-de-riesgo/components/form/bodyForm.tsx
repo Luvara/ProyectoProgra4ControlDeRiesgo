@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../card";
 import Question from "./question";
 import Pagination from "./pagination";
+import Button from "./button";
 
 const BodyHomePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -232,6 +233,10 @@ const BodyHomePage: React.FC = () => {
           totalPages={sections.length}
           onPageChange={handlePageChange}
         />
+        <div className="m-5 w-full flex flex-row justify-evenly items-center">
+          <Button text="Atras" color="blue" onClick={() => {}} />
+          <Button text="Guardar" color="purple" onClick={() => {}} />
+        </div>
       </div>
     </div>
   );
