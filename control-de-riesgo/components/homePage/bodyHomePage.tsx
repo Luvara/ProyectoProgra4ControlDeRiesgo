@@ -1,6 +1,6 @@
-import SurveyOverview from "./surveyOverview";
-import UserResponseChart from "./userResponseChart";
-import DepartmentCompletionChart from "./departmentCompletionChart";
+import SurveyOverview from "./charts/surveyOverview";
+import UserResponseChart from "./charts/userResponseChart";
+import DepartmentCompletionChart from "./charts/departmentCompletionChart";
 
 const departmentData = [
   { name: "Department A", percentage: 75 },
