@@ -1,16 +1,16 @@
 "use client";
 import Header from "../header/header";
-import BodyForm from "./bodyForm";
+import BodyFormMaintenance from "./bodyFormMaintenance";
 
-const Form: React.FC = () => {
+const FormMaintenance: React.FC = () => {
   return (
     <div className="bg-gradient-to-b from-black to-purple-950">
       <Header />
       <section className="p-14">
-        <BodyForm />
+        <BodyFormMaintenance />
       </section>
     </div>
   );
 };
 
-export default Form;
+export default FormMaintenance;

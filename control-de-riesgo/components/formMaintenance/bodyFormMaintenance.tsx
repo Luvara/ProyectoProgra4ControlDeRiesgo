@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Card from "../card";
-import Question from "./question";
-import Pagination from "./pagination";
-import Button from "./button";
+import Question from "../form/question";
+import Pagination from "../form/pagination";
+import Button from "../form/button";
 
-const BodyForm: React.FC = () => {
+const BodyFormMaintenance: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [sections, setSections] = useState([
     {
@@ -242,4 +242,4 @@ const BodyForm: React.FC = () => {
   );
 };
 
-export default BodyForm;
+export default BodyFormMaintenance;
