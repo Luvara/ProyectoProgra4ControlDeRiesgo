@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form, Data } from "../../components/index";
 import Question from "./question";
 import Pagination from "./pagination";
 import Button from "./button";
@@ -6,28 +7,6 @@ import Button from "./button";
 const BodyForm: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [sections, setSections] = useState<Form[]>([]);
-
-  interface Question {
-    id: number;
-    text: string;
-    response: boolean | null;
-    observation: string;
-    file: File | null;
-  }
-
-  interface Section {
-    title: string;
-    questions: Question[];
-  }
-
-  interface Form {
-    formName: string;
-    sections: Section[];
-  }
-
-  interface Data {
-    forms: Form[];
-  }
 
   useEffect(() => {
     fetch("/formData.json")

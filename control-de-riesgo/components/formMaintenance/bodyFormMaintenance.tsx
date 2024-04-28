@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Form, Data } from "../../components/index";
 import Card from "../card";
-import Question from "../form/question";
+import QuestionMaintenance from "./questionMaintenance";
 import Pagination from "../form/pagination";
 import Button from "../form/button";
 
@@ -8,28 +9,6 @@ const BodyFormMaintenance: React.FC = () => {
   const [activeForm, setActiveForm] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [sections, setSections] = useState<Form[]>([]);
-
-  interface Question {
-    id: number;
-    text: string;
-    response: boolean | null;
-    observation: string;
-    file: File | null;
-  }
-
-  interface Section {
-    title: string;
-    questions: Question[];
-  }
-
-  interface Form {
-    formName: string;
-    sections: Section[];
-  }
-
-  interface Data {
-    forms: Form[];
-  }
 
   useEffect(() => {
     fetch("/formData.json")
@@ -99,18 +78,15 @@ const BodyFormMaintenance: React.FC = () => {
         />
 
         {sections.length > 0 && sections[activeForm] ? (
-          <div className="flex flex-col justify-center items-center">
+          <div className="w-full flex flex-col justify-center items-center">
             <h2 className="text-4xl font-bold m-4 text-white">
               {sections[activeForm].sections[currentPage].title}
             </h2>
             {sections[activeForm].sections[currentPage].questions.map(
               (question, index) => (
-                <Question
+                <QuestionMaintenance
                   key={question.id}
                   question={question}
-                  index={index}
-                  sectionIndex={currentPage}
-                  updateQuestion={updateQuestion}
                 />
               )
             )}
