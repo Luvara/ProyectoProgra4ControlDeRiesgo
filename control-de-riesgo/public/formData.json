@@ -1,0 +1,444 @@
+{
+    "forms": [
+        {
+            "formName": "Ambience",
+            "sections": [
+                {
+                    "title": "Compromiso Ambiente",
+                    "questions": [
+                        {
+                            "id": 1,
+                            "text": "El jerarca y los titulares subordinados demuestran, en su gestión y actuaciones diarias, su apoyo y compromiso con el control interno? Ej. Promueven talleres, reuniones, unidad de divulgación de controles, etc.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 2,
+                            "text": "El jerarca y los titulares subordinados ejercen liderazgo en el fortalecimiento constante del sistema de control interno? Ej. Se interesan y revisan periódicamente el cumplimiento de recomendaciones de la AI y otros. Así como de la autoevaluación y SEVRI",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 3,
+                            "text": "El jerarca y los titulares subordinados han definido a nivel institucional y en cada unidad orgánica, los alcances del sistema de control interno y las regulaciones para el funcionamiento del mismo? Existe un reglamento o circular sobre el control interno, roles y responsabilidades, u otros acuerdos o circulares.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 4,
+                            "text": "Se han realizado y se proyectan con frecuencia actividades para divulgar los alcances y la importancia del sistema de control interno, a todos los funcionarios de la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Ética Ambiente",
+                    "questions": [
+                        {
+                            "id": 5,
+                            "text": "Se han establecido y fortalecen permanentemente medidas, instrumentos y demás elementos en materia ética, a saber: declaración de visión, misión, valores, código de ética u otros similares; así también los referidos al clima organizacional, valores compartidos, creencias y otros factores que se dan de manera informal en la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 6,
+                            "text": "Están contenidas las medidas éticas en un reglamento o código de ética que contenga los acuerdos, compromisos o protocolos éticos que involucre al área contable?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Personal Ambiente",
+                    "questions": [
+                        {
+                            "id": 7,
+                            "text": "El personal reúne los requisitos, las competencias y valores establecidos en el manual de puestos institucionales para el desempeño de las responsabilidades encomendadas en los diversos puestos. El personal de la institución cuenta con las habilidades y conocimientos requeridos para el puesto asignado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 8,
+                            "text": "Recursos humanos realiza pruebas para corroborar la fidelidad de los títulos y el currículo presentado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Estructura Ambiente",
+                    "questions": [
+                        {
+                            "id": 9,
+                            "text": "Existe formal y materialmente una estructura organizativa flexible y ágil para atender las demandas, necesidades y los objetivos de la institución y en particular los de la unidad o área bajo estudio, así como los riesgos que le plantea su entorno?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formName": "Risk",
+            "sections": [
+                {
+                    "title": "Compromiso Riesgo",
+                    "questions": [
+                        {
+                            "id": 10,
+                            "text": "El jerarca y los titulares subordinados demuestran, en su gestión y actuaciones diarias, su apoyo y compromiso con el control interno? Ej. Promueven talleres, reuniones, unidad de divulgación de controles, etc.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 11,
+                            "text": "El jerarca y los titulares subordinados ejercen liderazgo en el fortalecimiento constante del sistema de control interno? Ej. Se interesan y revisan periódicamente el cumplimiento de recomendaciones de la AI y otros. Así como de la autoevaluación y SEVRI",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 12,
+                            "text": "El jerarca y los titulares subordinados han definido a nivel institucional y en cada unidad orgánica, los alcances del sistema de control interno y las regulaciones para el funcionamiento del mismo? Existe un reglamento o circular sobre el control interno, roles y responsabilidades, u otros acuerdos o circulares.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 13,
+                            "text": "Se han realizado y se proyectan con frecuencia actividades para divulgar los alcances y la importancia del sistema de control interno, a todos los funcionarios de la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Ética Riesgo",
+                    "questions": [
+                        {
+                            "id": 14,
+                            "text": "Se han establecido y fortalecen permanentemente medidas, instrumentos y demás elementos en materia ética, a saber: declaración de visión, misión, valores, código de ética u otros similares; así también los referidos al clima organizacional, valores compartidos, creencias y otros factores que se dan de manera informal en la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 15,
+                            "text": "Están contenidas las medidas éticas en un reglamento o código de ética que contenga los acuerdos, compromisos o protocolos éticos que involucre al área contable?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Personal Riesgo",
+                    "questions": [
+                        {
+                            "id": 16,
+                            "text": "El personal reúne los requisitos, las competencias y valores establecidos en el manual de puestos institucionales para el desempeño de las responsabilidades encomendadas en los diversos puestos. El personal de la institución cuenta con las habilidades y conocimientos requeridos para el puesto asignado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 17,
+                            "text": "Recursos humanos realiza pruebas para corroborar la fidelidad de los títulos y el currículo presentado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Estructura Riesgo",
+                    "questions": [
+                        {
+                            "id": 18,
+                            "text": "Existe formal y materialmente una estructura organizativa flexible y ágil para atender las demandas, necesidades y los objetivos de la institución y en particular los de la unidad o área bajo estudio, así como los riesgos que le plantea su entorno?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formName": "Control",
+            "sections": [
+                {
+                    "title": "Compromiso Control",
+                    "questions": [
+                        {
+                            "id": 19,
+                            "text": "El jerarca y los titulares subordinados demuestran, en su gestión y actuaciones diarias, su apoyo y compromiso con el control interno? Ej. Promueven talleres, reuniones, unidad de divulgación de controles, etc.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 20,
+                            "text": "El jerarca y los titulares subordinados ejercen liderazgo en el fortalecimiento constante del sistema de control interno? Ej. Se interesan y revisan periódicamente el cumplimiento de recomendaciones de la AI y otros. Así como de la autoevaluación y SEVRI",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 21,
+                            "text": "El jerarca y los titulares subordinados han definido a nivel institucional y en cada unidad orgánica, los alcances del sistema de control interno y las regulaciones para el funcionamiento del mismo? Existe un reglamento o circular sobre el control interno, roles y responsabilidades, u otros acuerdos o circulares.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 22,
+                            "text": "Se han realizado y se proyectan con frecuencia actividades para divulgar los alcances y la importancia del sistema de control interno, a todos los funcionarios de la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Ética Control",
+                    "questions": [
+                        {
+                            "id": 23,
+                            "text": "Se han establecido y fortalecen permanentemente medidas, instrumentos y demás elementos en materia ética, a saber: declaración de visión, misión, valores, código de ética u otros similares; así también los referidos al clima organizacional, valores compartidos, creencias y otros factores que se dan de manera informal en la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 24,
+                            "text": "Están contenidas las medidas éticas en un reglamento o código de ética que contenga los acuerdos, compromisos o protocolos éticos que involucre al área contable?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Personal Control",
+                    "questions": [
+                        {
+                            "id": 25,
+                            "text": "El personal reúne los requisitos, las competencias y valores establecidos en el manual de puestos institucionales para el desempeño de las responsabilidades encomendadas en los diversos puestos. El personal de la institución cuenta con las habilidades y conocimientos requeridos para el puesto asignado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 26,
+                            "text": "Recursos humanos realiza pruebas para corroborar la fidelidad de los títulos y el currículo presentado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Estructura Control",
+                    "questions": [
+                        {
+                            "id": 27,
+                            "text": "Existe formal y materialmente una estructura organizativa flexible y ágil para atender las demandas, necesidades y los objetivos de la institución y en particular los de la unidad o área bajo estudio, así como los riesgos que le plantea su entorno?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formName": "Systems",
+            "sections": [
+                {
+                    "title": "Compromiso Sistemas",
+                    "questions": [
+                        {
+                            "id": 19,
+                            "text": "El jerarca y los titulares subordinados demuestran, en su gestión y actuaciones diarias, su apoyo y compromiso con el control interno? Ej. Promueven talleres, reuniones, unidad de divulgación de controles, etc.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 20,
+                            "text": "El jerarca y los titulares subordinados ejercen liderazgo en el fortalecimiento constante del sistema de control interno? Ej. Se interesan y revisan periódicamente el cumplimiento de recomendaciones de la AI y otros. Así como de la autoevaluación y SEVRI",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 21,
+                            "text": "El jerarca y los titulares subordinados han definido a nivel institucional y en cada unidad orgánica, los alcances del sistema de control interno y las regulaciones para el funcionamiento del mismo? Existe un reglamento o circular sobre el control interno, roles y responsabilidades, u otros acuerdos o circulares.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 22,
+                            "text": "Se han realizado y se proyectan con frecuencia actividades para divulgar los alcances y la importancia del sistema de control interno, a todos los funcionarios de la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Ética Sistemas",
+                    "questions": [
+                        {
+                            "id": 23,
+                            "text": "Se han establecido y fortalecen permanentemente medidas, instrumentos y demás elementos en materia ética, a saber: declaración de visión, misión, valores, código de ética u otros similares; así también los referidos al clima organizacional, valores compartidos, creencias y otros factores que se dan de manera informal en la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 24,
+                            "text": "Están contenidas las medidas éticas en un reglamento o código de ética que contenga los acuerdos, compromisos o protocolos éticos que involucre al área contable?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Personal Sistemas",
+                    "questions": [
+                        {
+                            "id": 25,
+                            "text": "El personal reúne los requisitos, las competencias y valores establecidos en el manual de puestos institucionales para el desempeño de las responsabilidades encomendadas en los diversos puestos. El personal de la institución cuenta con las habilidades y conocimientos requeridos para el puesto asignado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 26,
+                            "text": "Recursos humanos realiza pruebas para corroborar la fidelidad de los títulos y el currículo presentado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Estructura Sistemas",
+                    "questions": [
+                        {
+                            "id": 27,
+                            "text": "Existe formal y materialmente una estructura organizativa flexible y ágil para atender las demandas, necesidades y los objetivos de la institución y en particular los de la unidad o área bajo estudio, así como los riesgos que le plantea su entorno?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formName": "Follow-up",
+            "sections": [
+                {
+                    "title": "Compromiso Seguimiento",
+                    "questions": [
+                        {
+                            "id": 28,
+                            "text": "El jerarca y los titulares subordinados demuestran, en su gestión y actuaciones diarias, su apoyo y compromiso con el control interno? Ej. Promueven talleres, reuniones, unidad de divulgación de controles, etc.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 29,
+                            "text": "El jerarca y los titulares subordinados ejercen liderazgo en el fortalecimiento constante del sistema de control interno? Ej. Se interesan y revisan periódicamente el cumplimiento de recomendaciones de la AI y otros. Así como de la autoevaluación y SEVRI",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 30,
+                            "text": "El jerarca y los titulares subordinados han definido a nivel institucional y en cada unidad orgánica, los alcances del sistema de control interno y las regulaciones para el funcionamiento del mismo? Existe un reglamento o circular sobre el control interno, roles y responsabilidades, u otros acuerdos o circulares.",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 31,
+                            "text": "Se han realizado y se proyectan con frecuencia actividades para divulgar los alcances y la importancia del sistema de control interno, a todos los funcionarios de la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Ética Seguimiento",
+                    "questions": [
+                        {
+                            "id": 32,
+                            "text": "Se han establecido y fortalecen permanentemente medidas, instrumentos y demás elementos en materia ética, a saber: declaración de visión, misión, valores, código de ética u otros similares; así también los referidos al clima organizacional, valores compartidos, creencias y otros factores que se dan de manera informal en la institución?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 33,
+                            "text": "Están contenidas las medidas éticas en un reglamento o código de ética que contenga los acuerdos, compromisos o protocolos éticos que involucre al área contable?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Personal Seguimiento",
+                    "questions": [
+                        {
+                            "id": 34,
+                            "text": "El personal reúne los requisitos, las competencias y valores establecidos en el manual de puestos institucionales para el desempeño de las responsabilidades encomendadas en los diversos puestos. El personal de la institución cuenta con las habilidades y conocimientos requeridos para el puesto asignado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        },
+                        {
+                            "id": 35,
+                            "text": "Recursos humanos realiza pruebas para corroborar la fidelidad de los títulos y el currículo presentado?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                },
+                {
+                    "title": "Estructura Seguimiento",
+                    "questions": [
+                        {
+                            "id": 36,
+                            "text": "Existe formal y materialmente una estructura organizativa flexible y ágil para atender las demandas, necesidades y los objetivos de la institución y en particular los de la unidad o área bajo estudio, así como los riesgos que le plantea su entorno?",
+                            "response": null,
+                            "observation": "",
+                            "file": null
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

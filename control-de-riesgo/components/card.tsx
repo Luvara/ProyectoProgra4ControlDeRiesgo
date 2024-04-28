@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-const Card = ({ svg, title }) => {
+const Card = ({ svg, title, onClick }: { svg: string, title: string, onClick: any }) => {
   return (
-    <div className="w-20 h-20 md:w-40 p-2">
+    <div className="w-20 h-20 md:w-40 p-2" onClick={onClick}>
       <a
         href="#"
         className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
