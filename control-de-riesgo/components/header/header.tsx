@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
@@ -95,12 +96,12 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#"
+              <button
+                onClick={() => signOut()}
                 className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
                 Sign off
-              </a>
+              </button>
             </li>
           </ul>
         </div>
