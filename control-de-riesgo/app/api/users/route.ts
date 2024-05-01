@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, user } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -14,14 +14,22 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  // try {
-  //   const user = await prisma.user.create({
-  //     data: req.body,
-  //   });
-  //   return NextResponse.json(user);
-  // } catch (error) {
-  //   console.error("Error creating user:", error);
-  //   return NextResponse.error();
-  // }
-}
+  try {
+    const body = await req.json();
+    const { usu_id, usu_name, usu_email } = body as user;
 
+    if (!usu_name || !usu_email) {
+      return new NextResponse("Missing required fields", { status: 400 });
+    }
+
+    const newUser = await prisma.user.create({
+      data: {
+        ...(body as user),
+      },
+    });
+
+    return NextResponse.json(newUser);
+  } catch (error) {
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
