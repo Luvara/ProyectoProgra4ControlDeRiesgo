@@ -4,6 +4,7 @@ import Card from "../card";
 import QuestionMaintenance from "./questionMaintenance";
 import Pagination from "../form/pagination";
 import Button from "../form/button";
+import FormConfig from "./formConfig";
 
 const BodyFormMaintenance: React.FC = () => {
   const [activeForm, setActiveForm] = useState(0);
@@ -71,6 +72,9 @@ const BodyFormMaintenance: React.FC = () => {
             onClick={() => handleSectionChange(4)}
           />
         </div>
+
+        <FormConfig />
+
         <Pagination
           currentPage={currentPage}
           totalPages={4}

@@ -1,0 +1,40 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "number": "A123456",
+            "name": "Juan",
+            "lastname": "Pérez",
+            "slastname": "López",
+            "email": "juan.perez@example.com",
+            "torespond": "Y",
+            "version": 1,
+            "department": "Control",
+            "userType": "Admin"
+        },
+        {
+            "id": 2,
+            "number": "B789012",
+            "name": "María",
+            "lastname": "González",
+            "slastname": "Fernández",
+            "email": "maria.gonzalez@example.com",
+            "torespond": "N",
+            "version": 2,
+            "department": "Ambience",
+            "userType": "User"
+        },
+        {
+            "id": 3,
+            "number": "C345678",
+            "name": "Carlos",
+            "lastname": "Martínez",
+            "slastname": "Rodríguez",
+            "email": "carlos.martinez@example.com",
+            "torespond": "Y",
+            "version": 1,
+            "department": "Risk",
+            "userType": "BossDpt"
+        }
+    ]
+}

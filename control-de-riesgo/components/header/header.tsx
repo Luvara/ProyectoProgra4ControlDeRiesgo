@@ -77,7 +77,7 @@ const Header = () => {
                     </li>
                     <li>
                       <a
-                        href="#"
+                        href="/userMaintenance"
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         User Maintenance
@@ -98,7 +98,7 @@ const Header = () => {
             <li>
               <button
                 onClick={() => signOut()}
-                className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
+                className="px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
                 Sign off
               </button>

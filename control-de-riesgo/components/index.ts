@@ -21,3 +21,21 @@ export interface Question {
   observation: string
   file: any
 }
+export interface DataUser {
+  users: User[]
+}
+
+export interface User {
+  id: number
+  number: string
+  name: string
+  lastname: string
+  slastname: string
+  email: string
+  torespond: string
+  version: number
+  department: string
+  userType: string
+}
+
+
