@@ -13,16 +13,15 @@ export async function GET() {
   }
 }
 
-export async function GETbyName(name: string) {
-  try {
-    const users = await prisma.user.findMany({
-      where: {
-        usu_name: name,
-      },
-    });
-    return NextResponse.json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    return NextResponse.error();
-  }
+export async function POST(req: Request) {
+  // try {
+  //   const user = await prisma.user.create({
+  //     data: req.body,
+  //   });
+  //   return NextResponse.json(user);
+  // } catch (error) {
+  //   console.error("Error creating user:", error);
+  //   return NextResponse.error();
+  // }
 }
+
