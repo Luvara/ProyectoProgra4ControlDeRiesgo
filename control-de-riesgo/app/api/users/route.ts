@@ -33,3 +33,26 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    const body = await req.json();
+    const { usu_id, usu_name, usu_email } = body as user;
+
+    if (!usu_id || !usu_name || !usu_email) {
+      return new NextResponse("Missing required fields", { status: 400 });
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { usu_id: usu_id },
+      data: {
+        ...(body as user),
+      },
+    });
+
+    return NextResponse.json(updatedUser);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return NextResponse.error();
+  }
+}
