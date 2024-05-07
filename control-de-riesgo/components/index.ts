@@ -26,16 +26,27 @@ export interface DataUser {
 }
 
 export interface User {
-  id: number
-  number: string
-  name: string
-  lastname: string
-  slastname: string
-  email: string
-  torespond: string
-  version: number
-  department: string
-  userType: string
+  department_dep_id: number
+  userType_usut_id: number
+  usu_email: string
+  usu_id: number
+  usu_idnumber: string
+  usu_lastname: string
+  usu_name: string
+  usu_slastname: string
+  usu_torespond: string
+  usu_version: number
 }
+
+export interface DataUserType {
+  usertypes: UserType[]
+}
+export interface UserType {
+  usut_id: number
+  usut_role: string
+  usut_version?: number
+}
+
+
 
 

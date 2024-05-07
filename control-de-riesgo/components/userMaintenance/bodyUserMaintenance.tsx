@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { User, DataUser } from "../../components/index";
+import { User, UserType } from "../../components/index";
 import TableUserMaintenance from "./tableUserMaintenance";
 import UserEditor from "./userEditor";
 
 const BodyFormMaintenance: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User>({} as User);
   const [users, setUsers] = useState<User[]>([]);
+  const [userTypes, setUserTypes] = useState<UserType[]>([]);
 
   useEffect(() => {
-    fetch("/userData.json")
-      .then((response) => response.json())
-      .then((data: DataUser) => setUsers(data.users))
+    fetch("/api/users")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        // Asume que la API devuelve un array directamente
+        setUsers(data);
+      })
       .catch((error) => console.error("Error loading the data", error));
+
+      fetch("/api/usertype")
+      .then(response => response.json())
+      .then(data => setUserTypes(data))
+      .catch(error => console.error("Error loading user types:", error));
   }, []);
 
   const departments = ["Control", "Ambience", "Risk"];
-  const roles = ["Admin", "User", "BossDpt"];
 
   const handleSave = () => {
     console.log("Guardando los cambios...");
@@ -35,7 +49,7 @@ const BodyFormMaintenance: React.FC = () => {
           <UserEditor
             user={selectedUser}
             departments={departments}
-            roles={roles}
+            usertypes={userTypes}
             onSave={handleSave}
             onUpdateUser={setSelectedUser}
           />
