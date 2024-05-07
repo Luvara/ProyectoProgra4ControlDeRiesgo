@@ -1,9 +1,9 @@
 import React from "react";
-import { User, UserType } from "../../components/index";
+import { User, UserType, DepartmentType } from "../../components/index";
 
 interface UserEditorProps {
   user: User;
-  departments: string[];
+  departments: DepartmentType[];
   usertypes: UserType[];
   onSave: () => void;
   onUpdateUser: (user: User) => void;
@@ -29,13 +29,13 @@ const UserEditor: React.FC<UserEditorProps> = ({
           <select
             value={user.department_dep_id}
             onChange={(e) =>
-              onUpdateUser({ ...user, department: e.target.value })
+              onUpdateUser({ ...user, department_dep_id: Number(e.target.value) })
             }
             className="select bg-gray-700 text-white p-2 m-2"
           >
             {departments.map((department) => (
-              <option key={department} value={department}>
-                {department}
+              <option key={department.dep_id} value={department.dep_id}>
+                {department.dep_name}
               </option>
             ))}
           </select>

@@ -47,6 +47,16 @@ export interface UserType {
   usut_version?: number
 }
 
+export interface DataDepartmentType {
+  departmenttypes: DepartmentType[]
+}
+
+export interface DepartmentType {
+  dep_id: number
+  dep_name: string
+  dep_version: number
+  UNIT_unit_id: number
+}
 
 
 

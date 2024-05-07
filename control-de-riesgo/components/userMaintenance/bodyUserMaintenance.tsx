@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { User, UserType } from "../../components/index";
+import { User, UserType, DepartmentType } from "../../components/index";
 import TableUserMaintenance from "./tableUserMaintenance";
 import UserEditor from "./userEditor";
 
@@ -7,6 +7,7 @@ const BodyFormMaintenance: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User>({} as User);
   const [users, setUsers] = useState<User[]>([]);
   const [userTypes, setUserTypes] = useState<UserType[]>([]);
+  const [departmentTypes, setDepartmentTypes] = useState<DepartmentType[]>([]);
 
   useEffect(() => {
     fetch("/api/users")
@@ -18,21 +19,44 @@ const BodyFormMaintenance: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        // Asume que la API devuelve un array directamente
         setUsers(data);
       })
       .catch((error) => console.error("Error loading the data", error));
 
-      fetch("/api/usertype")
-      .then(response => response.json())
-      .then(data => setUserTypes(data))
-      .catch(error => console.error("Error loading user types:", error));
+    fetch("/api/usertype")
+      .then((response) => response.json())
+      .then((data) => setUserTypes(data))
+      .catch((error) => console.error("Error loading user types:", error));
+
+    fetch("/api/departments")
+      .then((response) => response.json())
+      .then((data) => setDepartmentTypes(data))
+      .catch((error) => console.error("Error loading user types:", error));
   }, []);
 
-  const departments = ["Control", "Ambience", "Risk"];
-
   const handleSave = () => {
-    console.log("Guardando los cambios...");
+    fetch("/api/users", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json", // Asegúrate de enviar el tipo correcto
+      },
+      body: JSON.stringify(selectedUser),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((updatedUser) => {
+        // Actualizar el usuario en el array de usuarios
+        const updatedUsers = users.map((user) =>
+          user.usu_id === updatedUser.usu_id ? updatedUser : user
+        );
+        setUsers(updatedUsers); // Setear el nuevo array de usuarios
+        setSelectedUser({} as User); // Limpiar el usuario seleccionado
+      })
+      .catch((error) => console.error("Error saving the data", error));
   };
 
   return (
@@ -48,7 +72,7 @@ const BodyFormMaintenance: React.FC = () => {
         {selectedUser && (
           <UserEditor
             user={selectedUser}
-            departments={departments}
+            departments={departmentTypes}
             usertypes={userTypes}
             onSave={handleSave}
             onUpdateUser={setSelectedUser}
