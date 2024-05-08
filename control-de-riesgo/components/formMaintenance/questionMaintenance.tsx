@@ -5,14 +5,14 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
     <div className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
       <div className="mb-4">
         <label className="text-lg font-semibold">ID:</label>
-        <span className="text-2xl font-bold ml-2">{question.id}</span>
+        <span className="text-2xl font-bold ml-2">{question.quest_id}</span>
       </div>
 
       <div className="mb-4">
         <label className="block text-lg font-semibold mb-2">Question:</label>
         <textarea
           className="p-2 border rounded w-full h-36 bg-transparent"
-          value={question.text}
+          value={question.quest_question}
         />
       </div>
 
@@ -21,7 +21,7 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
           <label className="block text-lg font-semibold mb-2">Active:</label>
           <input
             type="checkbox"
-            checked={question.active}
+            checked={question.quest_deactivationdate !== null}
             className="accent-white h-5 w-5"
           />
         </div>
@@ -29,7 +29,7 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
           <label className="block text-lg font-semibold mb-2">Order:</label>
           <input
             type="text"
-            value={question.order}
+            value={question.quest_ordern}
             className="mt-2 p-2 border rounded w-20  bg-transparent"
           />
         </div>

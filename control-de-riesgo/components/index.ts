@@ -1,62 +1,67 @@
 export interface Data {
-  forms: Form[]
+  forms: Form[];
 }
 
 export interface Form {
-  formName: string
-  sections: Section[]
+  form_id: number;
+  form_name: string;
+  form_status: string;
+  form_description: string;
+  form_version: number;
+  DEPARTMENT_dep_id: number;
+  sections: Section[];
 }
 
 export interface Section {
-  title: string
-  questions: Question[]
+  sect_id: number;
+  sect_name: string;
+  sect_version: number;
+  FORM_form_id: number;
+  questions: Question[];
 }
 
 export interface Question {
-  id: number
-  order: number
-  active: boolean
-  text: string
-  response: any
-  observation: string
-  file: any
+  quest_id: number;
+  quest_ordern: string;
+  quest_question: string;
+  quest_deactivationdate: any;
+  quest_version: number;
+  SECTION_sect_id: number;
 }
+
 export interface DataUser {
-  users: User[]
+  users: User[];
 }
 
 export interface User {
-  department_dep_id: number
-  userType_usut_id: number
-  usu_email: string
-  usu_id: number
-  usu_idnumber: string
-  usu_lastname: string
-  usu_name: string
-  usu_slastname: string
-  usu_torespond: string
-  usu_version: number
+  department_dep_id: number;
+  userType_usut_id: number;
+  usu_email: string;
+  usu_id: number;
+  usu_idnumber: string;
+  usu_lastname: string;
+  usu_name: string;
+  usu_slastname: string;
+  usu_torespond: string;
+  usu_version: number;
 }
 
 export interface DataUserType {
-  usertypes: UserType[]
+  usertypes: UserType[];
 }
 export interface UserType {
-  usut_id: number
-  usut_role: string
-  usut_version?: number
+  usut_id: number;
+  usut_role: string;
+  usut_version?: number;
 }
 
 export interface DataDepartmentType {
-  departmenttypes: DepartmentType[]
+  departmenttypes: DepartmentType[];
 }
 
 export interface DepartmentType {
-  dep_id: number
-  dep_name: string
-  dep_version: number
-  UNIT_unit_id: number
+  dep_id: number;
+  dep_name: string;
+  dep_version: number;
+  UNIT_unit_id: number;
 }
-
-
-
