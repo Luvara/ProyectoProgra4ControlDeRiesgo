@@ -1,42 +1,45 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Form } from "../../components/index";
 
-const departmentOptions = ["Administrativo", "Operativo", "Financiero"];
-const statusOptions = ["Evaluando", "Completado", "En Progreso"];
+const statusOptions = [
+  { status: "Complete", id: "c" },
+  { status: "Active", id: "a" },
+  { status: "Desactivate", id: "d" },
+];
 
-const FormConfig = () => {
-  const [department, setDepartment] = useState(departmentOptions[0]);
-  const [status, setStatus] = useState(statusOptions[0]);
-  const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+interface FormConfigProps {
+  form: Form;
+  onSave: () => void;
+  onUpdateForm: (form: Form) => void;
+}
 
+const FormConfig: React.FC<FormConfigProps> = ({
+  form,
+  onSave,
+  onUpdateForm,
+}) => {
   return (
     <div className="bg-background-4 m-5 rounded-lg flex justify-between items-center">
       <select
         className="m-4 bg-transparent text-white outline-none"
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-      >
-        {departmentOptions.map((option, index) => (
-          <option className="bg-background-3" key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-
-      <select
-        className="m-4 bg-transparent text-white outline-none"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
+        value={form.form_status}
+        onChange={(e) => onUpdateForm({ ...form, form_status: e.target.value })}
       >
         {statusOptions.map((option, index) => (
-          <option className="bg-background-3" key={index} value={option}>
-            {option}
+          <option className="bg-background-3" key={index} value={option.id}>
+            {option.status}
           </option>
         ))}
       </select>
 
-      <p className="m-4 text-white">Acá va la descripcion del formulario</p>
+      <p className="m-4 text-white">{form.form_description}</p>
+
+      <button
+        onClick={onSave}
+        className="btn bg-blue-500 text-white px-4 py-2 rounded md:w-1/2"
+      >
+        Save
+      </button>
     </div>
   );
 };

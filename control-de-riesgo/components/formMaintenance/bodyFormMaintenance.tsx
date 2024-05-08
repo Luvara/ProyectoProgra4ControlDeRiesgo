@@ -9,6 +9,7 @@ import FormConfig from "./formConfig";
 const BodyFormMaintenance: React.FC = () => {
   const [activeForm, setActiveForm] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [selectedForm, setSelectedForm] = useState<Form>({} as Form);
   const [data, setData] = useState<Form[]>([]);
 
   useEffect(() => {
@@ -27,7 +28,6 @@ const BodyFormMaintenance: React.FC = () => {
           console.log("Sections Data:", sectionsData);
           console.log("Questions Data:", questionsData);
 
-          // Organize the data
           const forms: Form[] = formsData.map((form: Form) => ({
             ...form,
             sections: sectionsData
@@ -43,6 +43,7 @@ const BodyFormMaintenance: React.FC = () => {
               })),
           }));
           setData(forms);
+          setSelectedForm(forms[0]);
           console.log("Data loaded", forms);
         }
       )
@@ -51,7 +52,7 @@ const BodyFormMaintenance: React.FC = () => {
       });
   }, []);
 
-  const handleSectionChange = (formIndex) => {
+  const handleSectionChange = (formIndex: any) => {
     setActiveForm(formIndex);
     setCurrentPage(0);
   };
@@ -62,6 +63,14 @@ const BodyFormMaintenance: React.FC = () => {
     }
   };
 
+  const svgs = [
+    "/Ambience.svg",
+    "/Risk.svg",
+    "/Control.svg",
+    "/Systems.svg",
+    "/Follow-up.svg",
+  ];
+
   return (
     <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
       <div className="bg-background-3 flex flex-col justify-center items-center">
@@ -69,14 +78,31 @@ const BodyFormMaintenance: React.FC = () => {
           {data.map((form, index) => (
             <Card
               key={form.form_id}
-              svg={"/Ambience.svg"} // Consider adjusting SVG dynamically
+              svg={svgs[index]}
               title={form.form_name}
-              onClick={() => handleSectionChange(index)}
+              onClick={() => {
+                handleSectionChange(index);
+                setSelectedForm(data[index]);
+              }}
             />
           ))}
         </div>
 
-        <FormConfig />
+        {selectedForm && (
+          <FormConfig
+            form={selectedForm}
+            onSave={() => {
+              console.log("Save");
+            }}
+            onUpdateForm={setSelectedForm}
+          />
+        )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={data[activeForm]?.sections.length || 0}
+          onPageChange={handlePageChange}
+        />
 
         {data.length > 0 &&
         data[activeForm] &&
