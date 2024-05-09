@@ -4,11 +4,21 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownMobile, setIsDropdownMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const {data:session}=useSession();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });  // Evita la redirección automática de NextAuth
+    router.push('/');  // Redirige al usuario al login manualmente
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,6 +31,7 @@ const Header = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
 
   return (
     <nav className="relative">
@@ -97,7 +108,7 @@ const Header = () => {
             </li>
             <li>
               <button
-                onClick={() => signOut()}
+                onClick={handleSignOut}
                 className="px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
                 Sign off
