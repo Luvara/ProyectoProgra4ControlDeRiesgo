@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
+import { User } from "../../components/index";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
-
+import UserLog from "../user/userlog";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -19,6 +20,9 @@ const Header = () => {
     await signOut({ redirect: false });  // Evita la redirección automática de NextAuth
     router.push('/');  // Redirige al usuario al login manualmente
   };
+  // const [user, setUser] = useState<User | null>(UserLog());
+  const user = UserLog();
+  // Permitir `null`
 
   useEffect(() => {
     const handleResize = () => {
@@ -69,7 +73,8 @@ const Header = () => {
                 href="/homePage"
                 className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
-                Home
+                Home Usuario:
+                {user && <h1>{user.usu_name}</h1>}
               </a>
             </li>
             <li className="relative">

@@ -44,6 +44,7 @@ export interface User {
   usu_slastname: string;
   usu_torespond: string;
   usu_version: number;
+  
 }
 
 export interface DataUserType {
