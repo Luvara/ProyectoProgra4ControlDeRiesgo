@@ -68,7 +68,7 @@ model generalparameters {
 model question {
   quest_id               Int       @id @default(autoincrement())
   quest_ordern           String?   @db.VarChar(10)
-  quest_question         String    @db.VarChar(200)
+  quest_question         String    @db.VarChar(500)
   quest_deactivationdate DateTime? @db.Date
   quest_version          Int?
   SECTION_sect_id        Int
@@ -80,7 +80,7 @@ model question {
 
 model section {
   sect_id      Int        @id @default(autoincrement())
-  sect_name    String     @db.VarChar(45)
+  sect_name    String     @db.VarChar(100)
   sect_version Int?
   FORM_form_id Int
   question     question[]
@@ -106,9 +106,9 @@ model user {
   usu_torespond     String?     @db.VarChar(1)
   usu_version       Int?
   department_dep_id Int?
-  userType_usut_id  Int
+  userType_usut_id  Int?
   department        department? @relation(fields: [department_dep_id], references: [dep_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_department")
-  usertype          usertype    @relation(fields: [userType_usut_id], references: [usut_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_userType1")
+  usertype          usertype?   @relation(fields: [userType_usut_id], references: [usut_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_userType1")
 
   @@index([department_dep_id], map: "DEPARTUSU_FK01")
   @@index([userType_usut_id], map: "TYPEUSER_FK01")
