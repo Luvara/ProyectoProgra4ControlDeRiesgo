@@ -8,10 +8,13 @@ import HeaderButton from "./headerButton";
 import UserLog from "../user/userlog";
 
 
+
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownMobile, setIsDropdownMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { data: session } = useSession();
+
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });  // Evita la redirección automática de NextAuth
@@ -71,7 +74,7 @@ const Header = () => {
                 className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
               >
                 Home Usuario:
-                {user && <h1>{user.usu_name}</h1>}
+                {user && <h1>{session?.user?.name}</h1>}
               </a>
             </li>
             <li className="relative">
@@ -82,7 +85,7 @@ const Header = () => {
                   <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                     <li>
                       <a
-                        href="/formMaintenance"
+                        href="admin/formMaintenance"
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         Form Maintenance
@@ -90,7 +93,7 @@ const Header = () => {
                     </li>
                     <li>
                       <a
-                        href="/userMaintenance"
+                        href="admin/userMaintenance"
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
                       >
                         User Maintenance
