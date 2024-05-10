@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <SessionWrapper>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <body className={`${inter.className} background_color`}>{children}</body>
     </html>
     </SessionWrapper>
   )
