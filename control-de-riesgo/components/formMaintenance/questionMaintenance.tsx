@@ -1,5 +1,5 @@
 import { Question } from "../../components/index";
-import useQuestionStore from "./useQuestionStore";
+import useQuestionStore from "../../lib/useQuestionStore";
 
 const QuestionMaintenance = ({ question }: { question: Question }) => {
   const { updateQuestion } = useQuestionStore();

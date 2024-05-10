@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Question, Section, Department } from "../../components/index";
-import useQuestionStore from "./useQuestionStore";
+import useQuestionStore from "../../lib/useQuestionStore";
 import Card from "../card";
 import QuestionMaintenance from "./questionMaintenance";
 import Pagination from "../form/pagination";

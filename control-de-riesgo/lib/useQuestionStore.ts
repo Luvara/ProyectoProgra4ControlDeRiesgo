@@ -1,5 +1,5 @@
 import create from "zustand";
-import { Question } from "../../components/index";
+import { Question } from "../components/index";
 
 interface EnhancedQuestion extends Question {
   isModified: boolean;
