@@ -52,11 +52,11 @@ const handler = NextAuth({
         return !!emailExists;  
       }
       return false;  
-    }
+    },
+   
   },
   pages: {
     error: '/error',
-    signOut: '/auth/signout' 
   },
   debug: process.env.NODE_ENV === 'development',
 });

@@ -1,13 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { signOut } from "next-auth/react";
+import { signOut,useSession } from "next-auth/react";
 import { User } from "../../components/index";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
-import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import UserLog from "../user/userlog";
+
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,7 +18,7 @@ const Header = () => {
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });  // Evita la redirección automática de NextAuth
-    router.push('/');  // Redirige al usuario al login manualmente
+    window.location.href = 'https://login.microsoftonline.com/{AZURE_AD_TENANT_ID}/oauth2/v2.0/logout?post_logout_redirect_uri=' + encodeURIComponent(window.location.origin);
   };
   // const [user, setUser] = useState<User | null>(UserLog());
   const user = UserLog();
