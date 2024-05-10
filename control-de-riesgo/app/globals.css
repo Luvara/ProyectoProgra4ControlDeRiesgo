@@ -23,7 +23,7 @@
   position: absolute;
   width: 150%;
   height: 150%;
-  background-image: conic-gradient(rgb(127, 33, 170) 20deg, transparent 120deg);
+  background-image: conic-gradient(rgb(255, 255, 255) 20deg, transparent 120deg);
   animation: rotar 2s linear infinite;
 }
 
@@ -32,7 +32,7 @@
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 
