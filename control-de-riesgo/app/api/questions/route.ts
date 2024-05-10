@@ -17,9 +17,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const {  } = body as question;
-
-    
-
     const newQuestion = await prisma.question.create({
       data: {
         ...(body as question),

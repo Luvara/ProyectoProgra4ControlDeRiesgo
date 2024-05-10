@@ -5,7 +5,6 @@ import { User } from "../../components/index";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
-import { useRouter } from 'next/navigation';
 import UserLog from "../user/userlog";
 
 
@@ -13,8 +12,6 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownMobile, setIsDropdownMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const {data:session}=useSession();
-  const router = useRouter();
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });  // Evita la redirección automática de NextAuth
