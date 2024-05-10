@@ -2,7 +2,6 @@ import {  question } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-
 export async function GET() {
   try {
     const questions = await prisma.question.findMany();
@@ -32,22 +31,20 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const { quest_id } = body as question;
+    const questions = body as question[];
 
-    // if (!usu_id || !usu_name || !usu_email) {
-    //   return new NextResponse("Missing required fields", { status: 400 });
-    // }
+    const updatedQuestions = await prisma.$transaction(
+      questions.map(question =>
+        prisma.question.update({
+          where: { quest_id: question.quest_id },
+          data: question,
+        })
+      )
+    );
 
-    const updatedQuestion = await prisma.question.update({
-      where: { quest_id: quest_id },
-      data: {
-        ...(body as question),
-      },
-    });
-
-    return NextResponse.json(updatedQuestion);
+    return NextResponse.json(updatedQuestions);
   } catch (error) {
-    console.error("Error updating question:", error);
+    console.error("Error updating questions:", error);
     return NextResponse.error();
   }
 }
