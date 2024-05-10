@@ -2,6 +2,14 @@ export interface Data {
   forms: Form[];
 }
 
+export interface Department {
+  dep_id: number;
+  dep_name: string;
+  dep_version: number;
+  UNIT_unit_id: number;
+  axisform: Form[];
+}
+
 export interface Form {
   form_id: number;
   form_name: string;
@@ -9,7 +17,7 @@ export interface Form {
   form_description: string;
   form_version: number;
   DEPARTMENT_dep_id: number;
-  sections: Section[];
+  section: Section[];
 }
 
 export interface Section {
@@ -17,7 +25,7 @@ export interface Section {
   sect_name: string;
   sect_version: number;
   FORM_form_id: number;
-  questions: Question[];
+  question: Question[];
 }
 
 export interface Question {

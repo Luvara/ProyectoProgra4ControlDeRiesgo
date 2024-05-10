@@ -2,12 +2,21 @@ import { department } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-
-
-
 export async function GET() {
   try {
-    const departments = await prisma.department.findMany();
+    const departments = await prisma.department.findMany({
+      include: {
+        axisform: {
+          include: {
+            section: {
+              include: {
+                question: true,
+              },
+            },
+          },
+        },
+      },
+    });
     return NextResponse.json(departments);
   } catch (error) {
     console.error("Error fetching departments:", error);
@@ -15,14 +24,10 @@ export async function GET() {
   }
 }
 
-
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const {  } = body as department;
-
-    
+    const {} = body as department;
 
     const newQuestion = await prisma.department.create({
       data: {
