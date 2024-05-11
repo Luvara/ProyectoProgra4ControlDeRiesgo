@@ -70,13 +70,8 @@ const Header = () => {
             } flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0`}
           >
             <li>
-              <a
-                href="/homePage"
-                className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-              >
-                Home Usuario:
-                {user && <h1>{session?.user?.name}</h1>}
-              </a>
+              <Link href="/homePage" className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white">  Home Usuario:
+                {user && <h1>{session?.user?.name}</h1>}</Link>
             </li>
             <li className="relative">
               <HeaderButton onClick={toggleDropdown}>Maintenance</HeaderButton>
@@ -95,12 +90,8 @@ const Header = () => {
               )}
             </li>
             <li>
-              <a
-                href="/form"
-                className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
-              >
-                Complete form
-              </a>
+              <Link href="/form" className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white">   Complete form</Link>
+             
             </li>
             <li>
               <button
