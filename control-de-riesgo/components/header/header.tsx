@@ -6,6 +6,7 @@ import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
 import UserLog from "../user/userlog";
+import Link from "next/link";
 
 
 
@@ -84,20 +85,10 @@ const Header = () => {
                 <div className="my-2 absolute z-50 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                   <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                     <li>
-                      <a
-                        href="admin/formMaintenance"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-                      >
-                        Form Maintenance
-                      </a>
+                      <Link className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600" href="/admin/formMaintenance"> Form Maintenance</Link>
                     </li>
                     <li>
-                      <a
-                        href="admin/userMaintenance"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-                      >
-                        User Maintenance
-                      </a>
+                    <Link className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600" href="/admin/userMaintenance"> User Maintenance</Link>
                     </li>
                   </ul>
                 </div>

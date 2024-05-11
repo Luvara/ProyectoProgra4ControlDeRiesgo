@@ -90,9 +90,7 @@ const BodyFormMaintenance: React.FC = () => {
         <NewFormMaintenance onSave={() => {}} departments={data} />
 
         <TableFormMaintenance
-          forms={forms.filter(
-            (q) => q.DEPARTMENT_dep_id === data[activeDepartment].dep_id
-          )}
+          forms={forms.filter((q) => q.DEPARTMENT_dep_id === data[activeDepartment].dep_id)}
           onSelectform={setSelectedForm}
         />
 
