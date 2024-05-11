@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Form, Question, Section, Department } from "../../components/index";
 import useQuestionStore from "../../lib/useQuestionStore";
+import useFormStore from "../../lib/useFormStore";
 import Card from "../card";
 import QuestionMaintenance from "./questionMaintenance";
 import Pagination from "../form/pagination";
 import Button from "../form/button";
 import FormConfig from "./formConfig";
+import TableFormMaintenance from "./tableFormsMaintenance";
+import NewFormMaintenance from "./newFormMaintenance";
 
 const BodyFormMaintenance: React.FC = () => {
   const [activeDepartment, setActiveDepartment] = useState(0);
@@ -15,6 +18,7 @@ const BodyFormMaintenance: React.FC = () => {
   const [selectedForm, setSelectedForm] = useState<Form>({} as Form);
 
   const { saveQuestions, setQuestions, questions } = useQuestionStore();
+  const { forms, setForms, updateForm } = useFormStore();
 
   useEffect(() => {
     fetch("/api/departments")
@@ -27,6 +31,7 @@ const BodyFormMaintenance: React.FC = () => {
           )
         );
         setQuestions(allQuestions);
+        setForms(data.flatMap((dept: Department) => dept.axisform));
         console.log(data);
       })
       .catch((error) => {
@@ -82,15 +87,16 @@ const BodyFormMaintenance: React.FC = () => {
           ))}
         </div>
 
-        {selectedForm && (
-          <FormConfig
-            form={selectedForm}
-            onSave={() => {
-              console.log("Save");
-            }}
-            onUpdateForm={setSelectedForm}
-          />
-        )}
+        <NewFormMaintenance onSave={() => {}} departments={data} />
+
+        <TableFormMaintenance
+          forms={forms.filter(
+            (q) => q.DEPARTMENT_dep_id === data[activeDepartment].dep_id
+          )}
+          onSelectform={setSelectedForm}
+        />
+
+        {selectedForm && <FormConfig formId={selectedForm.form_id} />}
 
         <Pagination
           currentPage={currentPage}
@@ -98,23 +104,16 @@ const BodyFormMaintenance: React.FC = () => {
           onPageChange={handlePageChange}
         />
 
-        {data.length > 0 &&
-        data[activeDepartment] &&
-        data[activeDepartment].axisform[activeForm].section[currentPage] ? (
+        {selectedForm.form_id ? (
           <div className="w-full flex flex-col justify-center items-center">
             <h2 className="text-4xl font-bold m-4 text-white">
-              {
-                data[activeDepartment].axisform[activeForm].section[currentPage]
-                  .sect_name
-              }
+              {selectedForm.section[currentPage].sect_name}
             </h2>
             {questions
               .filter(
                 (q) =>
                   q.SECTION_sect_id ===
-                  data[activeDepartment].axisform[activeForm].section[
-                    currentPage
-                  ].sect_id
+                  selectedForm.section[currentPage].sect_id
               )
               .map((question, index) => (
                 <QuestionMaintenance

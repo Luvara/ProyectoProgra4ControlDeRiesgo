@@ -28,7 +28,6 @@ const useQuestionStore = create<QuestionState>((set, get) => ({
   saveQuestions: async () => {
     const modifiedQuestions = get().questions.filter((q) => q.isModified);
 
-    // Limpia las preguntas eliminando la propiedad 'isModified'
     const cleanQuestions = modifiedQuestions.map(
       ({ isModified, ...rest }) => rest
     );
@@ -38,7 +37,7 @@ const useQuestionStore = create<QuestionState>((set, get) => ({
 
     try {
       const response = await fetch("/api/questions", {
-        method: "PUT", // Asegúrate de que tu API acepta PUT para múltiples elementos
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cleanQuestions),
       });
@@ -46,7 +45,6 @@ const useQuestionStore = create<QuestionState>((set, get) => ({
       const savedQuestions = await response.json();
       console.log("Saved questions:", savedQuestions);
 
-      // Opcional: resetear la bandera isModified si la respuesta es exitosa
       set((state) => ({
         questions: state.questions.map((q) => ({
           ...q,

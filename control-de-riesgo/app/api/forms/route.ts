@@ -11,3 +11,24 @@ export async function GET() {
     return NextResponse.error();
   }
 }
+
+export async function PUT(req: Request) {
+  try {
+    const body = await req.json();
+    const forms = body as axisform[];
+
+    const updatedForms = await prisma.$transaction(
+      forms.map((form) =>
+        prisma.axisform.update({
+          where: { form_id: form.form_id },
+          data: form,
+        })
+      )
+    );
+
+    return NextResponse.json(updatedForms);
+  } catch (error) {
+    console.error("Error updating form:", error);
+    return NextResponse.error();
+  }
+}
