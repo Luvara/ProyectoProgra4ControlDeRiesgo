@@ -14,16 +14,22 @@ const HeaderButton = ({
     <button
       type="button"
       onClick={onClick}
-      className={`flex items-center justify-between w-full px-4 ${otherClass} text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white`}
+      className={`flex items-center justify-between  ${otherClass}  img-hover`}
     >
       {children}
-      <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 20 20">
+      <svg
+        className="w-2.5 h-2.5 ms-3"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 10 6"
+      >
         <path
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 8l5 5 5-5"
+          strokeWidth="2"
+          d="m1 1 4 4 4-4"
         />
       </svg>
     </button>
