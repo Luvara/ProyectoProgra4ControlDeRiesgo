@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { signOut,useSession } from "next-auth/react";
-import { User } from "../../components/index";
+import { User } from "../index";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
-import UserLog from "../user/userlog";
 import Link from "next/link";
 
 
@@ -22,7 +21,6 @@ const Header = () => {
     window.location.href = 'https://login.microsoftonline.com/{AZURE_AD_TENANT_ID}/oauth2/v2.0/logout?post_logout_redirect_uri=' + encodeURIComponent(window.location.origin);
   };
   // const [user, setUser] = useState<User | null>(UserLog());
-  const user = UserLog();
   // Permitir `null`
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const Header = () => {
           >
             <li>
               <Link href="/homePage" className="py-2 px-3 text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white">  Home Usuario:
-                {user && <h1>{session?.user?.name}</h1>}</Link>
+                { <h1>{session?.user?.name}</h1>}</Link>
             </li>
             <li className="relative">
               <HeaderButton onClick={toggleDropdown}>Maintenance</HeaderButton>

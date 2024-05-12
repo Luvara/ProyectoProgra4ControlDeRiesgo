@@ -1,4 +1,4 @@
-import { User } from "../../components/index";
+import { User } from "../index";
 
 const TableUserMaintenance = ({
   users,

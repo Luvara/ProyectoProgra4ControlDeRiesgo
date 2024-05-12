@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Department } from "../../components";
+import { Form, Department } from "..";
 import useQuestionStore from "../../lib/useQuestionStore";
 import useFormStore from "../../lib/useFormStore";
 import Card from "../card";

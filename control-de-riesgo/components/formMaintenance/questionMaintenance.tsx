@@ -1,4 +1,4 @@
-import { Question } from "../../components/index";
+import { Question } from "../index";
 import useQuestionStore from "../../lib/useQuestionStore";
 
 const QuestionMaintenance = ({ question }: { question: Question }) => {

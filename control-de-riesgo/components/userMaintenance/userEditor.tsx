@@ -1,5 +1,5 @@
 import React from "react";
-import { User, UserType, DepartmentType } from "../../components/index";
+import { User, UserType, DepartmentType } from "../index";
 
 interface UserEditorProps {
   user: User;

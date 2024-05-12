@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, DepartmentType } from "../../components/index";
+import { Form, DepartmentType } from "../index";
 
 const statusOptions = [
   { status: "Complete", id: "c" },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { User, UserType, DepartmentType } from "../../components/index";
+import { User, UserType, DepartmentType } from "../index";
 import TableUserMaintenance from "./tableUserMaintenance";
 import UserEditor from "./userEditor";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Data } from "../../components/index";
+import { Form, Data } from "../index";
 import Question from "./question";
 import Pagination from "./pagination";
 import Button from "./button";
