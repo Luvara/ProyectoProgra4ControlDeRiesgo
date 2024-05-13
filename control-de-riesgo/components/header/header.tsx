@@ -45,6 +45,7 @@ const Header = () => {
           <p>Control de Riesgo</p>
           <div className="flex space-x-2">
             <p className="text-nowrap">Usuario:</p>
+            <p>{<p>{session?.user?.name}</p>}</p>
           </div>
         </div>
 
