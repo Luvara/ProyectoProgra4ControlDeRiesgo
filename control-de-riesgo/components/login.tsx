@@ -21,7 +21,7 @@ const Login: React.FC = () => {
         <div className="flex flex-col items-center justify-center p-8 logBox">
           <div className="flex flex-col items-center z-10">
             <Image src="/Logo.svg" width={150} height={150} alt="Image"></Image>
-            <p className="text-lg text-white text-center font-bold ">
+            <p className="text-lg text-white text-center font-bold mt-10">
               ¡Bienvenido de vuelta!
             </p>
             <p className="text-lg text-white text-center">
@@ -42,7 +42,7 @@ const Login: React.FC = () => {
                 src="https://img.icons8.com/fluency/48/azure-1.png"
                 alt="azure-1"
               />
-              Login with Azure
+              Iniciar sesión
             </button>
           </div>
         </div>

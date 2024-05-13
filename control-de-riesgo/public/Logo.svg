@@ -1,8 +1,8 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
  "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="1024.000000pt" height="1024.000000pt" viewBox="0 0 1024.000000 1024.000000"
+ <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="670.000000pt" height="670.000000pt" viewBox="0 0 670.000000 670.000000"
  preserveAspectRatio="xMidYMid meet">
    <defs>
         <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -17,7 +17,7 @@
 <metadata>
 Created by potrace 1.16, written by Peter Selinger 2001-2019
 </metadata>
-<g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
+<g transform="translate(-189.000000,830.000000) scale(0.100000,-0.100000)"
 fill="url(#blueGradient)" stroke="none">
 <path d="M4775 8215 c-363 -48 -757 -179 -1086 -360 -316 -174 -658 -438 -876
 -676 -147 -160 -157 -171 -225 -261 -245 -320 -407 -638 -514 -1008 -77 -266
