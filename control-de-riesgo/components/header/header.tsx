@@ -38,7 +38,6 @@ const Header = () => {
 
   return (
     <nav className="relative ">
-      {/*<div className="max-w-screen-xl flex flex-wrap  justify-center items-center text-white marker:p-4 lg:justify-between   md:flex-row md:justify-center ">*/}
       <div className="max-w-screen-xl flex flex-wrap justify-between items-center mx-10 p-4 md:mx-auto text-white md:justify-center  lg:justify-between">
         <div className="flex flex-col items-center">
           <Image src="/Logo.svg" width={50} height={50} alt="image" />
