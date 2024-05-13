@@ -22,8 +22,8 @@ const BodyFormMaintenance: React.FC = () => {
 
   useEffect(() => {
     fetch("/api/departments")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setData(data);
         if (data.length > 0) {
           const allQuestions = data.flatMap((dept: Department) =>
@@ -36,7 +36,7 @@ const BodyFormMaintenance: React.FC = () => {
           setSelectedForm(data[0].axisform[0]); // Set initial selected form if data is available
         }
       })
-      .catch(error => console.error("Error fetching departments:", error));
+      .catch((error) => console.error("Error fetching departments:", error));
   }, []);
 
   const handleSectionChange = (index: number) => {
@@ -62,7 +62,13 @@ const BodyFormMaintenance: React.FC = () => {
     }
   };
 
-  const svgs = ["/Ambience.svg", "/Risk.svg", "/Control.svg", "/Systems.svg", "/Follow-up.svg"];
+  const svgs = [
+    "/Ambience.svg",
+    "/Risk.svg",
+    "/Control.svg",
+    "/Systems.svg",
+    "/Follow-up.svg",
+  ];
 
   return (
     <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
@@ -82,7 +88,10 @@ const BodyFormMaintenance: React.FC = () => {
           <>
             <NewFormMaintenance onSave={() => {}} departments={data} />
             <TableFormMaintenance
-              forms={forms.filter((form) => form.DEPARTMENT_dep_id === data[activeDepartment].dep_id)}
+              forms={forms.filter(
+                (form) =>
+                  form.DEPARTMENT_dep_id === data[activeDepartment].dep_id
+              )}
               onSelectform={setSelectedForm}
             />
             <FormConfig formId={selectedForm.form_id} />
@@ -95,11 +104,18 @@ const BodyFormMaintenance: React.FC = () => {
               <h2 className="text-4xl font-bold m-4 text-white">
                 {selectedForm.section[currentPage].sect_name}
               </h2>
-              {questions.filter(
-                (q) => q.SECTION_sect_id === selectedForm.section[currentPage].sect_id
-              ).map((question, index) => (
-                <QuestionMaintenance key={question.quest_id} question={question} />
-              ))}
+              {questions
+                .filter(
+                  (q) =>
+                    q.SECTION_sect_id ===
+                    selectedForm.section[currentPage].sect_id
+                )
+                .map((question, index) => (
+                  <QuestionMaintenance
+                    key={question.quest_id}
+                    question={question}
+                  />
+                ))}
             </div>
             <Pagination
               currentPage={currentPage}
