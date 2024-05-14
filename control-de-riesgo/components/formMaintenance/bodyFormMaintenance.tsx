@@ -9,6 +9,7 @@ import Button from "../form/button";
 import FormConfig from "./formConfig";
 import TableFormMaintenance from "./tableFormsMaintenance";
 import NewFormMaintenance from "./newFormMaintenance";
+import { useUser } from "../../lib/userContext";
 
 const BodyFormMaintenance: React.FC = () => {
   const [activeDepartment, setActiveDepartment] = useState(0);
@@ -19,6 +20,8 @@ const BodyFormMaintenance: React.FC = () => {
 
   const { saveQuestions, setQuestions, questions } = useQuestionStore();
   const { forms, setForms, updateForm } = useFormStore();
+
+  const { user } = useUser();
 
   useEffect(() => {
     fetch("/api/departments")
@@ -83,6 +86,7 @@ const BodyFormMaintenance: React.FC = () => {
             />
           ))}
         </div>
+        <p>{<p>{user?.usu_name}</p>}</p>
 
         {selectedForm && (
           <>

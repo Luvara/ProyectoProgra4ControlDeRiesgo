@@ -1,25 +1,30 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import SessionWrapper from '../components/SessionWrapper'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import SessionWrapper from "../components/SessionWrapper";
+import { UserProvider } from "../lib/userContext";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Control risk',
-  description: 'Programation IV',
-}
+  title: "Control risk",
+  description: "Programation IV",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <SessionWrapper>
-    <html lang="en">
-    <body className={`${inter.className} background_color`}>{children}</body>
-    </html>
+      <UserProvider>
+        <html lang="en">
+          <body className={`${inter.className} background_color`}>
+            {children}
+          </body>
+        </html>
+      </UserProvider>
     </SessionWrapper>
-  )
+  );
 }

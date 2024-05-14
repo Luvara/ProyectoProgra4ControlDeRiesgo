@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import { signOut, useSession } from "next-auth/react";
 import { User } from "../../components/index";
+import { useUser } from "../../lib/userContext";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
@@ -13,6 +14,8 @@ const Header = () => {
   const [isDropdownMobile, setIsDropdownMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { data: session } = useSession();
+
+  const { user } = useUser();
 
   const handleSignOut = async () => {
     await signOut({ redirect: false }); // Evita la redirección automática de NextAuth
@@ -44,7 +47,8 @@ const Header = () => {
           <p>Control de Riesgo</p>
           <div className="flex space-x-2">
             <p className="text-nowrap">Usuario:</p>
-            <p>{<p>{session?.user?.name}</p>}</p>
+            {/* <p>{<p>{session?.user?.name}</p>}</p> */}
+            <p>{<p>{user?.usu_name}</p>}</p>
           </div>
         </div>
 
