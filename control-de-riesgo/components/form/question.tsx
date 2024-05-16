@@ -1,35 +1,57 @@
-const Question = ({
+import { useState, useEffect } from "react";
+import { Question } from "../index";
+
+const QuestionAnswer = ({
   question,
   index,
   sectionIndex,
   updateQuestion,
 }: {
-  question: any;
+  question: Question;
   index: number;
   sectionIndex: number;
-  updateQuestion: any;
+  updateQuestion: (sectionIndex: number, questionIndex: number, newData: Partial<Question["answer"][0]>) => void;
 }) => {
-  const handleResponseChange = (response) => {
-    updateQuestion(sectionIndex, index, { response });
+  const initialJustification = question.answer.length > 0 ? question.answer[0].answ_justification : "";
+  const [justification, setJustification] = useState(initialJustification);
+  const [lastSavedJustification, setLastSavedJustification] = useState(initialJustification);
+
+  useEffect(() => {
+    setJustification(initialJustification);
+    setLastSavedJustification(initialJustification);
+  }, [initialJustification]);
+
+  const handleResponseChange = (response: string) => {
+    updateQuestion(sectionIndex, index, { answ_answer: response });
   };
 
-  const handleObservationChange = (observation) => {
-    updateQuestion(sectionIndex, index, { observation });
+  const handleObservationChange = (observation: string) => {
+    setJustification(observation);
   };
 
-  const handleFileChange = (event) => {
-    updateQuestion(sectionIndex, index, { file: event.target.files[0] });
+  const handleObservationBlur = () => {
+    if (justification !== lastSavedJustification) {
+      updateQuestion(sectionIndex, index, { answ_justification: justification });
+      setLastSavedJustification(justification);
+    }
   };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    updateQuestion(sectionIndex, index, { file });
+  };
+
+  const answer = question.answer.length > 0 ? question.answer[0] : { answ_answer: "", answ_justification: "" };
 
   return (
     <div className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
-      <h4 className="font-semibold">{question.text}</h4>
+      <h4 className="font-semibold">{question.quest_question}</h4>
       <div className="my-2">
         <label>
           <input
             type="radio"
             name={`response-${index}`}
-            checked={question.response === "yes"}
+            checked={answer.answ_answer === "yes"}
             onChange={() => handleResponseChange("yes")}
           />{" "}
           Yes
@@ -38,7 +60,7 @@ const Question = ({
           <input
             type="radio"
             name={`response-${index}`}
-            checked={question.response === "no"}
+            checked={answer.answ_answer === "no"}
             onChange={() => handleResponseChange("no")}
           />{" "}
           No
@@ -47,8 +69,9 @@ const Question = ({
       <textarea
         className="mt-2 p-2 border rounded w-full bg-transparent"
         placeholder="Observations"
-        value={question.observation}
+        value={justification}
         onChange={(e) => handleObservationChange(e.target.value)}
+        onBlur={handleObservationBlur}
       />
       <input
         type="file"
@@ -61,11 +84,11 @@ const Question = ({
              hover:file:bg-blue-100
              dark:file:bg-gray-800 dark:file:text-white dark:file:border dark:hover:file:bg-gray-700"
       />
-      {question.file && (
+      {/* {question.file && (
         <p className="text-sm text-gray-500">File: {question.file.name}</p>
-      )}
+      )} */}
     </div>
   );
 };
 
-export default Question;
+export default QuestionAnswer;

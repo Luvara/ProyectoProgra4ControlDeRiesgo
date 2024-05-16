@@ -2,8 +2,6 @@ import { answer } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-
-
 export async function GET() {
   try {
     const answers = await prisma.answer.findMany();
@@ -14,14 +12,10 @@ export async function GET() {
   }
 }
 
-
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const {  } = body as answer;
-
-    
+    const {} = body as answer;
 
     const newAnswer = await prisma.answer.create({
       data: {
@@ -38,22 +32,27 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const { answ_id } = body as answer;
+    const { QUESTION_quest_id, DEPARTMENT_dep_id } = body as answer;
 
-    // if (!usu_id || !usu_name || !usu_email) {
-    //   return new NextResponse("Missing required fields", { status: 400 });
-    // }
-
-    const updatedAnswer = await prisma.answer.update({
-      where: { answ_id: answ_id },
-      data: {
-        ...(body as answer),
-      },
+    const existingAnswer = await prisma.answer.findFirst({
+      where: { QUESTION_quest_id, DEPARTMENT_dep_id },
     });
 
-    return NextResponse.json(updatedAnswer);
+    if (existingAnswer) {
+      const updatedAnswer = await prisma.answer.update({
+        where: { answ_id: existingAnswer.answ_id },
+        data: body,
+      });
+      return NextResponse.json(updatedAnswer);
+    } else {
+      const newAnswer = await prisma.answer.create({
+        data: body,
+      });
+      return NextResponse.json(newAnswer);
+    }
   } catch (error) {
-    console.error("Error updating answer:", error);
+    console.error("Error upserting answer:", error);
     return NextResponse.error();
   }
 }
+
