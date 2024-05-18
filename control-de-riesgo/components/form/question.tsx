@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Question } from "../index";
 
 const QuestionAnswer = ({
@@ -10,11 +10,17 @@ const QuestionAnswer = ({
   question: Question;
   index: number;
   sectionIndex: number;
-  updateQuestion: (sectionIndex: number, questionIndex: number, newData: Partial<Question["answer"][0]>) => void;
+  updateQuestion: (
+    sectionIndex: number,
+    questionIndex: number,
+    newData: Partial<Question["answer"][0]>
+  ) => void;
 }) => {
-  const initialJustification = question.answer.length > 0 ? question.answer[0].answ_justification : "";
+  const initialJustification =
+    question.answer.length > 0 ? question.answer[0].answ_justification : "";
   const [justification, setJustification] = useState(initialJustification);
-  const [lastSavedJustification, setLastSavedJustification] = useState(initialJustification);
+  const [lastSavedJustification, setLastSavedJustification] =
+    useState(initialJustification);
 
   useEffect(() => {
     setJustification(initialJustification);
@@ -31,7 +37,9 @@ const QuestionAnswer = ({
 
   const handleObservationBlur = () => {
     if (justification !== lastSavedJustification) {
-      updateQuestion(sectionIndex, index, { answ_justification: justification });
+      updateQuestion(sectionIndex, index, {
+        answ_justification: justification,
+      });
       setLastSavedJustification(justification);
     }
   };
@@ -41,11 +49,19 @@ const QuestionAnswer = ({
     updateQuestion(sectionIndex, index, { file });
   };
 
-  const answer = question.answer.length > 0 ? question.answer[0] : { answ_answer: "", answ_justification: "" };
+  const answer =
+    question.answer.length > 0
+      ? question.answer[0]
+      : { answ_answer: "", answ_justification: "" };
 
   return (
-    <div className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
-      <h4 className="font-semibold">{question.quest_question}</h4>
+    <div
+      id={`question-${sectionIndex}-${index}`}
+      className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow"
+    >
+      <h4 className="font-semibold">
+        {question.quest_ordern} - {question.quest_question}
+      </h4>
       <div className="my-2">
         <label>
           <input

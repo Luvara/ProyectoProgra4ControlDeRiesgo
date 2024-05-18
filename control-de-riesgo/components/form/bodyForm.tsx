@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "../index";
 import Question from "./question";
 import Pagination from "./pagination";
@@ -8,26 +8,70 @@ import useFormStore from "../../lib/useFormRespondStore";
 
 const BodyForm: React.FC = () => {
   const { user } = useUser();
-  const { form, currentPage, setForm, setCurrentPage, updateAnswer } = useFormStore();
+  const {
+    form,
+    currentPage,
+    setForm,
+    setCurrentPage,
+    updateAnswer,
+    unansweredQuestions,
+    checkUnansweredQuestions,
+  } = useFormStore();
 
   useEffect(() => {
     if (user?.department_dep_id) {
       fetch(`/api/forms/${user.department_dep_id}`)
         .then((response) => response.json())
-        .then((data: Form) => setForm(data))
+        .then((data: Form) => {
+          setForm(data);
+          checkUnansweredQuestions();
+        })
         .catch((error) => console.error("Error loading the data", error));
     }
   }, [user]);
 
-  const handlePageChange = (newPage: number): void => {
+  const handlePageChange = (newPage: number, questionIndex?: number): void => {
     if (form && newPage >= 0 && newPage < form.section.length) {
       setCurrentPage(newPage);
+      if (questionIndex !== undefined) {
+        setTimeout(() => {
+          const questionElement = document.getElementById(
+            `question-${newPage}-${questionIndex}`
+          );
+          questionElement?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 0);
+      }
     }
   };
 
   return (
-    <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
-      <div className="p-2 bg-background-3 flex flex-col justify-center items-center">
+    <div className="container md:flex px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
+      <div className="bg-gray-800 hidden md:flex md:flex-col p-4 shadow-xl md:w-80">
+        <h4 className="font-bold text-white text-lg mb-4">
+          Preguntas sin responder
+        </h4>
+        <ul className="space-y-2">
+          {unansweredQuestions.map((q, idx) => (
+            <li
+              key={idx}
+              className={`text-white p-2 rounded-md ${
+                (q.sectionIndex + 1) % 2 === 0 ? "bg-gray-700" : "bg-gray-900"
+              }`}
+              onClick={() => handlePageChange(q.sectionIndex, q.questionIndex)}
+            >
+              <span className="font-semibold">
+                Sección {q.sectionIndex + 1}
+              </span>
+              , Pregunta {q.questionOrdern}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="p-2 bg-background-3 flex flex-col justify-center items-center w-full">
         <Pagination
           currentPage={currentPage}
           totalPages={form ? form.section.length : 0}
@@ -57,8 +101,18 @@ const BodyForm: React.FC = () => {
           onPageChange={handlePageChange}
         />
         <div className="m-2 w-full flex flex-row justify-evenly items-center">
-          <Button text="Atras" color="blue" onClick={() => handlePageChange(currentPage - 1)} />
-          <Button text="Guardar" color="purple" onClick={() => { /* Handle save */ }} />
+          <Button
+            text="Atras"
+            color="blue"
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
+          <Button
+            text="Guardar"
+            color="purple"
+            onClick={() => {
+              /* Handle save */
+            }}
+          />
         </div>
       </div>
     </div>
