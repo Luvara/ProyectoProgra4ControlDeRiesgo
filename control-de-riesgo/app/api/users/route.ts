@@ -1,10 +1,8 @@
-import { user } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-
-
-export async function GET() {
+// Función para obtener todos los usuarios
+async function getAllUsuarios() {
   try {
     const users = await prisma.user.findMany();
     return NextResponse.json(users);
@@ -14,46 +12,72 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
+// Función para obtener usuarios según el tipo de usuario
+async function getUsuariosByType(userTypes: number[]) {
+  try {
+    const users = await prisma.user.findMany({
+      where: {
+        userType_usut_id: {
+          in: userTypes,
+        },
+      },
+    });
+    return NextResponse.json(users);
+  } catch (error) {
+    console.error("Error fetching users by type:", error);
+    return NextResponse.error();
+  }
+}
+
+// Handler principal para manejar diferentes casos basados en los parámetros de consulta
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const type = searchParams.get('type');
+
+  if (type === '2-3') {
+    return getUsuariosByType([2, 3]);
+  } else if (type === '4-5') {
+    return getUsuariosByType([4, 5]);
+  } else {
+    return getAllUsuarios();
+  }
+}
+
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { usu_id, usu_name, usu_email } = body as user;
+    const { usu_name, usu_email } = body;
 
     if (!usu_name || !usu_email) {
-      return new NextResponse("Missing required fields", { status: 400 });
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const newUser = await prisma.user.create({
-      data: {
-        ...(body as user),
-      },
+      data: body,
     });
 
     return NextResponse.json(newUser);
   } catch (error) {
-    return new NextResponse("Internal Error", { status: 500 });
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { usu_id, usu_name, usu_email } = body as user;
+    const { usu_id, usu_name, usu_email } = body;
 
     if (!usu_id || !usu_name || !usu_email) {
-      return new NextResponse("Missing required fields", { status: 400 });
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const updatedUser = await prisma.user.update({
-      where: { usu_id: usu_id },
-      data: {
-        ...(body as user),
-      },
+      where: { usu_id },
+      data: body,
     });
 
     return NextResponse.json(updatedUser);
   } catch (error) {
-    console.error("Error updating user:", error);
-    return NextResponse.error();
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

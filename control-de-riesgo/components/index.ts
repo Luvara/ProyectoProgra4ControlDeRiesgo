@@ -62,7 +62,7 @@ export interface User {
   usu_slastname: string;
   usu_torespond: string;
   usu_version: number;
-  
+  usu_state: string;
 }
 
 export interface DataUserType {

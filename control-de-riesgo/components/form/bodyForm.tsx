@@ -19,7 +19,12 @@ const BodyForm: React.FC = () => {
   } = useFormStore();
 
   useEffect(() => {
-    if (user?.department_dep_id) {
+    if (
+      user?.department_dep_id &&
+      user?.usu_torespond === "y" &&
+      user?.usu_state === "A" &&
+      (user?.userType_usut_id === 4 || user?.userType_usut_id === 5)
+    ) {
       fetch(`/api/forms/${user.department_dep_id}`)
         .then((response) => response.json())
         .then((data: Form) => {
