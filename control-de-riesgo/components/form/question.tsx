@@ -36,10 +36,10 @@ const QuestionAnswer = ({
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
-    updateQuestion(sectionIndex, index, { file });
-  };
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files ? event.target.files[0] : null;
+  //   updateQuestion(sectionIndex, index, { file });
+  // };
 
   const answer = question.answer.length > 0 ? question.answer[0] : { answ_answer: "", answ_justification: "" };
 
@@ -73,7 +73,7 @@ const QuestionAnswer = ({
         onChange={(e) => handleObservationChange(e.target.value)}
         onBlur={handleObservationBlur}
       />
-      <input
+      {/* <input
         type="file"
         onChange={handleFileChange}
         className="block w-full text-sm text-gray-500
@@ -83,7 +83,7 @@ const QuestionAnswer = ({
              file:bg-blue-50 file:text-blue-700
              hover:file:bg-blue-100
              dark:file:bg-gray-800 dark:file:text-white dark:file:border dark:hover:file:bg-gray-700"
-      />
+      /> */}
       {/* {question.file && (
         <p className="text-sm text-gray-500">File: {question.file.name}</p>
       )} */}

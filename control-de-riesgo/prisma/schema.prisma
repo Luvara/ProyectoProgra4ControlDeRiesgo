@@ -105,6 +105,7 @@ model user {
   usu_email         String      @unique(map: "usu_email_UNIQUE") @db.VarChar(100)
   usu_torespond     String?     @db.VarChar(1)
   usu_version       Int?
+  usu_state         String      @default("A") @db.VarChar(1)
   department_dep_id Int?
   userType_usut_id  Int?
   department        department? @relation(fields: [department_dep_id], references: [dep_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_department")

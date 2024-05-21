@@ -8,7 +8,8 @@ import useFormStore from "../../lib/useFormRespondStore";
 
 const BodyForm: React.FC = () => {
   const { user } = useUser();
-  const { form, currentPage, setForm, setCurrentPage, updateAnswer } = useFormStore();
+  const { form, currentPage, setForm, setCurrentPage, updateAnswer } =
+    useFormStore();
 
   useEffect(() => {
     if (user?.department_dep_id) {
@@ -28,6 +29,7 @@ const BodyForm: React.FC = () => {
   return (
     <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
       <div className="p-2 bg-background-3 flex flex-col justify-center items-center">
+        <h1 className="text-4xl font-bold m-4 text-white">{form?.form_name}</h1>
         <Pagination
           currentPage={currentPage}
           totalPages={form ? form.section.length : 0}
@@ -57,8 +59,18 @@ const BodyForm: React.FC = () => {
           onPageChange={handlePageChange}
         />
         <div className="m-2 w-full flex flex-row justify-evenly items-center">
-          <Button text="Atras" color="blue" onClick={() => handlePageChange(currentPage - 1)} />
-          <Button text="Guardar" color="purple" onClick={() => { /* Handle save */ }} />
+          <Button
+            text="Atras"
+            color="blue"
+            onClick={() => handlePageChange(currentPage - 1)}
+          />
+          <Button
+            text="Guardar"
+            color="purple"
+            onClick={() => {
+              /* Handle save */
+            }}
+          />
         </div>
       </div>
     </div>

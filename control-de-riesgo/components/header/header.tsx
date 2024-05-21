@@ -23,8 +23,6 @@ const Header = () => {
       "https://login.microsoftonline.com/{AZURE_AD_TENANT_ID}/oauth2/v2.0/logout?post_logout_redirect_uri=" +
       encodeURIComponent(window.location.origin);
   };
-  // const [user, setUser] = useState<User | null>(UserLog());
-  // Permitir `null`
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +46,7 @@ const Header = () => {
           <div className="flex space-x-2">
             <p className="text-nowrap">Usuario:</p>
             {/* <p>{<p>{session?.user?.name}</p>}</p> */}
-            <p>{<p>{user?.usu_name}</p>}</p>
+            <p>{<p>{user?.userType_usut_id}</p>}</p>
           </div>
         </div>
 
@@ -80,33 +78,35 @@ const Header = () => {
             </li>
 
             <li className="relative">
-              <HeaderButton onClick={toggleDropdown}>
-                Mantenimiento
-              </HeaderButton>
+              {user?.userType_usut_id !== 5 && (
+                <>
+                  <HeaderButton onClick={toggleDropdown}>
+                    Mantenimiento
+                  </HeaderButton>
 
-              {isDropdownOpen && (
-                <div className="absolute w-60 bg-nodes mt-2">
-                  <ul className="py-1 text-sm">
-                    <li>
-                      <Link
-                        className="block px-4 py-2 img-hover"
-                        href="/admin/formMaintenance"
-                      >
-                        {" "}
-                        Mantenimiento de formularios
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="block px-4 py-2 img-hover"
-                        href="/admin/userMaintenance"
-                      >
-                        {" "}
-                        Mantenimiento de usuarios
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+                  {isDropdownOpen && (
+                    <div className="absolute w-60 bg-nodes mt-2">
+                      <ul className="py-1 text-sm">
+                        <li>
+                          <Link
+                            className="block px-4 py-2 img-hover"
+                            href="/admin/formMaintenance"
+                          >
+                            Mantenimiento de formularios
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="block px-4 py-2 img-hover"
+                            href="/admin/userMaintenance"
+                          >
+                            Mantenimiento de usuarios
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </>
               )}
             </li>
             <li>
