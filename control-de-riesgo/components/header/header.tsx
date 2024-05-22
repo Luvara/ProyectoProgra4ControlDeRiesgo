@@ -45,7 +45,7 @@ const Header = () => {
           <p>Control de Riesgo</p>
           <div className="flex space-x-2">
             <p className="text-nowrap">Usuario:</p>
-            {/* <p>{<p>{session?.user?.name}</p>}</p> */}
+            <p>{<p>{session?.user?.name}</p>}</p>
             <p>{<p>{user?.userType_usut_id}</p>}</p>
           </div>
         </div>
@@ -87,21 +87,30 @@ const Header = () => {
                     <div className="absolute w-60 bg-nodes mt-2">
                       <ul className="py-1 text-sm">
                         {user?.userType_usut_id === 4 ? (
+                          <li>
+                            <Link
+                              className="block px-4 py-2 img-hover"
+                              href="/admin/information"
+                            >
+                              Información de usuarios de departamento
+                            </Link>
+                          </li>
+                        ) : user?.userType_usut_id === 2 ? (
                           <>
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/informationPersonal"
+                                href="/admin/coordinatorTable"
                               >
-                                Información personal
+                                Tabla de Coordinadores
                               </Link>
                             </li>
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/information"
+                                href="/admin/tiTable"
                               >
-                                Información de usuarios de departamento
+                                Tabla de TI
                               </Link>
                             </li>
                           </>
