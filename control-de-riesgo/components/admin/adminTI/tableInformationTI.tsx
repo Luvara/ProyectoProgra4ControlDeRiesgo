@@ -1,44 +1,35 @@
-import React, { useEffect, useState } from "react";
-import Switch from "react-switch";
-import Modal from "../../modal"; 
+import React, { useState } from "react";
+import { User } from "../../index";
+import Modal from "../../modal";
 import Pagination from "../../form/pagination";
-import {User}  from "../../index"
 
-interface InformationTableProps {
+interface TableInformationTIProps {
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
-  handleStateChange: (
-    checked: boolean,
-    user: User,
-    field: "usu_state" | "usu_torespond"
-  ) => void;
+  handleStateChange: (checked: boolean, user: User, field: "usu_state") => void;
 }
 
-const InformationTable: React.FC<InformationTableProps> = ({
+const TableInformationTI: React.FC<TableInformationTIProps> = ({
   users,
   setUsers,
   handleStateChange,
 }) => {
   const [confirmUser, setConfirmUser] = useState<User | null>(null);
-  const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+  const [filter, setFilter] = useState("");
   const itemsPerPage = 20;
-
-  useEffect(() => {
-    console.log("Users in InformationTable:", users); // Verifica los datos recibidos
-  }, [users]);
 
   const handleCheckboxChange = (checked: boolean, user: User) => {
     if (!checked) {
       setConfirmUser(user);
     } else {
-      handleStateChange(true, user, "usu_state");
+      handleStateChange(true, user,"usu_state");
     }
   };
 
   const confirmDeactivation = () => {
     if (confirmUser) {
-      handleStateChange(false, confirmUser, "usu_state");
+      handleStateChange(false, confirmUser,"usu_state");
       setConfirmUser(null);
     }
   };
@@ -52,7 +43,6 @@ const InformationTable: React.FC<InformationTableProps> = ({
       user.usu_name.toLowerCase().includes(filter.toLowerCase()) ||
       user.usu_email.toLowerCase().includes(filter.toLowerCase())
   );
-
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const displayedUsers = filteredUsers.slice(
     currentPage * itemsPerPage,
@@ -65,38 +55,21 @@ const InformationTable: React.FC<InformationTableProps> = ({
 
   return (
     <div>
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Filtrar por nombre o correo"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="p-2 border rounded"
-        />
-      </div>
-
+      <h2 className="text-white text-xl mb-4">Usuarios Activos</h2>
       <table className="w-full text-white text-center">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b">Nombre</th>
             <th className="py-2 px-4 border-b">Apellido</th>
             <th className="py-2 px-4 border-b">Email</th>
-            <th className="py-2 px-4 border-b">Estado del Empleado de Área</th>
-            {displayedUsers.some((user) => user.usu_state === "A") && (
-              <th className="py-2 px-4 border-b">Responder Formulario</th>
-            )}
+            <th className="py-2 px-4 border-b">Estado</th>
           </tr>
         </thead>
         <tbody>
           {displayedUsers.length === 0 ? (
             <tr>
-              <td
-                colSpan={
-                  displayedUsers.some((user) => user.usu_state === "A") ? 5 : 4
-                }
-                className="py-2 px-4 border-b"
-              >
-                Sin empleados asignados
+              <td colSpan={4} className="py-2 px-4 border-b">
+                Sin usuarios asignados
               </td>
             </tr>
           ) : (
@@ -115,26 +88,11 @@ const InformationTable: React.FC<InformationTableProps> = ({
                     }
                   />
                 </td>
-                {user.usu_state === "A" && (
-                  <td className="py-2 px-4 border-b">
-                    <Switch
-                      checked={user.usu_torespond === "y"}
-                      onChange={(checked) =>
-                        handleStateChange(checked, user, "usu_torespond")
-                      }
-                      offColor="#888"
-                      onColor="#0f0"
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                    />
-                  </td>
-                )}
               </tr>
             ))
           )}
         </tbody>
       </table>
-
       <div className="w-full flex flex-col items-center mt-8">
         <Pagination
           currentPage={currentPage}
@@ -142,6 +100,7 @@ const InformationTable: React.FC<InformationTableProps> = ({
           onPageChange={handlePageChange}
         />
       </div>
+
       {confirmUser && (
         <Modal
           isOpen={!!confirmUser}
@@ -155,4 +114,4 @@ const InformationTable: React.FC<InformationTableProps> = ({
   );
 };
 
-export default InformationTable;
+export default TableInformationTI;

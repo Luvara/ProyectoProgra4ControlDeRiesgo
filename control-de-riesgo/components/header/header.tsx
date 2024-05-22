@@ -108,9 +108,17 @@ const Header = () => {
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/tiTable"
+                                href="/admin/adminTI/informatioTI"
                               >
                                 Tabla de TI
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/adminTI/solicitudes"
+                              >
+                                Solicitudes
                               </Link>
                             </li>
                           </>
@@ -141,10 +149,12 @@ const Header = () => {
               )}
             </li>
             <li>
-              <Link href="/form" className="img-hover">
-                {" "}
-                Completar formulario
-              </Link>
+              {(user?.userType_usut_id === 5 ||
+                user?.userType_usut_id === 4) && (
+                <Link href="/form" className="img-hover">
+                  Completar formulario
+                </Link>
+              )}
             </li>
             <li>
               <button onClick={handleSignOut} className="img-hover-red">
