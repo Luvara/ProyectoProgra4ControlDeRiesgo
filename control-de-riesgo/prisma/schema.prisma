@@ -107,6 +107,7 @@ model user {
   usu_email         String      @unique(map: "usu_email_UNIQUE") @db.VarChar(100)
   usu_torespond     String?     @db.VarChar(1)
   usu_state         String      @default("A") @db.VarChar(1)
+  usu_permissons    String      @default("P") @db.VarChar(1)
   usu_version       Int?
   department_dep_id Int?
   userType_usut_id  Int?
