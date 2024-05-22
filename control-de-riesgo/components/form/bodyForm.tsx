@@ -80,7 +80,6 @@ const BodyForm: React.FC = () => {
       </div>
 
       <div className="p-2 bg-background-3 flex flex-col justify-center items-center w-full">
-
         <Pagination
           currentPage={currentPage}
           totalPages={form ? form.section.length : 0}

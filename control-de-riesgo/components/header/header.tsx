@@ -76,7 +76,6 @@ const Header = () => {
                 />
               </Link>
             </li>
-
             <li className="relative">
               {user?.userType_usut_id !== 5 && (
                 <>
@@ -87,22 +86,45 @@ const Header = () => {
                   {isDropdownOpen && (
                     <div className="absolute w-60 bg-nodes mt-2">
                       <ul className="py-1 text-sm">
-                        <li>
-                          <Link
-                            className="block px-4 py-2 img-hover"
-                            href="/admin/formMaintenance"
-                          >
-                            Mantenimiento de formularios
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="block px-4 py-2 img-hover"
-                            href="/admin/userMaintenance"
-                          >
-                            Mantenimiento de usuarios
-                          </Link>
-                        </li>
+                        {user?.userType_usut_id === 4 ? (
+                          <>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/informationPersonal"
+                              >
+                                Información personal
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/information"
+                              >
+                                Información de usuarios de departamento
+                              </Link>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/formMaintenance"
+                              >
+                                Mantenimiento de formularios
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/userMaintenance"
+                              >
+                                Mantenimiento de usuarios
+                              </Link>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </div>
                   )}
