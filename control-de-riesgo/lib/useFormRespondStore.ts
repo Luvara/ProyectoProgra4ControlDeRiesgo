@@ -4,14 +4,25 @@ import { Form, Answer } from "../components/index";
 interface FormState {
   form: Form | null;
   currentPage: number;
+  unansweredQuestions: {
+    sectionIndex: number;
+    questionIndex: number;
+    questionOrdern: String;
+  }[];
   setForm: (form: Form) => void;
   setCurrentPage: (page: number) => void;
-  updateAnswer: (sectionIndex: number, questionIndex: number, newData: Partial<Answer>) => void;
+  updateAnswer: (
+    sectionIndex: number,
+    questionIndex: number,
+    newData: Partial<Answer>
+  ) => void;
+  checkUnansweredQuestions: () => void;
 }
 
 const useFormStore = create<FormState>((set, get) => ({
   form: null,
   currentPage: 0,
+  unansweredQuestions: [],
   setForm: (form: Form) => set({ form }),
   setCurrentPage: (page: number) => set({ currentPage: page }),
   updateAnswer: (sectionIndex, questionIndex, newData) => {
@@ -19,7 +30,9 @@ const useFormStore = create<FormState>((set, get) => ({
     if (!form) return;
 
     const question = form.section[sectionIndex].question[questionIndex];
-    const answer = question.answer[0] || { QUESTION_quest_id: question.quest_id };
+    const answer = question.answer[0] || {
+      QUESTION_quest_id: question.quest_id,
+    };
 
     const updatedAnswer = { ...answer, ...newData };
 
@@ -40,6 +53,33 @@ const useFormStore = create<FormState>((set, get) => ({
         body: JSON.stringify(updatedAnswer),
       }).catch((error) => console.error("Error updating the answer", error));
     }
+
+    get().checkUnansweredQuestions();
+  },
+  checkUnansweredQuestions: () => {
+    const form = get().form;
+    if (!form) return;
+
+    const unansweredQuestions: {
+      sectionIndex: number;
+      questionIndex: number;
+      questionOrdern: String;
+    }[] = [];
+
+    form.section.forEach((section, sectionIndex) => {
+      section.question.forEach((question, questionIndex) => {
+        const answer = question.answer[0];
+        if (!answer || !answer.answ_answer) {
+          unansweredQuestions.push({
+            sectionIndex,
+            questionIndex,
+            questionOrdern: question.quest_ordern,
+          });
+        }
+      });
+    });
+
+    set({ unansweredQuestions });
   },
 }));
 

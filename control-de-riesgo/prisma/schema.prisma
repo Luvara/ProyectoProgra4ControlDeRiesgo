@@ -38,6 +38,8 @@ model axisform {
   form_status       String      @db.VarChar(1)
   form_description  String?     @db.VarChar(80)
   form_version      Int?
+  form_date_start   DateTime?   @db.DateTime(0)
+  form_date_finish  DateTime?   @db.DateTime(0)
   DEPARTMENT_dep_id Int?
   department        department? @relation(fields: [DEPARTMENT_dep_id], references: [dep_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_AXISFORM_DEPARTMENT1")
   section           section[]
@@ -104,6 +106,7 @@ model user {
   usu_slastname     String?     @db.VarChar(30)
   usu_email         String      @unique(map: "usu_email_UNIQUE") @db.VarChar(100)
   usu_torespond     String?     @db.VarChar(1)
+  usu_state         String      @default("A") @db.VarChar(1)
   usu_version       Int?
   usu_state         String      @default("A") @db.VarChar(1)
   department_dep_id Int?
