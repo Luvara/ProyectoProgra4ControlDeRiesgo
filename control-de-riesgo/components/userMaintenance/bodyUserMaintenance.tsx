@@ -17,6 +17,20 @@ const BodyFormMaintenance: React.FC = () => {
         .then((response) => response.json())
         .then((data) => setUsers(data))
         .catch((error) =>
+          console.error("Error fetching users by type 2 or 3:", error)
+        );
+    } else if (user?.userType_usut_id === 3) {
+      fetch("/api/users?type=4-5")
+        .then((response) => response.json())
+        .then((data) => setUsers(data))
+        .catch((error) =>
+          console.error("Error fetching users by type 4 or 5:", error)
+        );
+    } else if (user?.userType_usut_id === 4) {
+      fetch("/api/users?type=5")
+        .then((response) => response.json())
+        .then((data) => setUsers(data))
+        .catch((error) =>
           console.error("Error fetching users by type 4 or 5:", error)
         );
     } else {

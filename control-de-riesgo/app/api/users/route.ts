@@ -38,6 +38,8 @@ export async function GET(req: NextRequest) {
     return getUsuariosByType([2, 3]);
   } else if (type === '4-5') {
     return getUsuariosByType([4, 5]);
+  } else if (type === '5') {
+    return getUsuariosByType([5]);
   } else {
     return getAllUsuarios();
   }
