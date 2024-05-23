@@ -60,7 +60,7 @@ export interface User {
   usu_lastname: string;
   usu_name: string;
   usu_slastname: string;
-  usu_permissons:string,
+  usu_permissons:string;
   usu_torespond: string;
   usu_version: number;
   usu_state: string;
