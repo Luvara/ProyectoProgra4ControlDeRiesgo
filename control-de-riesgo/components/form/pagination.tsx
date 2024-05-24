@@ -4,7 +4,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       <ul className="flex items-center -space-x-px h-8 text-sm">
         <li>
           <button
-            className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-3 h-8 cursor-pointer  text-white bg-transparent border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 0}
           >
@@ -28,10 +28,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         {Array.from({ length: totalPages }, (_, index) => (
           <li key={index}>
             <button
-              className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+              className={`flex items-center justify-center px-3 h-8 bg-transparent leading-tight border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ${
                 currentPage === index
-                  ? "text-blue-600 bg-blue-50 dark:bg-gray-700 dark:text-white"
-                  : ""
+                  ? "text-black font-bold bg-white"
+                  : "text-white bg-transparent"
               }`}
               onClick={() => onPageChange(index)}
             >
@@ -41,7 +41,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         ))}
         <li>
           <button
-            className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-3 h-8 cursor-pointer text-white bg-transparent border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
             onClick={() => onPageChange(currentPage + 1)}
             disabled={currentPage === totalPages - 1}
           >

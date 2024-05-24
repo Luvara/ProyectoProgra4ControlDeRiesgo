@@ -57,49 +57,52 @@ const QuestionAnswer = ({
   return (
     <div
       id={`question-${sectionIndex}-${index}`}
-      className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow"
+      className="mx-10 my-3 p-4 bg-background-4 text-white rounded-lg shadow"
     >
       <h4 className="font-semibold">
         {question.quest_ordern} - {question.quest_question}
       </h4>
-      <div className="my-2">
-        <label>
+      <div className="my-2 flex justify-center">
+        <label className="flex items-center p-3 rounded-md img-hover cursor-pointer">
           <input
-            type="radio"
+            type="checkbox"
             name={`response-${index}`}
+            className="w-6 h-6  bg-gray-100 border-gray-300 rounded me-3"
             checked={answer.answ_answer === "yes"}
             onChange={() => handleResponseChange("yes")}
           />{" "}
-          Yes
+          Si.
         </label>
-        <label className="ml-4">
+        <label className="flex items-center p-3 rounded-md img-hover cursor-pointer">
           <input
-            type="radio"
+            type="checkbox"
+            className="w-6 h-6 bg-gray-100 border-gray-300 rounded me-3"
             name={`response-${index}`}
             checked={answer.answ_answer === "no"}
             onChange={() => handleResponseChange("no")}
           />{" "}
-          No
+          No.
         </label>
       </div>
       <textarea
-        className="mt-2 p-2 border rounded w-full bg-transparent"
-        placeholder="Observations"
+        className="my-2 p-2 border rounded-lg w-full bg-transparent"
+        placeholder="Observaciones..."
         value={justification}
         onChange={(e) => handleObservationChange(e.target.value)}
         onBlur={handleObservationBlur}
       />
-      {/* <input
-        type="file"
-        onChange={handleFileChange}
-        className="block w-full text-sm text-gray-500
+      {
+        <input
+          type="file"
+          /*onChange={handleFileChange}*/
+          className="block w-full text-sm text-gray-500 file:cursor-pointer
              file:mr-4 file:py-2 file:px-4
-             file:rounded file:border-0
-             file:text-sm file:font-semibold
-             file:bg-blue-50 file:text-blue-700
-             hover:file:bg-blue-100
-             dark:file:bg-gray-800 dark:file:text-white dark:file:border dark:hover:file:bg-gray-700"
-      /> */}
+             file:rounded-lg file:border file:border-white
+             file:font-semibold
+             file:bg-transparent file:text-white
+             hover:file:bg-blue-100 hover:file:text-black"
+        />
+      }
       {/* {question.file && (
         <p className="text-sm text-gray-500">File: {question.file.name}</p>
       )} */}

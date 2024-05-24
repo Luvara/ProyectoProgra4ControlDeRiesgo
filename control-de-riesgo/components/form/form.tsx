@@ -13,7 +13,7 @@ const Form: React.FC = () => {
     }
   }, [session, router]);
   return (
-    <div className="bg-gradient-to-b from-black to-purple-950">
+    <div className="background_color">
       <Header />
       <section className="p-14">
         <BodyForm />
