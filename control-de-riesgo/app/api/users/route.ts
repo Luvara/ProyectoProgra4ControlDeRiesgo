@@ -32,13 +32,13 @@ async function getUsuariosByType(userTypes: number[]) {
 // Handler principal para manejar diferentes casos basados en los parámetros de consulta
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const type = searchParams.get('type');
+  const type = searchParams.get("type");
 
-  if (type === '2-3') {
+  if (type === "2-3") {
     return getUsuariosByType([2, 3]);
-  } else if (type === '4-5') {
+  } else if (type === "4-5") {
     return getUsuariosByType([4, 5]);
-  } else if (type === '5') {
+  } else if (type === "5") {
     return getUsuariosByType([5]);
   } else {
     return getAllUsuarios();
@@ -51,7 +51,10 @@ export async function POST(req: NextRequest) {
     const { usu_name, usu_email } = body;
 
     if (!usu_name || !usu_email) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
     const newUser = await prisma.user.create({
@@ -60,7 +63,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(newUser);
   } catch (error) {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
 
@@ -70,7 +76,10 @@ export async function PUT(req: NextRequest) {
     const { usu_id, usu_name, usu_email } = body;
 
     if (!usu_id || !usu_name || !usu_email) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
     const updatedUser = await prisma.user.update({
@@ -80,6 +89,9 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json(updatedUser);
   } catch (error) {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

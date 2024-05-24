@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useUser } from "../../../lib/userContext";
-import {User}  from "../../index"
-
-
+import { User } from "../../index";
 
 const Information: React.FC = () => {
   const { data: session } = useSession();

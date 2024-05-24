@@ -1,6 +1,5 @@
 import Error_page from "@/components/error/error";
 
-
 function page() {
   return (
     <>

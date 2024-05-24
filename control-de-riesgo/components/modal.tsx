@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -8,7 +8,13 @@ interface ModalProps {
   onCancel: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, title, content, onConfirm, onCancel }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  title,
+  content,
+  onConfirm,
+  onCancel,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -17,10 +23,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title, content, onConfirm, onCanc
         <h2 className="text-xl font-bold mb-4">{title}</h2>
         <p className="mb-4">{content}</p>
         <div className="flex justify-end">
-          <button className="bg-red-500 text-white px-4 py-2 rounded mr-2" onClick={onCancel}>
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded mr-2"
+            onClick={onCancel}
+          >
             Cancelar
           </button>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={onConfirm}>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            onClick={onConfirm}
+          >
             Confirmar
           </button>
         </div>

@@ -23,13 +23,13 @@ const TableInformationTI: React.FC<TableInformationTIProps> = ({
     if (!checked) {
       setConfirmUser(user);
     } else {
-      handleStateChange(true, user,"usu_state");
+      handleStateChange(true, user, "usu_state");
     }
   };
 
   const confirmDeactivation = () => {
     if (confirmUser) {
-      handleStateChange(false, confirmUser,"usu_state");
+      handleStateChange(false, confirmUser, "usu_state");
       setConfirmUser(null);
     }
   };

@@ -19,7 +19,6 @@ const BodyForm: React.FC = () => {
     checkUnansweredQuestions,
   } = useFormStore();
 
-
   useEffect(() => {
     if (
       user?.department_dep_id &&
@@ -55,7 +54,6 @@ const BodyForm: React.FC = () => {
   };
 
   return (
-
     <div className="container md:flex px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
       <div className="bg-gray-800 hidden md:flex md:flex-col p-4 shadow-xl md:w-80">
         <h4 className="font-bold text-white text-lg mb-4">

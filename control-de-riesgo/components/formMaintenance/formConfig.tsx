@@ -11,11 +11,13 @@ interface FormConfigProps {
   formId: number; // Ahora solo necesitamos el ID del formulario para buscarlo en el store
 }
 
-const FormConfig: React.FC<FormConfigProps> = ({
-  formId,
-}) => {
+const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
   const { forms, updateForm, saveForms } = useFormStore();
-  const form = forms.find(f => f.form_id === formId) || { form_description: '', form_status: '', form_id: 0 }; // Encuentra el formulario o retorna un default
+  const form = forms.find((f) => f.form_id === formId) || {
+    form_description: "",
+    form_status: "",
+    form_id: 0,
+  }; // Encuentra el formulario o retorna un default
 
   const handleChange = (newValue: string) => {
     updateForm(formId, { form_status: newValue });

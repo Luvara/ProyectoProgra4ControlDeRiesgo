@@ -16,7 +16,7 @@ const NewFormMaintenance: React.FC<FormConfigProps> = ({
   onSave,
   departments,
 }) => {
-    const [form, setForm] = useState<Form>({} as Form);
+  const [form, setForm] = useState<Form>({} as Form);
 
   return (
     <div className="bg-background-4 m-5 rounded-lg flex justify-between items-center">
@@ -33,18 +33,18 @@ const NewFormMaintenance: React.FC<FormConfigProps> = ({
       </select>
 
       <select
-            value={form.DEPARTMENT_dep_id}
-            onChange={(e) =>
-                setForm({ ...form, DEPARTMENT_dep_id: Number(e.target.value) })
-            }
-            className="select bg-gray-700 text-white p-2 m-2"
-          >
-            {departments.map((department) => (
-              <option key={department.dep_id} value={department.dep_id}>
-                {department.dep_name}
-              </option>
-            ))}
-          </select>
+        value={form.DEPARTMENT_dep_id}
+        onChange={(e) =>
+          setForm({ ...form, DEPARTMENT_dep_id: Number(e.target.value) })
+        }
+        className="select bg-gray-700 text-white p-2 m-2"
+      >
+        {departments.map((department) => (
+          <option key={department.dep_id} value={department.dep_id}>
+            {department.dep_name}
+          </option>
+        ))}
+      </select>
 
       <p className="m-4 text-white">{form.form_description}</p>
 

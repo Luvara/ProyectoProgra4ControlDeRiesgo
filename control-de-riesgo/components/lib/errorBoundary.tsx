@@ -1,6 +1,5 @@
-
-"use client"
-import React, { Component, ReactNode, ErrorInfo } from 'react';
+"use client";
+import React, { Component, ReactNode, ErrorInfo } from "react";
 
 // Define las propiedades y el estado del componente usando interfaces
 interface Props {
