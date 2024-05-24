@@ -19,17 +19,27 @@ const Login: React.FC = () => {
     <>
       <div className="flex h-screen items-center justify-center tracking-wider">
         <div className="flex flex-col items-center justify-center p-8 logBox">
-          <div className="flex flex-col items-center z-10">
-            <Image src="/Logo.svg" width={150} height={150} alt="Image"></Image>
-            <p className="text-lg text-white text-center font-bold mt-10">
+          <div className="flex flex-col items-center z-10 text-xl text-white">
+            <h1 className="text-5xl font-bold img-shadow">SCI</h1>
+            <h2 className="text-2xl mb-8 img-shadow">
+              Sistema de Control Interno
+            </h2>
+            <Image
+              className="img-shadow"
+              src="/Logo.svg"
+              width={200}
+              height={200}
+              alt="Image"
+            ></Image>
+            <p className="text-2xl  text-center font-bold mt-8 img-shadow">
               ¡Bienvenido de vuelta!
             </p>
-            <p className="text-lg text-white text-center">
+            <p className="text-center img-shadow">
               Inicia sesión para comenzar.
             </p>
             <button
-              className="px-8 py-3 mt-10 text-white flex items-center justify-center font-bold tracking-wider
-              bg-purple-950 rounded-lg hover:bg-purple-900 active:bg-blue-800 transition delay-50 hover:shadow-md hover:shadow-purple-400"
+              className="px-8  py-3 mt-10  flex items-center justify-center font-bold tracking-wider
+              bg-purple-950 rounded-lg hover:bg-purple-900 active:bg-blue-800 transition delay-50 hover:shadow-md hover:shadow-purple-400 hover:scale-125"
               onClick={(e) => {
                 e.preventDefault();
                 signIn();
