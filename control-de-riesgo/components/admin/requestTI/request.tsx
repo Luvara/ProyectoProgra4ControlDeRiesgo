@@ -25,7 +25,7 @@ const Request: React.FC = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`/api/adminTI?checkPermissions=true`);
+      const response = await fetch(`/api/adminRequest?checkPermissions=true`);
       const data: User[] = await response.json();
       setUsers(data);
     } catch (error) {
@@ -36,7 +36,7 @@ const Request: React.FC = () => {
   const handleStateChange = async (approved: boolean, user: User) => {
     try {
       if (approved) {
-        const response = await fetch("/api/adminTI", {
+        const response = await fetch("/api/adminRequest", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const Request: React.FC = () => {
           throw new Error("Network response was not ok");
         }
       } else {
-        const response = await fetch("/api/adminTI", {
+        const response = await fetch("/api/adminRequest", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

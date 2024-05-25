@@ -15,7 +15,6 @@ async function getUsersByUserType(userTypeId: number) {
     return NextResponse.error();
   }
 }
-
 async function getUsersByPermissionAndType() {
   try {
     const users = await prisma.user.findMany({
@@ -39,20 +38,6 @@ async function getUsersByPermissionAndType() {
     return NextResponse.error();
   }
 }
-
-async function updateUserState(userId: number, state: string) {
-  try {
-    const user = await prisma.user.update({
-      where: { usu_id: userId },
-      data: { usu_state: state },
-    });
-    return NextResponse.json(user);
-  } catch (error) {
-    console.error("Error updating user state:", error);
-    return NextResponse.error();
-  }
-}
-
 async function updateUserPermission(userId: number, permissons: string) {
   try {
     const user = await prisma.user.update({
@@ -95,13 +80,13 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const { userId, state } = await req.json();
+  const { userId, permissons } = await req.json();
 
-  if (!userId || state === undefined) {
+  if (!userId || permissons === undefined) {
     return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
   }
 
-  return updateUserState(userId, state);
+  return updateUserPermission(userId, permissons);
 }
 
 export async function DELETE(req: NextRequest) {
