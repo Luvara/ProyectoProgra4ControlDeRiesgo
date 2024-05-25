@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SessionWrapper from "../components/SessionWrapper";
 import { UserProvider } from "../lib/userContext";
+import { RequestProvider } from "../lib/requestContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <SessionWrapper>
       <UserProvider>
-        <html lang="en">
-          <body className={`${inter.className} background_color`}>
-            {children}
-          </body>
-        </html>
+        <RequestProvider>
+          <html lang="en">
+            <body className={`${inter.className} background_color`}>
+              {children}
+            </body>
+          </html>
+        </RequestProvider>
       </UserProvider>
     </SessionWrapper>
   );

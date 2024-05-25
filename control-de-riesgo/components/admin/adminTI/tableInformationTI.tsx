@@ -23,13 +23,13 @@ const TableInformationTI: React.FC<TableInformationTIProps> = ({
     if (!checked) {
       setConfirmUser(user);
     } else {
-      handleStateChange(true, user,"usu_state");
+      handleStateChange(true, user, "usu_state");
     }
   };
 
   const confirmDeactivation = () => {
     if (confirmUser) {
-      handleStateChange(false, confirmUser,"usu_state");
+      handleStateChange(false, confirmUser, "usu_state");
       setConfirmUser(null);
     }
   };
@@ -55,7 +55,15 @@ const TableInformationTI: React.FC<TableInformationTIProps> = ({
 
   return (
     <div>
-      <h2 className="text-white text-xl mb-4">Usuarios Activos</h2>
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Filtrar por nombre o correo"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="p-2 border rounded"
+        />
+      </div>
       <table className="w-full text-white text-center">
         <thead>
           <tr>

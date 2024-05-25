@@ -64,6 +64,9 @@ export interface User {
   usu_torespond: string;
   usu_version: number;
   usu_state: string;
+  usertype: {
+    usut_role: string;
+  };
 }
 
 export interface DataUserType {

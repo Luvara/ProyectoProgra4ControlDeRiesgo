@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-
 import { signOut, useSession } from "next-auth/react";
-import { User } from "../../components/index";
 import { useUser } from "../../lib/userContext";
+import { useRequest } from "../../lib/requestContext";
 import Image from "next/image";
 import HeaderButtonMobile from "./headerButtonMobile";
 import HeaderButton from "./headerButton";
@@ -14,8 +13,8 @@ const Header = () => {
   const [isDropdownMobile, setIsDropdownMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { data: session } = useSession();
-
   const { user } = useUser();
+  const { requestCount, fetchRequestCount } = useRequest();
 
   const handleSignOut = async () => {
     await signOut({ redirect: false }); // Evita la redirección automática de NextAuth
@@ -33,20 +32,26 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      fetchRequestCount();
+    }
+  }, [user, fetchRequestCount]);
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
-    <nav className="relative ">
+    <nav className="relative">
       <div className="max-w-screen-xl flex flex-wrap justify-between items-center mx-10 p-4 md:mx-auto text-white md:justify-center  lg:justify-between">
         <div className="flex flex-col items-center">
           <Image src="/Logo.svg" width={50} height={50} alt="image" />
           <p>Control de Riesgo</p>
           <div className="flex space-x-2">
             <p className="text-nowrap">Usuario:</p>
-            <p>{<p>{session?.user?.name}</p>}</p>
-            <p>{<p>{user?.userType_usut_id}</p>}</p>
+            <p>{session?.user?.name}</p>
+            <p>{user?.usertype?.usut_role}</p>
           </div>
         </div>
 
@@ -115,10 +120,15 @@ const Header = () => {
                             </li>
                             <li>
                               <Link
-                                className="block px-4 py-2 img-hover"
-                                href="/admin/adminTI/solicitudes"
+                                className="relative block px-4 py-2 img-hover"
+                                href="/admin/adminTI/request"
                               >
                                 Solicitudes
+                                {requestCount > 0 && (
+                                  <span className="absolute top-0 right-0 inline-block w-6 h-6 bg-red-500 text-white rounded-full text-center text-xs">
+                                    {requestCount}
+                                  </span>
+                                )}
                               </Link>
                             </li>
                           </>
