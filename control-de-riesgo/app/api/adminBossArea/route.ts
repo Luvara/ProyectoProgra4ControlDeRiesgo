@@ -7,6 +7,7 @@ async function getUsuariosByDepartmentAndType(departmentId: number) {
       where: {
         department_dep_id: departmentId,
         userType_usut_id: 5,
+        usu_permissons: 'A'
       },
     });
     return NextResponse.json(users);

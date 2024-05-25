@@ -105,9 +105,7 @@ const TableRequest: React.FC<TableRequestProps> = ({
                 <td className="py-2 px-4 border-b">{user.usu_name}</td>
                 <td className="py-2 px-4 border-b">{`${user.usu_lastname} ${user.usu_slastname}`}</td>
                 <td className="py-2 px-4 border-b">{user.usu_email}</td>
-                <td className="py-2 px-4 border-b">
-                  {user.usertype?.usut_role}
-                </td>
+                <td className="py-2 px-4 border-b">{user.usertype?.usut_role}</td>
                 <td className="py-2 px-4 border-b">
                   <button
                     className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"

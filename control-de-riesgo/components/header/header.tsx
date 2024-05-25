@@ -137,7 +137,7 @@ const Header = () => {
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/formMaintenance"
+                                href="/admin/adminControlnterno/formMaintenance"
                               >
                                 Mantenimiento de formularios
                               </Link>
@@ -145,7 +145,7 @@ const Header = () => {
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/userMaintenance"
+                                href="/admin/adminControlnterno/userMaintenance"
                               >
                                 Mantenimiento de usuarios
                               </Link>

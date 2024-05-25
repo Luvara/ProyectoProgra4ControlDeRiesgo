@@ -33,7 +33,7 @@ const TableUserMaintenance = ({
               <td className="px-4 py-2">{user.usu_name}</td>
               <td className="px-4 py-2">{user.usu_lastname}</td>
               <td className="px-4 py-2">{user.department_dep_id}</td>
-              <td className="px-4 py-2">{user.userType_usut_id}</td>
+              <td className="px-4 py-2">{user.usertype?.usut_role}</td>
               <td className="px-4 py-2">
                 <button
                   onClick={() => onDeleteUser(user.usu_id.toString())}

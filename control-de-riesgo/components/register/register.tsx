@@ -1,9 +1,12 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 const Register = () => {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const [formData, setFormData] = useState({
     cedula: "",
     nombre: "",
@@ -14,7 +17,7 @@ const Register = () => {
   });
 
   const [emailError, setEmailError] = useState<string | null>(null);
-
+console.log(session?.user?.email)
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -48,7 +51,7 @@ const Register = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("User registered successfully:", result);
-        router.push("/login"); // Redirige al usuario al login después de registrarse
+        router.push("/"); // Redirige al usuario al login después de registrarse
       } else {
         console.error("Failed to register user");
       }

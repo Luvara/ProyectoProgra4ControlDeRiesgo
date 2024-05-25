@@ -47,6 +47,7 @@ const handler = NextAuth({
         const emailExists = await prisma.user.findUnique({
           where: {
             usu_email: user.email,
+            usu_permissons: 'A',
           },
         });
         return !!emailExists;
