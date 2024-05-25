@@ -105,7 +105,7 @@ const Header = () => {
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/coordinatorTable"
+                                href="/admin/adminTI/informationCoordinate"
                               >
                                 Tabla de Coordinadores
                               </Link>

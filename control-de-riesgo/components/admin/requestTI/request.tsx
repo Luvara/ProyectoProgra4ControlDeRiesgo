@@ -74,6 +74,8 @@ const Request: React.FC = () => {
     <div className="background_color">
       <Header />
       <section className="p-14 flex flex-col items-center">
+        <h2 className="text-white m-10 text-6xl">Solicitudes pendientes</h2>
+
         <div className="w-full mt-10">
           <TableRequest
             users={users}
