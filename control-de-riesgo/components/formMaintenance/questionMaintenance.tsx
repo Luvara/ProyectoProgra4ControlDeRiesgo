@@ -6,7 +6,7 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
 
   const handleInputChange = (event: any) => {
     const { name, value, type, checked } = event.target;
-    const newValue = type === 'checkbox' ? checked : value;
+    const newValue = type === "checkbox" ? checked : value;
     updateQuestion(String(question.quest_id), { [name]: newValue });
   };
 
@@ -20,7 +20,7 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
       <div className="mb-4">
         <label className="block text-lg font-semibold mb-2">Question:</label>
         <textarea
-        name="quest_question"
+          name="quest_question"
           className="p-2 border rounded w-full h-36 bg-transparent"
           value={question.quest_question}
           onChange={(e) => handleInputChange(e)}

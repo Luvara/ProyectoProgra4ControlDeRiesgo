@@ -1,10 +1,10 @@
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
-import prisma from "@/lib/prisma"; 
+import prisma from "@/lib/prisma";
 
 function getEnvVariable(key: string): string {
   const value = process.env[key];
-  if (typeof value !== 'string') { 
+  if (typeof value !== "string") {
     throw new Error(`Environment variable ${key} is not set!`);
   }
   return value;
@@ -20,9 +20,9 @@ interface UserSession {
 const handler = NextAuth({
   providers: [
     AzureADProvider({
-      clientId: getEnvVariable('AZURE_AD_CLIENT_ID'),
-      clientSecret: getEnvVariable('AZURE_AD_CLIENT_SECRET'),
-      tenantId: getEnvVariable('AZURE_AD_TENANT_ID'),
+      clientId: getEnvVariable("AZURE_AD_CLIENT_ID"),
+      clientSecret: getEnvVariable("AZURE_AD_CLIENT_SECRET"),
+      tenantId: getEnvVariable("AZURE_AD_TENANT_ID"),
       authorization: { params: { scope: "openid profile email" } },
     }),
   ],
@@ -38,7 +38,7 @@ const handler = NextAuth({
         name: token.name ?? null,
         email: token.email ?? null,
         image: token.picture ?? null,
-        accessToken: token.accessToken ?? null
+        accessToken: token.accessToken ?? null,
       } as UserSession;
       return session;
     },
@@ -46,19 +46,18 @@ const handler = NextAuth({
       if (user.email) {
         const emailExists = await prisma.user.findUnique({
           where: {
-            usu_email: user.email
-          }
+            usu_email: user.email,
+          },
         });
-        return !!emailExists;  
+        return !!emailExists;
       }
-      return false;  
+      return false;
     },
-   
   },
   pages: {
-    error: '/error',
+    error: "/error",
   },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
 });
 
 export { handler as GET, handler as POST };

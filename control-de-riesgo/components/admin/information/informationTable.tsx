@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Switch from "react-switch";
-import Modal from "../../modal"; 
+import Modal from "../../modal";
 import Pagination from "../../form/pagination";
-import {User}  from "../../index"
+import { User } from "../../index";
 
 interface InformationTableProps {
   users: User[];

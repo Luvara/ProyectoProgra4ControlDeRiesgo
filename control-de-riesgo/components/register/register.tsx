@@ -15,7 +15,9 @@ const Register = () => {
 
   const [emailError, setEmailError] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
@@ -45,13 +47,13 @@ const Register = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log('User registered successfully:', result);
+        console.log("User registered successfully:", result);
         router.push("/login"); // Redirige al usuario al login después de registrarse
       } else {
-        console.error('Failed to register user');
+        console.error("Failed to register user");
       }
     } catch (error) {
-      console.error('Error registering user:', error);
+      console.error("Error registering user:", error);
     }
   };
 
@@ -60,7 +62,10 @@ const Register = () => {
       <h1 className="text-3xl font-bold mb-6">Registrar</h1>
       <form onSubmit={handleSubmit} className="w-full max-w-sm">
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cedula">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="cedula"
+          >
             Cédula
           </label>
           <input
@@ -74,7 +79,10 @@ const Register = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="nombre"
+          >
             Nombre
           </label>
           <input
@@ -88,7 +96,10 @@ const Register = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellido1">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="apellido1"
+          >
             Apellido 1
           </label>
           <input
@@ -102,7 +113,10 @@ const Register = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellido2">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="apellido2"
+          >
             Apellido 2
           </label>
           <input
@@ -116,7 +130,10 @@ const Register = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="correo">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="correo"
+          >
             Correo
           </label>
           <input
@@ -133,7 +150,10 @@ const Register = () => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="rol">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="rol"
+          >
             Rol
           </label>
           <select

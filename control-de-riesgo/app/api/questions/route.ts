@@ -1,4 +1,4 @@
-import {  question } from "@prisma/client";
+import { question } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const {  } = body as question;
+    const {} = body as question;
     const newQuestion = await prisma.question.create({
       data: {
         ...(body as question),
@@ -34,7 +34,7 @@ export async function PUT(req: Request) {
     const questions = body as question[];
 
     const updatedQuestions = await prisma.$transaction(
-      questions.map(question =>
+      questions.map((question) =>
         prisma.question.update({
           where: { quest_id: question.quest_id },
           data: question,

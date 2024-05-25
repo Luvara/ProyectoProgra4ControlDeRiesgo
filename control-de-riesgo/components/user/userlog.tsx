@@ -7,7 +7,6 @@ const UserLog = () => {
   // Ajuste aquí para incluir `null` en el tipo de estado.
   const [user, setUser] = useState<User | null>(null); // Permitir `null`
 
-
   useEffect(() => {
     // Solo ejecuta el fetch cuando la sesión está activa y el email del usuario está disponible
     if (status === "authenticated" && session?.user?.email) {

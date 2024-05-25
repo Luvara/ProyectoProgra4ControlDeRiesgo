@@ -8,6 +8,7 @@
     #27173f 0%,
     #120d17 31.33%
   );
+  background-size: auto;
 }
 
 .logBox {
@@ -45,8 +46,12 @@
   border-radius: 24px;
   position: absolute;
   width: 98%;
-  height: 98%;
+  height: 99%;
   box-shadow: inset 16px 14px 20px #0000008c;
+}
+
+.img-shadow {
+  filter: drop-shadow(5px 5px 5px rgb(0, 0, 0));
 }
 
 .img-hover:hover {

@@ -12,14 +12,14 @@ const FormMaintenance: React.FC = () => {
       router.push("/");
     }
   }, [session, router]);
-    return (
-      <div className="bg-gradient-to-b from-black to-purple-950">
-        <Header />
-        <section className="p-14">
-          <BodyFormMaintenance />
-        </section>
-      </div>
-    );
-  }
+  return (
+    <div className="bg-gradient-to-b from-black to-purple-950">
+      <Header />
+      <section className="p-14">
+        <BodyFormMaintenance />
+      </section>
+    </div>
+  );
+};
 
 export default FormMaintenance;
