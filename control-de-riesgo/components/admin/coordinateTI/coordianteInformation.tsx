@@ -26,9 +26,7 @@ const Coordinate: React.FC = () => {
   const fetchUsers = async () => {
     if (!user?.department_dep_id) return;
     try {
-      const response = await fetch(
-        `/api/adminCoordinateTI?userTypeId=3`
-      );
+      const response = await fetch(`/api/adminCoordinateTI?userTypeId=3`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -106,7 +104,7 @@ const Coordinate: React.FC = () => {
     <div className="background_color">
       <Header />
       <section className="p-14 flex flex-col items-center ">
-      <h2 className="text-white m-10 text-6xl">Coordinadores Internos</h2>
+        <h2 className="text-white m-10 text-6xl">Coordinadores Internos</h2>
 
         <button
           className="m-19 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
