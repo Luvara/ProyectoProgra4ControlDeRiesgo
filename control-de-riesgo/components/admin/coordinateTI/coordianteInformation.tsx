@@ -44,7 +44,7 @@ const Coordinate: React.FC = () => {
   const handleStateChange = async (
     checked: boolean,
     user: User,
-    field: "usu_state" | "usu_torespond"
+    field: "usu_state" 
   ) => {
     const newState = checked ? "A" : "I";
     const newToRespond = checked ? "y" : "n";
@@ -57,9 +57,7 @@ const Coordinate: React.FC = () => {
         },
         body: JSON.stringify({
           userId: user.usu_id,
-          state: field === "usu_state" ? newState : user.usu_state,
-          toRespond:
-            field === "usu_torespond" ? newToRespond : user.usu_torespond,
+          state: field === "usu_state" ? newState : user.usu_state
         }),
       });
 
@@ -83,17 +81,6 @@ const Coordinate: React.FC = () => {
             { ...user, usu_state: newState },
           ]);
         }
-      } else {
-        setActiveUsers((prev) =>
-          prev.map((u) =>
-            u.usu_id === user.usu_id ? { ...u, usu_torespond: newToRespond } : u
-          )
-        );
-        setInactiveUsers((prev) =>
-          prev.map((u) =>
-            u.usu_id === user.usu_id ? { ...u, usu_torespond: newToRespond } : u
-          )
-        );
       }
     } catch (error) {
       console.error("Error updating user state:", error);
