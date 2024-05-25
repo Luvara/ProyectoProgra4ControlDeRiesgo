@@ -48,6 +48,7 @@ const handler = NextAuth({
           where: {
             usu_email: user.email,
             usu_permissons: 'A',
+            usu_state: 'A',
           },
         });
         return !!emailExists;
