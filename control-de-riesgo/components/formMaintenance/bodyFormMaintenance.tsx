@@ -5,7 +5,6 @@ import useFormStore from "../../lib/useFormStore";
 import Card from "../card";
 import QuestionMaintenance from "./questionMaintenance";
 import Pagination from "../form/pagination";
-import Button from "../form/button";
 import FormConfig from "./formConfig";
 import TableFormMaintenance from "./tableFormsMaintenance";
 import NewFormMaintenance from "./newFormMaintenance";
@@ -132,8 +131,8 @@ const BodyFormMaintenance: React.FC = () => {
         {!selectedForm && <p>Loading or no data available...</p>}
 
         <div className="m-5 w-full flex flex-row justify-evenly items-center">
-          <Button text="Atras" color="blue" onClick={() => {}} />
-          <Button text="Guardar" color="purple" onClick={handleSave} />
+          {/*<Button text="Atras" color="blue" onClick={() => {}} />
+          <Button text="Guardar" color="purple" onClick={handleSave} />*/}
         </div>
       </div>
     </div>

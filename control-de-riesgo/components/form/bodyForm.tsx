@@ -5,9 +5,11 @@ import Pagination from "./pagination";
 import { useUser } from "../../lib/userContext";
 import useFormStore from "../../lib/useFormRespondStore";
 import ScrollToTopButton from "../util/buttonToTop";
+import FormSkeleton from "./formSkeleton";
 
 const BodyForm: React.FC = () => {
   const { user } = useUser();
+  const [loading, setLoading] = useState(true);
 
   const {
     form,
@@ -31,8 +33,15 @@ const BodyForm: React.FC = () => {
         .then((data: Form) => {
           setForm(data);
           checkUnansweredQuestions();
+          // Temporizador para simular carga de datos
+          setTimeout(() => {
+            setLoading(false); // Cambia el estado de carga después de 2 segundos
+          }, 4000);
         })
-        .catch((error) => console.error("Error loading the data", error));
+        .catch((error) => {
+          console.error("Error loading the data", error);
+          setLoading(false); // Set loading to false even if there is an error
+        });
     }
   }, [user]);
 
@@ -53,20 +62,24 @@ const BodyForm: React.FC = () => {
     }
   };
 
+  if (loading) {
+    return <FormSkeleton />;
+  }
+
   return (
     <div className="container flex flex-col-reverse xl:container xl:flex xl:flex-row px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
       <div className="flex flex-col bg-gray-800 text-center p-4 xl:w-96">
-        <h4 className="font-bold text-white text-lg mb-4 ">
+        <h4 className="font-bold text-white text-lg mb-4">
           Preguntas sin responder
         </h4>
         <p className="font-bold text-white text-lg mb-4 xl:hidden">
           S = Sección / P = Pregunta
         </p>
-        <ul className="grid grid-cols-4 gap-3  xl:flex xl:flex-col xl:space-y-2 xl:gap-0 cursor-pointer">
+        <ul className="grid grid-cols-4 gap-3 xl:flex xl:flex-col xl:space-y-2 xl:gap-0 cursor-pointer">
           {unansweredQuestions.map((q, idx) => (
             <li
               key={idx}
-              className={`text-white p-2 rounded-md  justify-center md:flex md:flex-row hover:bg-slate-500 ${
+              className={`text-white p-2 rounded-md justify-center md:flex md:flex-row hover:bg-slate-500 ${
                 (q.sectionIndex + 1) % 2 === 0 ? "bg-gray-700" : "bg-gray-900"
               }`}
               onClick={() => handlePageChange(q.sectionIndex, q.questionIndex)}
@@ -112,7 +125,7 @@ const BodyForm: React.FC = () => {
             ))}
           </div>
         ) : (
-          <p>Cargando o no hay datos disponibles...</p>
+          <p>No hay datos disponibles...</p>
         )}
         <Pagination
           currentPage={currentPage}
@@ -132,6 +145,7 @@ const BodyForm: React.FC = () => {
             Guardar
           </button>
         </div>
+
         <ScrollToTopButton />
       </div>
     </div>

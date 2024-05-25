@@ -84,11 +84,11 @@ const BodyFormMaintenance: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-xl font-bold text-white mb-4">User Maintenance</h1>
+      <h1 className="text-xl font-bold text-white mb-4">Mantenimiento de usuarios</h1>
       <div className="bg-gray-800 p-4 flex flex-col justify-center items-center">
         <input
           type="text"
-          placeholder="Filter by name..."
+          placeholder="Filtrar por nombre..."
           className="input bg-gray-700 text-white outline-none rounded-lg p-3 md:w-1/2"
         />
 
