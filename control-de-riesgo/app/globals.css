@@ -69,3 +69,7 @@
   border-radius: 12px;
   box-shadow: inset 16px 14px 20px #0000008c;
 }
+
+.h-custom {
+  height: 65vh;
+}

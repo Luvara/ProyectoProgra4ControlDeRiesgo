@@ -20,16 +20,19 @@ const UserEditor: React.FC<UserEditorProps> = ({
     <div className="bg-gray-800 p-4 rounded-lg space-y-4 flex flex-col justify-center items-center w-full">
       <div className="flex flex-wrap items-center justify-center">
         <div className="mx-2 text-white text-center">
-          <p>Name: {user.usu_name}</p>
-          <p>ID Number: {user.usu_idnumber}</p>
-          <p>Email: {user.usu_email}</p>
+          <p>Nombre: {user.usu_name}</p>
+          <p>Numero ID: {user.usu_idnumber}</p>
+          <p>Correo: {user.usu_email}</p>
         </div>
 
         <div className="mx-2 flex flex-col">
           <select
             value={user.department_dep_id}
             onChange={(e) =>
-              onUpdateUser({ ...user, department_dep_id: Number(e.target.value) })
+              onUpdateUser({
+                ...user,
+                department_dep_id: Number(e.target.value),
+              })
             }
             className="select bg-gray-700 text-white p-2 m-2"
           >
@@ -43,7 +46,10 @@ const UserEditor: React.FC<UserEditorProps> = ({
           <select
             value={user.userType_usut_id}
             onChange={(e) =>
-              onUpdateUser({ ...user, userType_usut_id: Number(e.target.value) })
+              onUpdateUser({
+                ...user,
+                userType_usut_id: Number(e.target.value),
+              })
             }
             className="select bg-gray-700 text-white p-2 m-2"
           >
@@ -60,7 +66,7 @@ const UserEditor: React.FC<UserEditorProps> = ({
         onClick={onSave}
         className="btn bg-blue-500 text-white px-4 py-2 rounded md:w-1/2"
       >
-        Save
+        Guardar
       </button>
     </div>
   );
