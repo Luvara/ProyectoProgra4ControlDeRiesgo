@@ -19,7 +19,7 @@ const BodyFormMaintenance: React.FC = () => {
   const [data, setData] = useState<Department[]>([]);
   const [selectedForm, setSelectedForm] = useState<Form | null>(null);
 
-  const { saveQuestions, setQuestions, questions } = useQuestionStore();
+  const { setQuestions, questions } = useQuestionStore();
   const { forms, setForms, updateForm } = useFormStore();
 
   const { user } = useUser();
@@ -57,15 +57,6 @@ const BodyFormMaintenance: React.FC = () => {
     }
   };
 
-  const handleSave = async () => {
-    try {
-      await saveQuestions();
-      alert("Questions saved successfully!");
-    } catch (error) {
-      alert("Failed to save questions");
-    }
-  };
-
   const svgs = [
     "/Ambience.svg",
     "/Risk.svg",
@@ -88,55 +79,56 @@ const BodyFormMaintenance: React.FC = () => {
             />
           ))}
         </div>
-        <p>{<p>{user?.usu_name}</p>}</p>
 
-        {selectedForm && (
+        <NewFormMaintenance departments={data} />
+        <TableFormMaintenance
+          forms={forms.filter(
+            (form) =>
+              data[activeDepartment] &&
+              form.DEPARTMENT_dep_id === data[activeDepartment].dep_id
+          )}
+          onSelectform={setSelectedForm}
+        />
+        {selectedForm ? (
           <>
-            <NewFormMaintenance onSave={() => {}} departments={data} />
-            <TableFormMaintenance
-              forms={forms.filter(
-                (form) =>
-                  form.DEPARTMENT_dep_id === data[activeDepartment].dep_id
-              )}
-              onSelectform={setSelectedForm}
-            />
             <FormConfig formId={selectedForm.form_id} />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={selectedForm.section.length}
-              onPageChange={handlePageChange}
-            />
-            <div className="w-full flex flex-col justify-center items-center">
-              <h2 className="text-4xl font-bold m-4 text-white">
-                {selectedForm.section[currentPage].sect_name}
-              </h2>
-              {questions
-                .filter(
-                  (q) =>
-                    q.SECTION_sect_id ===
-                    selectedForm.section[currentPage].sect_id
-                )
-                .map((question, index) => (
-                  <QuestionMaintenance
-                    key={question.quest_id}
-                    question={question}
-                  />
-                ))}
-            </div>
-            <Pagination
-              currentPage={currentPage}
-              totalPages={selectedForm.section.length}
-              onPageChange={handlePageChange}
-            />
+            {selectedForm.form_status === "d" ? (
+              <div className="w-full flex flex-col justify-center items-center">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={selectedForm.section.length}
+                  onPageChange={handlePageChange}
+                />
+                <div className="w-full flex flex-col justify-center items-center">
+                  <h2 className="text-4xl font-bold m-4 text-white">
+                    {selectedForm.section[currentPage].sect_name}
+                  </h2>
+                  {questions
+                    .filter(
+                      (q) =>
+                        q.SECTION_sect_id ===
+                        selectedForm.section[currentPage].sect_id
+                    )
+                    .map((question, index) => (
+                      <QuestionMaintenance
+                        key={question.quest_id}
+                        question={question}
+                      />
+                    ))}
+                </div>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={selectedForm.section.length}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            ) : (
+              <p>Seleccione un formulario desactivado para modificarlo</p>
+            )}
           </>
+        ) : (
+          <p>Loading or no data available...</p>
         )}
-
-        {!selectedForm && <p>Loading or no data available...</p>}
-
-        <div className="m-5 w-full flex flex-row justify-evenly items-center">
-          {/*<Button text="Atras" color="blue" onClick={() => {}} />
-          <Button text="Guardar" color="purple" onClick={handleSave} />*/}
-        </div>
       </div>
     </div>
   );

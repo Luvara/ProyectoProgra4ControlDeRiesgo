@@ -1,13 +1,47 @@
 import { Question } from "../index";
 import useQuestionStore from "../../lib/useQuestionStore";
+import { useState, useEffect } from "react";
 
 const QuestionMaintenance = ({ question }: { question: Question }) => {
   const { updateQuestion } = useQuestionStore();
+  const [tempQuestion, setTempQuestion] = useState(question.quest_question);
+  const [tempOrder, setTempOrder] = useState(question.quest_ordern);
+  const [tempDate, setTempDate] = useState(question.quest_deactivationdate);
+
+  useEffect(() => {
+    setTempQuestion(question.quest_question);
+    setTempOrder(question.quest_ordern);
+    setTempDate(question.quest_deactivationdate);
+  }, [question]);
+
+  const handleBlur = () => {
+    if (
+      tempQuestion !== question.quest_question ||
+      tempOrder !== question.quest_ordern ||
+      tempDate !== question.quest_deactivationdate
+    ) {
+      updateQuestion(question.quest_id, {
+        quest_question: tempQuestion,
+        quest_ordern: tempOrder,
+        quest_deactivationdate: tempDate,
+      });
+    }
+  };
 
   const handleInputChange = (event: any) => {
-    const { name, value, type, checked } = event.target;
-    const newValue = type === "checkbox" ? checked : value;
-    updateQuestion(String(question.quest_id), { [name]: newValue });
+    const { name, type, checked, value } = event.target;
+    if (name === "quest_question") {
+      setTempQuestion(value);
+    } else if (name === "quest_ordern") {
+      setTempOrder(value);
+    } else if (name === "quest_deactivationdate") {
+      setTempDate(checked ? null : new Date());
+    }
+  };
+
+  const formatDate = (dateString: Date) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   return (
@@ -22,8 +56,9 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
         <textarea
           name="quest_question"
           className="p-2 border rounded w-full h-36 bg-transparent"
-          value={question.quest_question}
+          value={tempQuestion}
           onChange={(e) => handleInputChange(e)}
+          onBlur={handleBlur}
         />
       </div>
 
@@ -33,18 +68,23 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
           <input
             type="checkbox"
             name="quest_deactivationdate"
-            checked={question.quest_deactivationdate == null}
-            onChange={(e) => handleInputChange(e)}
+            checked={tempDate === null}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
             className="accent-white h-5 w-5"
           />
+          <p>
+            {tempDate ? formatDate(tempDate) : ""}
+          </p>
         </div>
         <div>
           <label className="block text-lg font-semibold mb-2">Order:</label>
           <input
             type="text"
             name="quest_ordern"
-            value={question.quest_ordern}
+            value={tempOrder}
             onChange={(e) => handleInputChange(e)}
+            onBlur={handleBlur}
             className="mt-2 p-2 border rounded w-20  bg-transparent"
           />
         </div>

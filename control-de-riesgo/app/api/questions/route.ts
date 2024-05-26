@@ -31,18 +31,14 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const questions = body as question[];
+    const question = body as question;
 
-    const updatedQuestions = await prisma.$transaction(
-      questions.map((question) =>
-        prisma.question.update({
-          where: { quest_id: question.quest_id },
-          data: question,
-        })
-      )
-    );
+    const updatedQuestion = await prisma.question.update({
+      where: { quest_id: question.quest_id },
+      data: question,
+    });
 
-    return NextResponse.json(updatedQuestions);
+    return NextResponse.json(updatedQuestion);
   } catch (error) {
     console.error("Error updating questions:", error);
     return NextResponse.error();

@@ -1,58 +1,44 @@
 import create from "zustand";
 import { Question } from "../components/index";
 
-interface EnhancedQuestion extends Question {
-  isModified: boolean;
-}
-
 interface QuestionState {
-  questions: EnhancedQuestion[];
+  questions: Question[];
   setQuestions: (questions: Question[]) => void;
-  updateQuestion: (id: string, newData: Partial<Question>) => void;
-  saveQuestions: () => Promise<void>;
+  updateQuestion: (
+    question_id: number,
+    newData: Partial<Question>
+  ) => void;
 }
 
 const useQuestionStore = create<QuestionState>((set, get) => ({
   questions: [],
-  setQuestions: (questions: Question[]) =>
-    set({ questions: questions.map((q) => ({ ...q, isModified: false })) }),
-  updateQuestion: (id, newData) => {
-    set((state) => ({
-      questions: state.questions.map((question) =>
-        String(question.quest_id) === String(id)
-          ? { ...question, ...newData, isModified: true }
-          : question
-      ),
-    }));
-  },
-  saveQuestions: async () => {
-    const modifiedQuestions = get().questions.filter((q) => q.isModified);
-
-    const cleanQuestions = modifiedQuestions.map(
-      ({ isModified, ...rest }) => rest
+  setQuestions: (questions: Question[]) => set({ questions }),
+  updateQuestion: async (question_id, newData) => {
+    const question = get().questions.find(
+      (q) => q.quest_id === question_id
     );
 
-    console.log("Modified questions:", modifiedQuestions);
-    console.log("Clean questions for update:", cleanQuestions);
+    if (!question) return;
 
-    try {
-      const response = await fetch("/api/questions", {
+    const updatedQuestion = { ...question, ...newData };
+    const questionsUpdate = get().questions.map((q) =>
+      q.quest_id === updatedQuestion.quest_id ? updatedQuestion : q
+    );
+    set({ questions: questionsUpdate });
+
+    // Guardar la pregunta solo si quest_question está presente y ha cambiado
+    if (
+      updatedQuestion.quest_question !== question.quest_question ||
+      updatedQuestion.quest_ordern !== question.quest_ordern ||
+      updatedQuestion.quest_deactivationdate !== question.quest_deactivationdate
+    ) {
+      fetch(`/api/questions`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cleanQuestions),
-      });
-      if (!response.ok) throw new Error("Failed to save questions");
-      const savedQuestions = await response.json();
-      console.log("Saved questions:", savedQuestions);
-
-      set((state) => ({
-        questions: state.questions.map((q) => ({
-          ...q,
-          isModified: false,
-        })),
-      }));
-    } catch (error) {
-      console.error("Error saving questions:", error);
+        body: JSON.stringify(updatedQuestion),
+      }).catch((error) =>
+        console.error("Error updating the question", error)
+      );
     }
   },
 }));

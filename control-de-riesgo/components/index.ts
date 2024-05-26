@@ -16,6 +16,8 @@ export interface Form {
   form_status: string;
   form_description: string;
   form_version: number;
+  form_date_start: Date | null;
+  form_date_finish: Date | null;
   DEPARTMENT_dep_id: number;
   section: Section[];
 }
@@ -32,7 +34,7 @@ export interface Question {
   quest_id: number;
   quest_ordern: string;
   quest_question: string;
-  quest_deactivationdate: any;
+  quest_deactivationdate: Date | null;
   quest_version: number;
   SECTION_sect_id: number;
   answer: Answer[];

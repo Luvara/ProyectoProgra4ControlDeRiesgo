@@ -1,5 +1,6 @@
 import create from "zustand";
-import { Form } from "../components/index";
+import { Form, Question, Section } from "../components/index";
+import useQuestionStore from "./useQuestionStore";
 
 interface EnhancedForm extends Form {
   isModified?: boolean; // Agregar para rastrear cambios
@@ -9,6 +10,7 @@ interface FormState {
   forms: EnhancedForm[];
   setForms: (forms: Form[]) => void;
   updateForm: (id: number, newData: Partial<Form>) => void;
+  createForm: (departmentId: number) => void;
   saveForms: () => Promise<void>;
 }
 
@@ -19,9 +21,36 @@ const useFormStore = create<FormState>((set, get) => ({
   updateForm: (id, newData) => {
     set((state) => ({
       forms: state.forms.map((form) =>
-        form.form_id === id ? { ...form, ...newData, isModified: true } : form
+        form.form_id === id &&
+        (newData.form_status !== "c" || form.form_status !== "c")
+          ? { ...form, ...newData, isModified: true }
+          : form
       ),
     }));
+  },
+  createForm: async (departmentId: number) => {
+    try {
+      const response = await fetch(`/api/forms`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ departmentId }),
+      });
+      if (!response.ok) throw new Error("Failed to create form");
+      const newForm = await response.json();
+
+      set((state) => ({
+        forms: [...state.forms, { ...newForm, isModified: false }],
+      }));
+
+      // Actualizar las preguntas en el store de preguntas
+      const newQuestions = newForm.section.flatMap(
+        (section: Section) => section.question
+      );
+      const { setQuestions, questions } = useQuestionStore.getState();
+      setQuestions([...questions, ...newQuestions]);
+    } catch (error) {
+      console.error("Error creating form:", error);
+    }
   },
   saveForms: async () => {
     const modifiedForms = get().forms.filter((f) => f.isModified);
