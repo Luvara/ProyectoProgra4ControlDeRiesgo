@@ -6,8 +6,8 @@ async function getUsersByDepartmentAndPermission(departmentId: number) {
     const users = await prisma.user.findMany({
       where: {
         department_dep_id: departmentId,
-        userType_usut_id: 4, 
-        usu_permissons: 'A', 
+        userType_usut_id: 5,  // Coordinadores Internos
+        usu_permissons: 'A',  // Activos
       },
       include: {
         usertype: {

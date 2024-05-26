@@ -1,17 +1,18 @@
 "use client";
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { User, Department } from '../../index';
-import Header from '@/components/header/header';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { User, Department } from "../../index";
+import Header from "@/components/header/header";
 import { useSession } from "next-auth/react";
 
-
 const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
-  const { data: session,status } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [departments, setDepartments] = useState<Department[]>([]);
-  const [selectedDepartment, setSelectedDepartment] = useState<number | null>(null);
+  const [selectedDepartment, setSelectedDepartment] = useState<number | null>(
+    null
+  );
 
   useEffect(() => {
     if (status === "unauthenticated" && !session) {
@@ -45,7 +46,7 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prevUser) => prevUser ? { ...prevUser, [name]: value } : null);
+    setUser((prevUser) => (prevUser ? { ...prevUser, [name]: value } : null));
   };
 
   const handleDepartmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -69,7 +70,11 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
         });
 
         if (res.ok) {
-          router.push("/admin/adminControlnterno/informationBoss"); // Redireccionar después de la actualización exitosa
+          if (user.userType_usut_id == 4) {
+            router.push("/admin/adminControlnterno/informationBoss");
+          } else {
+            router.push("/admin/adminControlnterno/informationEmployee");
+          }
         } else {
           console.error("Error updating user details");
         }
@@ -87,7 +92,10 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
         {user && (
           <form onSubmit={handleSubmit} className="w-full max-w-lg">
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="usu_idnumber">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="usu_idnumber"
+              >
                 Cédula
               </label>
               <input
@@ -100,7 +108,10 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="usu_name">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="usu_name"
+              >
                 Nombre
               </label>
               <input
@@ -113,7 +124,10 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="usu_lastname">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="usu_lastname"
+              >
                 Apellido
               </label>
               <input
@@ -126,7 +140,10 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="usu_slastname">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="usu_slastname"
+              >
                 Segundo Apellido
               </label>
               <input
@@ -139,7 +156,10 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="usu_email">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="usu_email"
+              >
                 Correo
               </label>
               <input
@@ -152,7 +172,10 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="department">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="department"
+              >
                 Departamento
               </label>
               <select
