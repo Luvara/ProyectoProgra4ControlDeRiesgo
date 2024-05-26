@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Department } from "..";
+import { Form, Department, User } from "..";
 import useQuestionStore from "../../lib/useQuestionStore";
 import useFormStore from "../../lib/useFormStore";
 import Card from "../card";
@@ -13,6 +13,8 @@ import { useUser } from "../../lib/userContext";
 const BodyFormMaintenance: React.FC = () => {
   const [activeDepartment, setActiveDepartment] = useState(0);
   const [activeForm, setActiveForm] = useState(0);
+  const [activeUsers, setActiveUsers] = useState<User[]>([]);
+  const [inactiveUsers, setInactiveUsers] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState<Department[]>([]);
   const [selectedForm, setSelectedForm] = useState<Form | null>(null);
@@ -82,6 +84,7 @@ const BodyFormMaintenance: React.FC = () => {
               svg={svgs[index]}
               title={department.dep_name}
               onClick={() => handleSectionChange(index)}
+              isActive={activeDepartment === index} // Añadir isActive
             />
           ))}
         </div>

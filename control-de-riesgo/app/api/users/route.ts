@@ -1,97 +1,59 @@
-import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma"; 
+import { NextResponse, NextRequest } from 'next/server';
 
-// Función para obtener todos los usuarios
-async function getAllUsuarios() {
-  try {
-    const users = await prisma.user.findMany();
-    return NextResponse.json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    return NextResponse.error();
-  }
-}
-
-// Función para obtener usuarios según el tipo de usuario
-async function getUsuariosByType(userTypes: number[]) {
+async function getUsersByDepartmentAndPermission(departmentId: number) {
   try {
     const users = await prisma.user.findMany({
       where: {
-        userType_usut_id: {
-          in: userTypes,
+        department_dep_id: departmentId,
+        userType_usut_id: 4,  // Coordinadores Internos
+        usu_permissons: 'A',  // Activos
+      },
+      include: {
+        usertype: {
+          select: {
+            usut_role: true,
+          },
         },
       },
     });
     return NextResponse.json(users);
   } catch (error) {
-    console.error("Error fetching users by type:", error);
+    console.error("Error fetching users by department and permission:", error);
     return NextResponse.error();
   }
 }
 
-// Handler principal para manejar diferentes casos basados en los parámetros de consulta
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const type = searchParams.get("type");
-
-  if (type === "2-3") {
-    return getUsuariosByType([2, 3]);
-  } else if (type === "4-5") {
-    return getUsuariosByType([4, 5]);
-  } else if (type === "5") {
-    return getUsuariosByType([5]);
-  } else {
-    return getAllUsuarios();
+async function updateUserState(userId: number, state: string, toRespond: string) {
+  try {
+    const user = await prisma.user.update({
+      where: { usu_id: userId },
+      data: { usu_state: state, usu_torespond: toRespond },
+    });
+    return NextResponse.json(user);
+  } catch (error) {
+    console.error("Error updating user state:", error);
+    return NextResponse.error();
   }
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const { usu_name, usu_email } = body;
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url);
+  const departmentId = parseInt(url.searchParams.get('departmentId') || '0', 10);
 
-    if (!usu_name || !usu_email) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-
-    const newUser = await prisma.user.create({
-      data: body,
-    });
-
-    return NextResponse.json(newUser);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+  if (!departmentId) {
+    return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
   }
+
+  return getUsersByDepartmentAndPermission(departmentId);
 }
 
 export async function PUT(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const { usu_id, usu_name, usu_email } = body;
+  const { userId, state, toRespond } = await req.json();
 
-    if (!usu_id || !usu_name || !usu_email) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-
-    const updatedUser = await prisma.user.update({
-      where: { usu_id },
-      data: body,
-    });
-
-    return NextResponse.json(updatedUser);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+  if (!userId || state === undefined || toRespond === undefined) {
+    return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
   }
+
+  return updateUserState(userId, state, toRespond);
 }

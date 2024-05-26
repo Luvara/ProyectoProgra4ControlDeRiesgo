@@ -145,9 +145,25 @@ const Header = () => {
                             <li>
                               <Link
                                 className="block px-4 py-2 img-hover"
-                                href="/admin/adminControlnterno/userMaintenance"
+                                href="/admin/adminControlnterno/informationBoss"
                               >
-                                Mantenimiento de usuarios
+                                Tabla de Jefes de Area
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/adminControlnterno/informationEmployee"
+                              >
+                                Tabla de Empleados de area
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                className="block px-4 py-2 img-hover"
+                                href="/admin/adminControlnterno/requestCoordinate"
+                              >
+                                Solicitudes
                               </Link>
                             </li>
                           </>

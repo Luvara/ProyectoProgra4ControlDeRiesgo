@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
 
 const Register = () => {
   const router = useRouter();
-  const { data: session } = useSession();
 
   const [formData, setFormData] = useState({
     cedula: "",
@@ -17,7 +15,6 @@ const Register = () => {
   });
 
   const [emailError, setEmailError] = useState<string | null>(null);
-console.log(session?.user?.email)
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
