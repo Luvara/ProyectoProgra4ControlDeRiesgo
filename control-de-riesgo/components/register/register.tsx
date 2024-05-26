@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Register = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const Register = () => {
   });
 
   const [emailError, setEmailError] = useState<string | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -22,11 +24,15 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
 
     if (name === "correo") {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@est\.una\.ac\.cr$/;
-      if (!emailRegex.test(value)) {
-        setEmailError("El correo debe terminar en @est.una.ac.cr");
-      } else {
+      if (value === "") {
         setEmailError(null);
+      } else {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@est\.una\.ac\.cr$/;
+        if (!emailRegex.test(value)) {
+          setEmailError("El correo debe terminar en @est.una.ac.cr");
+        } else {
+          setEmailError(null);
+        }
       }
     }
   };
@@ -58,128 +64,148 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-3xl font-bold mb-6">Registrar</h1>
-      <form onSubmit={handleSubmit} className="w-full max-w-sm">
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="cedula"
-          >
-            Cédula
-          </label>
-          <input
-            id="cedula"
-            name="cedula"
-            type="text"
-            value={formData.cedula}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="nombre"
-          >
-            Nombre
-          </label>
-          <input
-            id="nombre"
-            name="nombre"
-            type="text"
-            value={formData.nombre}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="apellido1"
-          >
-            Apellido 1
-          </label>
-          <input
-            id="apellido1"
-            name="apellido1"
-            type="text"
-            value={formData.apellido1}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="apellido2"
-          >
-            Apellido 2
-          </label>
-          <input
-            id="apellido2"
-            name="apellido2"
-            type="text"
-            value={formData.apellido2}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="correo"
-          >
-            Correo
-          </label>
-          <input
-            id="correo"
-            name="correo"
-            type="email"
-            value={formData.correo}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-          {emailError && (
-            <p className="text-red-500 text-xs italic">{emailError}</p>
-          )}
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="rol"
-          >
-            Rol
-          </label>
-          <select
-            id="rol"
-            name="rol"
-            value={formData.rol}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          >
-            <option value="">Seleccione un rol</option>
-            <option value="TI">TI</option>
-            <option value="Coordinador interno">Coordinador interno</option>
-            <option value="Empleado de area">Empleado de área</option>
-            <option value="Jefe de area">Jefe de área</option>
-          </select>
-        </div>
-        <div className="flex items-center justify-between">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Enviar
-          </button>
-        </div>
-      </form>
+    <div className="flex items-center justify-center w-screen h-screen p-10">
+      <div className="flex flex-col w-full  items-center justify-center p-4 bg-background-2 rounded-xl text-white bg-register sm:w-2/5">
+        <Image
+          className="my-2"
+          src="/Logo.svg"
+          width={125}
+          height={125}
+          alt="image"
+        />
+        <h1 className="text-3xl font-bold mb-6">Formulario Registro</h1>
+        <form onSubmit={handleSubmit} className="w-full max-w-sm">
+          <div className="space-y-5">
+            {/* campo cedula */}
+            <div className="inputContainer">
+              <input
+                id="cedula"
+                name="cedula"
+                type="text"
+                value={formData.cedula}
+                onChange={handleChange}
+                className="inputTxt"
+                placeholder="a"
+                required
+              />
+              <label className="labelFloat" htmlFor="cedula">
+                Cédula
+              </label>
+            </div>
+            {/* campo nombre */}
+            <div className="inputContainer">
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                value={formData.nombre}
+                onChange={handleChange}
+                className="inputTxt"
+                placeholder="a"
+                required
+              />
+              <label className="labelFloat" htmlFor="nombre">
+                Nombre
+              </label>
+            </div>
+            {/* campo primer apellido */}
+            <div className="inputContainer">
+              <input
+                id="apellido1"
+                name="apellido1"
+                type="text"
+                value={formData.apellido1}
+                onChange={handleChange}
+                className="inputTxt"
+                placeholder="a"
+                required
+              />
+              <label className="labelFloat" htmlFor="apellido1">
+                Primer Apellido
+              </label>
+            </div>
+            {/* campo segundo apellido */}
+            <div className="inputContainer">
+              <input
+                id="apellido2"
+                name="apellido2"
+                type="text"
+                value={formData.apellido2}
+                onChange={handleChange}
+                className="inputTxt"
+                placeholder="a"
+                required
+              />
+              <label className="labelFloat" htmlFor="apellido2">
+                Segundo Apellido
+              </label>
+            </div>
+            {/* campo correo */}
+            <div>
+              <div className="inputContainer">
+                <input
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  value={formData.correo}
+                  onChange={handleChange}
+                  className="inputTxt"
+                  placeholder="a"
+                  required
+                />{" "}
+                <label className="labelFloat" htmlFor="correo">
+                  Correo
+                </label>
+              </div>
+              {/* error correo */}
+              {emailError && (
+                <p className="text-red-500 text-sm italic ms-4 mt-1">
+                  {emailError}
+                </p>
+              )}{" "}
+            </div>
+
+            <div className="inputContainer">
+              <select
+                id="rol"
+                name="rol"
+                value={formData.rol}
+                onChange={handleChange}
+                className="inputTxt"
+                required
+              >
+                <option className="bg-background-2" value="">
+                  Seleccione el puesto
+                </option>
+                <option className="bg-background-2" value="TI">
+                  TI
+                </option>
+                <option className="bg-background-2" value="Coordinador interno">
+                  Coordinador interno
+                </option>
+                <option className="bg-background-2" value="Empleado de area">
+                  Empleado de área
+                </option>
+                <option className="bg-background-2" value="Jefe de area">
+                  Jefe de área
+                </option>
+              </select>
+              <label className="labelFloat" htmlFor="rol">
+                Puesto
+              </label>
+            </div>
+          </div>
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="flex p-2 border rounded-xl text-white w-52 mt-5 font-bold justify-center hover:bg-slate-600"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

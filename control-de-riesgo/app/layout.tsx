@@ -8,7 +8,7 @@ import { RequestProvider } from "../lib/requestContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Control risk",
+  title: "SCI control de riesgo",
   description: "Programation IV",
 };
 

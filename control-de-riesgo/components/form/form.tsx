@@ -13,9 +13,9 @@ const Form: React.FC = () => {
     }
   }, [session, router]);
   return (
-    <div className="background_color">
+    <div className="">
       <Header />
-      <section className="p-14">
+      <section className="px-14">
         <BodyForm />
       </section>
     </div>

@@ -35,8 +35,8 @@ const BodyForm: React.FC = () => {
           checkUnansweredQuestions();
           // Temporizador para simular carga de datos
           setTimeout(() => {
-            setLoading(false); // Cambia el estado de carga después de 2 segundos
-          }, 4000);
+            setLoading(false); // Cambia el estado de carga después de 4 segundos
+          }, 2000);
         })
         .catch((error) => {
           console.error("Error loading the data", error);
@@ -68,6 +68,7 @@ const BodyForm: React.FC = () => {
 
   return (
     <div className="container flex flex-col-reverse xl:container xl:flex xl:flex-row px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
+    
       <div className="flex flex-col bg-gray-800 text-center p-4 xl:w-96">
         <h4 className="font-bold text-white text-lg mb-4">
           Preguntas sin responder
@@ -102,7 +103,6 @@ const BodyForm: React.FC = () => {
           ))}
         </ul>
       </div>
-
       <div className="p-2 bg-background-3 flex flex-col justify-center items-center w-full">
         <Pagination
           currentPage={currentPage}
@@ -125,7 +125,9 @@ const BodyForm: React.FC = () => {
             ))}
           </div>
         ) : (
-          <p>No hay datos disponibles...</p>
+          <p className="my-10 text-white font-bold">
+            No hay datos disponibles...
+          </p>
         )}
         <Pagination
           currentPage={currentPage}

@@ -13,9 +13,9 @@ const HomePage: React.FC = () => {
     }
   }, [session, router]);
   return (
-    <div className="background_color">
+    <div className="">
       <Header />
-      <section className="p-14">
+      <section className="">
         <BodyHomePage />
       </section>
     </div>
