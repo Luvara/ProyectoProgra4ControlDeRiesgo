@@ -2,8 +2,10 @@
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
 interface RequestContextType {
-  requestCount: number;
-  fetchRequestCount: () => void;
+  tiRequestCount: number;
+  coordinatorRequestCount: number;
+  fetchTIRequestCount: () => void;
+  fetchCoordinatorRequestCount: () => void;
 }
 
 const RequestContext = createContext<RequestContextType | undefined>(undefined);
@@ -17,24 +19,36 @@ export const useRequest = () => {
 };
 
 export const RequestProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [requestCount, setRequestCount] = useState(0);
+  const [tiRequestCount, setTIRequestCount] = useState(0);
+  const [coordinatorRequestCount, setCoordinatorRequestCount] = useState(0);
 
-  const fetchRequestCount = async () => {
+  const fetchTIRequestCount = async () => {
     try {
       const response = await fetch(`/api/adminTI?checkPermissions=true`);
       const data = await response.json();
-      setRequestCount(data.length);
+      setTIRequestCount(data.length);
     } catch (error) {
-      console.error("Error fetching request count:", error);
+      console.error("Error fetching TI request count:", error);
+    }
+  };
+
+  const fetchCoordinatorRequestCount = async () => {
+    try {
+      const response = await fetch(`/api/adminCoordinator?checkPermissions=true`);
+      const data = await response.json();
+      setCoordinatorRequestCount(data.length);
+    } catch (error) {
+      console.error("Error fetching Coordinator request count:", error);
     }
   };
 
   useEffect(() => {
-    fetchRequestCount();
+    fetchTIRequestCount();
+    fetchCoordinatorRequestCount();
   }, []);
 
   return (
-    <RequestContext.Provider value={{ requestCount, fetchRequestCount }}>
+    <RequestContext.Provider value={{ tiRequestCount, coordinatorRequestCount, fetchTIRequestCount, fetchCoordinatorRequestCount }}>
       {children}
     </RequestContext.Provider>
   );

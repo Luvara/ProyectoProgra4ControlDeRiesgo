@@ -14,7 +14,12 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const { data: session } = useSession();
   const { user } = useUser();
-  const { requestCount, fetchRequestCount } = useRequest();
+  const {
+    tiRequestCount,
+    coordinatorRequestCount,
+    fetchTIRequestCount,
+    fetchCoordinatorRequestCount,
+  } = useRequest();
 
   const handleSignOut = async () => {
     await signOut({ redirect: false }); // Evita la redirección automática de NextAuth
@@ -34,9 +39,10 @@ const Header = () => {
 
   useEffect(() => {
     if (user) {
-      fetchRequestCount();
+      fetchTIRequestCount();
+      fetchCoordinatorRequestCount();
     }
-  }, [user, fetchRequestCount]);
+  }, [user, fetchTIRequestCount, fetchCoordinatorRequestCount]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -124,9 +130,9 @@ const Header = () => {
                                 href="/admin/adminTI/request"
                               >
                                 Solicitudes
-                                {requestCount > 0 && (
+                                {tiRequestCount > 0 && (
                                   <span className="absolute top-0 right-0 inline-block w-6 h-6 bg-red-500 text-white rounded-full text-center text-xs">
-                                    {requestCount}
+                                    {tiRequestCount}
                                   </span>
                                 )}
                               </Link>
@@ -159,12 +165,17 @@ const Header = () => {
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                className="block px-4 py-2 img-hover"
-                                href="/admin/adminControlnterno/requestCoordinate"
-                              >
-                                Solicitudes
-                              </Link>
+                              <div className="relative inline-block">
+                                <Link
+                                  className="block px-4 py-2 img-hover"
+                                  href="/admin/adminControlnterno/requestCoordinate"
+                                >
+                                  Solicitudes
+                                  <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                    {coordinatorRequestCount}
+                                  </span>
+                                </Link>
+                              </div>
                             </li>
                           </>
                         )}
