@@ -15,16 +15,14 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const {} = body as question;
     const newQuestion = await prisma.question.create({
-      data: {
-        ...(body as question),
-      },
+      data: body,
     });
 
     return NextResponse.json(newQuestion);
   } catch (error) {
-    return new NextResponse("Internal Error", { status: 500 });
+    console.error("Error creating question:", error);
+    return NextResponse.error();
   }
 }
 

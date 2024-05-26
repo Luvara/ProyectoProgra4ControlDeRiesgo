@@ -8,6 +8,7 @@ import Pagination from "../form/pagination";
 import FormConfig from "./formConfig";
 import TableFormMaintenance from "./tableFormsMaintenance";
 import NewFormMaintenance from "./newFormMaintenance";
+import NewQuestionMaintenance from "./newQuestionMaintenance";
 import { useUser } from "../../lib/userContext";
 
 const BodyFormMaintenance: React.FC = () => {
@@ -94,6 +95,7 @@ const BodyFormMaintenance: React.FC = () => {
             <FormConfig formId={selectedForm.form_id} />
             {selectedForm.form_status === "d" ? (
               <div className="w-full flex flex-col justify-center items-center">
+                <NewQuestionMaintenance formId={selectedForm.form_id} />
                 <Pagination
                   currentPage={currentPage}
                   totalPages={selectedForm.section.length}

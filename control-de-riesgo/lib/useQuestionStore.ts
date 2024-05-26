@@ -4,19 +4,15 @@ import { Question } from "../components/index";
 interface QuestionState {
   questions: Question[];
   setQuestions: (questions: Question[]) => void;
-  updateQuestion: (
-    question_id: number,
-    newData: Partial<Question>
-  ) => void;
+  updateQuestion: (question_id: number, newData: Partial<Question>) => void;
+  createQuestion: (newQuestionData: Partial<Question>) => void;
 }
 
 const useQuestionStore = create<QuestionState>((set, get) => ({
   questions: [],
   setQuestions: (questions: Question[]) => set({ questions }),
   updateQuestion: async (question_id, newData) => {
-    const question = get().questions.find(
-      (q) => q.quest_id === question_id
-    );
+    const question = get().questions.find((q) => q.quest_id === question_id);
 
     if (!question) return;
 
@@ -39,6 +35,23 @@ const useQuestionStore = create<QuestionState>((set, get) => ({
       }).catch((error) =>
         console.error("Error updating the question", error)
       );
+    }
+  },
+  createQuestion: async (newQuestionData) => {
+    try {
+      const response = await fetch(`/api/questions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newQuestionData),
+      });
+      if (!response.ok) throw new Error("Failed to create question");
+      const newQuestion = await response.json();
+
+      set((state) => ({
+        questions: [...state.questions, newQuestion],
+      }));
+    } catch (error) {
+      console.error("Error creating question:", error);
     }
   },
 }));
