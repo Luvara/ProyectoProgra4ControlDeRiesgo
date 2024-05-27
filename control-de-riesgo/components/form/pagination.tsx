@@ -1,4 +1,4 @@
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange }: { currentPage: number, totalPages: number, onPageChange: (page: number) => void }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="flex items-center -space-x-px h-8 text-sm">
