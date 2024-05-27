@@ -22,7 +22,7 @@ const useFormStore = create<FormState>((set, get) => ({
     set((state) => ({
       forms: state.forms.map((form) =>
         form.form_id === id &&
-        (newData.form_status !== "c" || form.form_status !== "c")
+        (newData.form_status !== "c" && form.form_status !== "c")
           ? { ...form, ...newData, isModified: true }
           : form
       ),
