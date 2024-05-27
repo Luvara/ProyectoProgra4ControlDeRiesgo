@@ -31,7 +31,7 @@ const DepartmentCompletionChart = ({
     scales: {
       y: {
         ticks: {
-          callback: function (value) {
+          callback: function (value: any) {
             return value + "%";
           },
           color: "white",
