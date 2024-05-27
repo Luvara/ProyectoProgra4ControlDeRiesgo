@@ -6,7 +6,9 @@ interface NewQuestionMaintenanceProps {
   formId: number; // ID del formulario actual
 }
 
-const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({ formId }) => {
+const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({
+  formId,
+}) => {
   const [showForm, setShowForm] = useState(false);
   const [questionText, setQuestionText] = useState("");
   const [questionOrder, setQuestionOrder] = useState("");
@@ -40,17 +42,20 @@ const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({ formId 
   };
 
   return (
-    <div className="md:w-3/4 flex flex-col justify-center items-center">
+    <div className="flex flex-col w-full justify-center items-center">
       <button
-        className="bg-primary text-white p-2 rounded-lg"
+        className="flex p-2 border rounded-xl text-white w-52 h-12 font-bold justify-center items-center btn-form hover:bg-slate-600"
         onClick={handleNewQuestion}
       >
-        New Question
+        Nueva Pregunta
       </button>
+
       {showForm && (
-        <div className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
+        <div className="w-full m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
           <div className="mb-4">
-            <label className="block text-lg font-semibold mb-2">Question:</label>
+            <label className="block text-lg font-semibold mb-2">
+              Pregunta:
+            </label>
             <textarea
               name="quest_question"
               className="p-2 border rounded w-full h-36 bg-transparent"
@@ -59,14 +64,16 @@ const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({ formId 
             />
           </div>
 
-          <div className="flex justify-evenly items-center mb-4">
+          <div className="flex w-full justify-evenly items-center mb-4">
             <select
               name="quest_section"
               className="p-2 border rounded w-1/2 bg-transparent"
               value={sectionId ?? ""}
               onChange={(e) => setSectionId(Number(e.target.value))}
             >
-              <option value="" disabled>Select Section</option>
+              <option value="" disabled>
+                Seleccionar Sección
+              </option>
               {currentForm?.section.map((section) => (
                 <option key={section.sect_id} value={section.sect_id}>
                   {section.sect_name}
@@ -74,7 +81,9 @@ const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({ formId 
               ))}
             </select>
             <div>
-              <label className="block text-lg font-semibold mb-2">Order:</label>
+              <label className="block text-lg font-semibold mb-2">
+                Posición:
+              </label>
               <input
                 type="text"
                 name="quest_ordern"
@@ -84,7 +93,10 @@ const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({ formId 
               />
             </div>
           </div>
-          <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-500 text-white p-2 rounded-lg"
+          >
             Crear Pregunta
           </button>
         </div>

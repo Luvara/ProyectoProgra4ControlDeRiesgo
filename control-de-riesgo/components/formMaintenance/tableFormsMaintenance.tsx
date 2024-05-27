@@ -21,7 +21,7 @@ const TableFormMaintenance = ({
   };
 
   return (
-    <div className="">
+    <div className="flex w-full">
       <table className="w-full text-white bg-register">
         <thead>
           <tr className="bg-gray-700 border-b">

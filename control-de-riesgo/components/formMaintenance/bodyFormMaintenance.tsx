@@ -99,7 +99,7 @@ const BodyFormMaintenance: React.FC = () => {
           />
         </div>
         {/* seccion de formularios existentes */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col w-3/4 items-center">
           <h2 className="text-2xl font-bold m-4 text-white">
             Formularios existentes:
           </h2>
@@ -112,44 +112,58 @@ const BodyFormMaintenance: React.FC = () => {
             onSelectform={setSelectedForm}
           />
         </div>
-        {/* seccion de mantenimiento de formularios */}
-        <div>
-        <h2 className="text-2xl font-bold m-4 text-white">
+        {/* seccion de editar formularios */}
+        <div className="flex flex-col w-full items-center">
+          <h2 className="text-2xl font-bold m-4 text-white">
             Editar formulario seleccionado:
           </h2>
           {selectedForm ? (
             <>
-              <FormConfig formId={selectedForm.form_id} />
+              <div className="flex w-3/4 mb-5">
+                <FormConfig formId={selectedForm.form_id} />
+              </div>
               {selectedForm.form_status === "d" ? (
-                <div className="w-full flex flex-col justify-center items-center">
-                  <NewQuestionMaintenance formId={selectedForm.form_id} />
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={selectedForm.section.length}
-                    onPageChange={handlePageChange}
-                  />
-                  <div className="w-full flex flex-col justify-center items-center">
-                    <h2 className="text-4xl font-bold m-4 text-white">
-                      {selectedForm.section[currentPage].sect_name}
+                <div className="flex flex-col w-full items-center ">
+                  {/* seccion crear preguntas */}
+                  <div className=" flex flex-col w-full items-center">
+                    <h2 className="text-2xl font-bold m-4 text-white">
+                      Crear una nueva pregunta:
                     </h2>
-                    {questions
-                      .filter(
-                        (q) =>
-                          q.SECTION_sect_id ===
-                          selectedForm.section[currentPage].sect_id
-                      )
-                      .map((question, index) => (
-                        <QuestionMaintenance
-                          key={question.quest_id}
-                          question={question}
-                        />
-                      ))}
+                    <NewQuestionMaintenance formId={selectedForm.form_id} />
                   </div>
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={selectedForm.section.length}
-                    onPageChange={handlePageChange}
-                  />
+                  {/* seccion de preguntas */}
+                  <div className=" flex flex-col w-full items-center">
+                    <h2 className="text-2xl font-bold m-4 text-white">
+                     Editar preguntas del formulario seleccionado:
+                    </h2>
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={selectedForm.section.length}
+                      onPageChange={handlePageChange}
+                    />
+                    <div className="w-full flex flex-col justify-center items-center">
+                      <h2 className="text-4xl font-bold m-4 text-white">
+                        {selectedForm.section[currentPage].sect_name}
+                      </h2>
+                      {questions
+                        .filter(
+                          (q) =>
+                            q.SECTION_sect_id ===
+                            selectedForm.section[currentPage].sect_id
+                        )
+                        .map((question, index) => (
+                          <QuestionMaintenance
+                            key={question.quest_id}
+                            question={question}
+                          />
+                        ))}
+                    </div>
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={selectedForm.section.length}
+                      onPageChange={handlePageChange}
+                    />
+                  </div>
                 </div>
               ) : (
                 <p>Seleccione un formulario desactivado para modificarlo</p>

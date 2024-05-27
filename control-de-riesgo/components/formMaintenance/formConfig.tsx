@@ -71,60 +71,82 @@ const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
   };
 
   return (
-    <div className="bg-background-4 m-5 rounded-lg flex flex-wrap justify-center items-center text-white">
-      <div>
-        <p>Estado</p>
-        <select
-          className="m-4 bg-transparent text-white outline-none"
-          value={form?.form_status}
-          onChange={(e) => handleChange(e.target.value)}
+    <div className="flex flex-col bg-gray-800 w-full  rounded-xl items-center text-white node-shadow pb-3">
+      {/* titulos */}
+      <div className="flex bg-gray-700 w-full h-10 items-center rounded-t-xl border-b font-bold">
+        <p className="w-1/4">Estado</p>
+        <p className="w-1/4">Descripción</p>
+        <p className="w-1/4">Fecha de Inicio</p>
+        <p className="w-1/4">Fecha de Fin</p>
+      </div>
+      {/* ajustes */}
+      <div className="flex w-full h-14 items-center">
+        {/* div estado */}
+        <div className="w-1/4 px-4">
+          <select
+            className={`flex w-full bg-transparent text-center border rounded-lg p-2 ${
+              form?.form_status === "c" 
+                ? "cursor-not-allowed"
+                : "hover:bg-slate-600"
+            }`}
+            disabled={form?.form_status === "c" }
+            value={form?.form_status}
+            onChange={(e) => handleChange(e.target.value)}
+          >
+            {statusOptions.map((option, index) => (
+              <option className="bg-background-3" key={index} value={option.id}>
+                {option.status}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* div descripcion */}
+        <div className="w-1/4">
+          <p className="text-white">{form?.form_description}</p>
+        </div>
+        {/* div fecha inicio */}
+        <div className="w-1/4 px-4">
+          <input
+            type="date"
+            className={`flex w-full bg-transparent h-10 text-center border rounded-lg p-2 justify-center  ${
+              form?.form_status === "c" || form?.form_status === "a"
+                ? "cursor-not-allowed"
+                : "hover:bg-slate-600"
+            }`}
+            disabled={form?.form_status === "c" || form?.form_status === "a"}
+            value={startDate}
+            onChange={(e) => handleChangeDate(e.target.value, "start")}
+          />
+        </div>
+        {/* div fecha fin */}
+        <div className="w-1/4 px-4">
+          <input
+            type="date"
+            className={`flex w-full bg-transparent h-10 text-center border rounded-lg p-2 justify-center  ${
+              form?.form_status === "c" || form?.form_status === "a"
+                ? "cursor-not-allowed"
+                : "hover:bg-slate-600"
+            }`}
+            disabled={form?.form_status === "c" || form?.form_status === "a"}
+            value={endDate}
+            onChange={(e) => handleChangeDate(e.target.value, "finish")}
+          />
+        </div>
+      </div>
+
+      <div className="flex w-full h-14 items-center justify-center">
+        <button
+          onClick={handleSave}
+          className={`p-2 border rounded-xl w-52 font-bold btn-form  ${
+            form?.form_status === "c"
+              ? " cursor-not-allowed"
+              : "hover:bg-slate-600"
+          }`}
+          disabled={form?.form_status === "c"}
         >
-          {statusOptions.map((option, index) => (
-            <option className="bg-background-3" key={index} value={option.id}>
-              {option.status}
-            </option>
-          ))}
-        </select>
+          Actualizar Formulario
+        </button>
       </div>
-
-      <div>
-        <p>Descripción</p>
-        <p className="m-4 text-white">{form?.form_description}</p>
-      </div>
-
-      <div>
-        <p>Fecha de Inicio</p>
-        <input
-          type="date"
-          className="m-4 bg-transparent text-white outline-none"
-          disabled={form?.form_status === "c" || form?.form_status === "a"}
-          value={startDate}
-          onChange={(e) => handleChangeDate(e.target.value, "start")}
-        />
-      </div>
-
-      <div>
-        <p>Fecha de Fin</p>
-        <input
-          type="date"
-          className="m-4 bg-transparent text-white outline-none"
-          disabled={form?.form_status === "c" || form?.form_status === "a"}
-          value={endDate}
-          onChange={(e) => handleChangeDate(e.target.value, "finish")}
-        />
-      </div>
-
-      <button
-        onClick={handleSave}
-        className={`btn bg-blue-500 text-white px-4 py-2 rounded md:w-1/2 ${
-          form?.form_status === "c"
-            ? "bg-gray-500 cursor-not-allowed"
-            : "bg-blue-500"
-        }`}
-        disabled={form?.form_status === "c"}
-      >
-        Actualizar Formulario
-      </button>
     </div>
   );
 };
