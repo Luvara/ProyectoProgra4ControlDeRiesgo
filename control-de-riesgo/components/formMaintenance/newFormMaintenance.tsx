@@ -1,52 +1,31 @@
-import { useState } from "react";
-import { DepartmentType } from "../index";
+import React from "react";
 import useFormStore from "../../lib/useFormStore";
 
-interface FormConfigProps {
-  departments: DepartmentType[];
+interface NewFormMaintenanceProps {
+  selectedDepartment: number | null;
 }
 
-const NewFormMaintenance: React.FC<FormConfigProps> = ({ departments }) => {
-  const [selectedDepartment, setSelectedDepartment] = useState<number | null>(
-    null
-  );
+const NewFormMaintenance: React.FC<NewFormMaintenanceProps> = ({
+  selectedDepartment,
+}) => {
   const { createForm } = useFormStore();
 
   const handleCreateForm = () => {
     if (selectedDepartment !== null) {
       createForm(selectedDepartment);
     } else {
-      alert("Please select a department before creating a form.");
+      alert("Seleccione un departamento antes de crear un formulario.");
     }
   };
 
   return (
-    <div className="bg-background-4 m-5 rounded-lg flex justify-between items-center">
-      <select
-        value={selectedDepartment ?? ""}
-        onChange={(e) => setSelectedDepartment(Number(e.target.value))}
-        className="select bg-gray-700 text-white p-2 m-2"
-      >
-        <option value="" disabled>
-          Select Department
-        </option>
-        {departments.map((department) => (
-          <option key={department.dep_id} value={department.dep_id}>
-            {department.dep_name}
-          </option>
-        ))}
-      </select>
-
+    <div className="flex">
       <button
         onClick={handleCreateForm}
         disabled={selectedDepartment === null}
-        className={`btn text-white px-4 py-2 rounded md:w-1/2 ${
-          selectedDepartment === null
-            ? "bg-gray-500 cursor-not-allowed"
-            : "bg-blue-500"
-        }`}
+        className="flex p-2 border rounded-xl text-white w-52 h-12 font-bold justify-center items-center btn-form hover:bg-slate-600"
       >
-        Create Form
+        Crear Formulario
       </button>
     </div>
   );

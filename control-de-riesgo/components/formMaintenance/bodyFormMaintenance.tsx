@@ -67,70 +67,98 @@ const BodyFormMaintenance: React.FC = () => {
   ];
 
   return (
-    <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
-      <div className="bg-background-3 flex flex-col justify-center items-center">
-        <div className="flex justify-center items-center flex-wrap md:flex-row">
-          {data.map((department, index) => (
-            <Card
-              key={department.dep_id}
-              svg={svgs[index]}
-              title={department.dep_name}
-              onClick={() => handleSectionChange(index)}
-              isActive={activeDepartment === index} // Añadir isActive
-            />
-          ))}
+    <div className="container px-5 py-7 mx-auto rounded-lg bg-background-2 body-font">
+      <div className="bg-background-3 flex flex-col justify-center items-center p-3 text-center space-y-5">
+        {/* seccion de ejes */}
+        <div className="w-full">
+          <h1 className="text-3xl font-bold m-4 text-white">
+            Mantenimiento de Formularios
+          </h1>
+          <h2 className="text-2xl font-bold m-4 text-white">
+            Seleccione un eje:
+          </h2>
+          <div className="flex w-full items-center space-x-4 justify-items-stretch px-5 ">
+            {data.map((department, index) => (
+              <Card
+                key={department.dep_id}
+                svg={svgs[index]}
+                title={department.dep_name}
+                onClick={() => handleSectionChange(index)}
+                isActive={activeDepartment === index} // Añadir isActive
+              />
+            ))}
+          </div>
         </div>
-
-        <NewFormMaintenance departments={data} />
-        <TableFormMaintenance
-          forms={forms.filter(
-            (form) =>
-              data[activeDepartment] &&
-              form.DEPARTMENT_dep_id === data[activeDepartment].dep_id
-          )}
-          onSelectform={setSelectedForm}
-        />
-        {selectedForm ? (
-          <>
-            <FormConfig formId={selectedForm.form_id} />
-            {selectedForm.form_status === "d" ? (
-              <div className="w-full flex flex-col justify-center items-center">
-                <NewQuestionMaintenance formId={selectedForm.form_id} />
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={selectedForm.section.length}
-                  onPageChange={handlePageChange}
-                />
-                <div className="w-full flex flex-col justify-center items-center">
-                  <h2 className="text-4xl font-bold m-4 text-white">
-                    {selectedForm.section[currentPage].sect_name}
-                  </h2>
-                  {questions
-                    .filter(
-                      (q) =>
-                        q.SECTION_sect_id ===
-                        selectedForm.section[currentPage].sect_id
-                    )
-                    .map((question, index) => (
-                      <QuestionMaintenance
-                        key={question.quest_id}
-                        question={question}
-                      />
-                    ))}
-                </div>
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={selectedForm.section.length}
-                  onPageChange={handlePageChange}
-                />
-              </div>
-            ) : (
-              <p>Seleccione un formulario desactivado para modificarlo</p>
+        {/* seccion crear formulario */}
+        <div className="flex flex-col items-center">
+          <h2 className="text-2xl font-bold m-4 text-white">
+            Crear un nuevo formulario:
+          </h2>
+          <NewFormMaintenance
+            selectedDepartment={data[activeDepartment]?.dep_id || null}
+          />
+        </div>
+        {/* seccion de formularios existentes */}
+        <div className="flex flex-col items-center">
+          <h2 className="text-2xl font-bold m-4 text-white">
+            Formularios existentes:
+          </h2>
+          <TableFormMaintenance
+            forms={forms.filter(
+              (form) =>
+                data[activeDepartment] &&
+                form.DEPARTMENT_dep_id === data[activeDepartment].dep_id
             )}
-          </>
-        ) : (
-          <p>Loading or no data available...</p>
-        )}
+            onSelectform={setSelectedForm}
+          />
+        </div>
+        {/* seccion de mantenimiento de formularios */}
+        <div>
+        <h2 className="text-2xl font-bold m-4 text-white">
+            Editar formulario seleccionado:
+          </h2>
+          {selectedForm ? (
+            <>
+              <FormConfig formId={selectedForm.form_id} />
+              {selectedForm.form_status === "d" ? (
+                <div className="w-full flex flex-col justify-center items-center">
+                  <NewQuestionMaintenance formId={selectedForm.form_id} />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={selectedForm.section.length}
+                    onPageChange={handlePageChange}
+                  />
+                  <div className="w-full flex flex-col justify-center items-center">
+                    <h2 className="text-4xl font-bold m-4 text-white">
+                      {selectedForm.section[currentPage].sect_name}
+                    </h2>
+                    {questions
+                      .filter(
+                        (q) =>
+                          q.SECTION_sect_id ===
+                          selectedForm.section[currentPage].sect_id
+                      )
+                      .map((question, index) => (
+                        <QuestionMaintenance
+                          key={question.quest_id}
+                          question={question}
+                        />
+                      ))}
+                  </div>
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={selectedForm.section.length}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+              ) : (
+                <p>Seleccione un formulario desactivado para modificarlo</p>
+              )}
+            </>
+          ) : (
+            <p>Loading or no data available...</p>
+          )}
+        </div>
       </div>
     </div>
   );

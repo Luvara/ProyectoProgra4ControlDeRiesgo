@@ -83,7 +83,7 @@ const InformationTI: React.FC = () => {
   return (
     <div className="background_color">
       <Header />
-      <section className="p-14 flex flex-col items-center">
+      <section className="px-14 flex flex-col items-center">
         <h2 className="text-white m-10 text-6xl">Administradores de TI</h2>
 
         <button

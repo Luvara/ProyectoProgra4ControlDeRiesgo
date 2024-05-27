@@ -13,9 +13,9 @@ const FormMaintenance: React.FC = () => {
     }
   }, [session, router]);
   return (
-    <div className="bg-gradient-to-b from-black to-purple-950">
+    <div>
       <Header />
-      <section className="p-14">
+      <section className="px-14">
         <BodyFormMaintenance />
       </section>
     </div>

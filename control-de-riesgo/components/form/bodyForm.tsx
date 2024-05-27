@@ -5,7 +5,7 @@ import Pagination from "./pagination";
 import { useUser } from "../../lib/userContext";
 import useFormStore from "../../lib/useFormRespondStore";
 import ScrollToTopButton from "../util/buttonToTop";
-import FormSkeleton from "./formSkeleton";
+import FormSkeleton from "../skeleton/formSkeleton";
 
 const BodyForm: React.FC = () => {
   const { user } = useUser();

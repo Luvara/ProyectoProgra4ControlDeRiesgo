@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "../index";
-import useFormStore from "../../lib/useFormStore"; // Asegúrate de que la ruta es correcta
+import useFormStore from "../../lib/useFormStore";
 
 const statusOptions = [
-  { status: "Completado", id: "c" },
+  { status: "Completo", id: "c" },
   { status: "Activo", id: "a" },
   { status: "Desactivado", id: "d" },
 ];
@@ -71,36 +71,48 @@ const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
   };
 
   return (
-    <div className="bg-background-4 m-5 rounded-lg flex flex-wrap justify-center items-center">
-      <select
-        className="m-4 bg-transparent text-white outline-none"
-        value={form?.form_status}
-        onChange={(e) => handleChange(e.target.value)}
-      >
-        {statusOptions.map((option, index) => (
-          <option className="bg-background-3" key={index} value={option.id}>
-            {option.status}
-          </option>
-        ))}
-      </select>
+    <div className="bg-background-4 m-5 rounded-lg flex flex-wrap justify-center items-center text-white">
+      <div>
+        <p>Estado</p>
+        <select
+          className="m-4 bg-transparent text-white outline-none"
+          value={form?.form_status}
+          onChange={(e) => handleChange(e.target.value)}
+        >
+          {statusOptions.map((option, index) => (
+            <option className="bg-background-3" key={index} value={option.id}>
+              {option.status}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <p className="m-4 text-white">{form?.form_description}</p>
+      <div>
+        <p>Descripción</p>
+        <p className="m-4 text-white">{form?.form_description}</p>
+      </div>
 
-      <input
-        type="date"
-        className="m-4 bg-transparent text-white outline-none"
-        disabled={form?.form_status === "c" || form?.form_status === "a"}
-        value={startDate}
-        onChange={(e) => handleChangeDate(e.target.value, "start")}
-      />
+      <div>
+        <p>Fecha de Inicio</p>
+        <input
+          type="date"
+          className="m-4 bg-transparent text-white outline-none"
+          disabled={form?.form_status === "c" || form?.form_status === "a"}
+          value={startDate}
+          onChange={(e) => handleChangeDate(e.target.value, "start")}
+        />
+      </div>
 
-      <input
-        type="date"
-        className="m-4 bg-transparent text-white outline-none"
-        disabled={form?.form_status === "c" || form?.form_status === "a"}
-        value={endDate}
-        onChange={(e) => handleChangeDate(e.target.value, "finish")}
-      />
+      <div>
+        <p>Fecha de Fin</p>
+        <input
+          type="date"
+          className="m-4 bg-transparent text-white outline-none"
+          disabled={form?.form_status === "c" || form?.form_status === "a"}
+          value={endDate}
+          onChange={(e) => handleChangeDate(e.target.value, "finish")}
+        />
+      </div>
 
       <button
         onClick={handleSave}
@@ -111,7 +123,7 @@ const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
         }`}
         disabled={form?.form_status === "c"}
       >
-        Update Form
+        Actualizar Formulario
       </button>
     </div>
   );
