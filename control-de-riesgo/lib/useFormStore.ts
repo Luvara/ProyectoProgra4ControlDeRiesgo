@@ -1,4 +1,4 @@
-import create from "zustand";
+import {create} from "zustand";
 import { Form, Question, Section } from "../components/index";
 import useQuestionStore from "./useQuestionStore";
 

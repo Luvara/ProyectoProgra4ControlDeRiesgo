@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
+import React, { Suspense } from "react";
 
 const Error_page = () => {
   const searchParams = useSearchParams();
@@ -8,11 +9,11 @@ const Error_page = () => {
   const router = useRouter();
 
   const handleBackToLogin = async () => {
-    router.push("/"); // Redirige al usuario al login manualmente
+    router.push("/"); // Redirect to login manually
   };
 
   const handleRegister = async () => {
-    router.push("/register"); // Redirige al usuario a la página de registro
+    router.push("/register"); // Redirect to registration page
   };
 
   return (
@@ -28,7 +29,7 @@ const Error_page = () => {
         <h1 className="text-[3rem]">Error</h1>
         <p className="text-[2rem]">{error ? error : "Something is wrong!!"}</p>
         <p className="text-[2rem]">Please contact administration!</p>
-        {!error && ( // El botón solo se mostrará si 'error' no tiene un valor
+        {!error && ( // The button will only be displayed if 'error' has no value
           <>
             <button
               onClick={handleBackToLogin}
@@ -49,4 +50,10 @@ const Error_page = () => {
   );
 };
 
-export default Error_page;
+const ErrorPageWrapper = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Error_page />
+  </Suspense>
+);
+
+export default ErrorPageWrapper;

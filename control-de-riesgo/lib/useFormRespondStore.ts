@@ -1,4 +1,4 @@
-import create from "zustand";
+import {create} from "zustand";
 import { Form, Answer } from "../components/index";
 
 interface FormState {

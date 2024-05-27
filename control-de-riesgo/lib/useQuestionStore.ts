@@ -1,4 +1,4 @@
-import create from "zustand";
+import {create} from "zustand";
 import { Question } from "../components/index";
 
 interface QuestionState {
