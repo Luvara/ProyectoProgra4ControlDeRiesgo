@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import RegisterSkeleton from "../skeleton/registerSkeleton";
 
 const Register = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const Register = () => {
   });
 
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Estado para rastrear el envío
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -42,6 +44,9 @@ const Register = () => {
     if (emailError) {
       return; // No enviar el formulario si hay un error de email
     }
+
+    setIsSubmitting(true); // Establecer el estado de envío a true
+
     try {
       const response = await fetch("/api/register", {
         method: "POST",
@@ -60,12 +65,18 @@ const Register = () => {
       }
     } catch (error) {
       console.error("Error registering user:", error);
+    } finally {
+      setIsSubmitting(false); // Restablecer el estado de envío a false
     }
   };
 
+  if (isSubmitting) {
+    return <RegisterSkeleton />; // Mostrar el esqueleto mientras se envía el formulario
+  }
+
   return (
     <div className="flex items-center justify-center w-screen h-screen p-10">
-      <div className="flex flex-col w-full  items-center justify-center p-4 bg-background-2 rounded-xl text-white bg-register sm:w-2/5">
+      <div className="flex flex-col w-full  items-center justify-center p-4 bg-background-2 rounded-xl text-white bg-register sm:w-3/4 lg:w-2/5">
         <Image
           className="my-2"
           src="/Logo.svg"
@@ -152,7 +163,7 @@ const Register = () => {
                   className="inputTxt"
                   placeholder="a"
                   required
-                />{" "}
+                />
                 <label className="labelFloat" htmlFor="correo">
                   Correo
                 </label>
@@ -162,7 +173,7 @@ const Register = () => {
                 <p className="text-red-500 text-sm italic ms-4 mt-1">
                   {emailError}
                 </p>
-              )}{" "}
+              )}
             </div>
 
             <div className="inputContainer">
