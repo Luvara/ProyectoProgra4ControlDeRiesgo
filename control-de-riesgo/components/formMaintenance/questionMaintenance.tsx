@@ -41,7 +41,7 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
 
   const formatDate = (dateString: Date) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString("en-US", options);
+    return new Date(dateString).toISOString().split("T")[0]
   };
 
   return (
