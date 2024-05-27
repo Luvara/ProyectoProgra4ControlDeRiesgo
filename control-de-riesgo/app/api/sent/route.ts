@@ -10,9 +10,11 @@ export async function POST(req: NextRequest) {
     const twoDaysBefore = new Date();
     twoDaysBefore.setDate(today.getDate() + 2);
 
+    const twoDaysBeforeFormatted = `${twoDaysBefore.toISOString().split('T')[0]}T00:00:00.000Z`;
+
     const forms = await prisma.axisform.findMany({
       where: {
-        form_date_finish: twoDaysBefore,
+        form_date_finish: twoDaysBeforeFormatted,
       },
       include: {
         department: {
@@ -28,22 +30,33 @@ export async function POST(req: NextRequest) {
         to: user.usu_email,
         subject: `Reminder: Form ${form.form_name} is due soon`,
         react: EmailTemplate({ firstName: user.usu_name }),
-        text: 'This is the text content of the email.', 
+        text: `Hello ${user.usu_name},\n\nThis is a reminder that the form "${form.form_name}" is due soon.\n\nBest regards,\nYour Company`,
       })) : []
     );
+    console.log('Emails to send:', emails);
 
     for (const email of emails) {
-      await resend.emails.send({
-        from: 'Acme <onboarding@resend.dev>',
-        to: [email.to],
-        subject: email.subject,
-        react: email.react,
-        text: email.text, 
-      });
+      try {
+        const { data, error } = await resend.emails.send({
+          from: 'Your Company <noreply@proyectoprogracuatro.site>',
+          to: [email.to],
+          subject: email.subject,
+          react: email.react,
+          text: email.text, 
+        });
+        
+        if (error) {
+          console.error('Error al enviar correo a', email.to + ':', error);
+        } else {
+          console.log('Correo enviado a', email.to);
+        }
+      } catch (emailError) {
+        console.error('Error al enviar correo a', email.to + ':', emailError);
+      }
     }
-    return NextResponse.json({ message: 'Emails sent successfully'} , {status: 200});
+    return NextResponse.json({ message: 'Emails sent successfully'}, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to send emails'},  {status: 500 });
+    console.error('Error en la API de correos:', error);
+    return NextResponse.json({ error: 'Failed to send emails'}, { status: 500 });
   }
 }
-
