@@ -90,3 +90,20 @@ export interface DepartmentType {
   dep_version: number;
   UNIT_unit_id: number;
 }
+
+export interface EmployeeResponse {
+  usu_name: string;
+  usu_idnumber: string;
+  department: string | null;
+}
+
+export interface FormResponse {
+  form_name: string;
+  form_status: "Completed" | "Pending";
+}
+
+export interface FormProgressResponse {
+  form_name: string;
+  answeredQuestions: number;
+  totalQuestions: number;
+}
