@@ -1,13 +1,13 @@
-import prisma from "@/lib/prisma"; 
-import { NextResponse, NextRequest } from 'next/server';
+import prisma from "@/lib/prisma";
+import { NextResponse, NextRequest } from "next/server";
 
 async function getUsersByDepartmentAndPermission(departmentId: number) {
   try {
     const users = await prisma.user.findMany({
       where: {
         department_dep_id: departmentId,
-        userType_usut_id: 4, 
-        usu_permissons: 'A', 
+        userType_usut_id: 4,
+        usu_permissons: "A",
       },
       include: {
         usertype: {
@@ -24,7 +24,11 @@ async function getUsersByDepartmentAndPermission(departmentId: number) {
   }
 }
 
-async function updateUserState(userId: number, state: string, toRespond: string) {
+async function updateUserState(
+  userId: number,
+  state: string,
+  toRespond: string
+) {
   try {
     const user = await prisma.user.update({
       where: { usu_id: userId },
@@ -39,10 +43,13 @@ async function updateUserState(userId: number, state: string, toRespond: string)
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
-  const departmentId = parseInt(url.searchParams.get('departmentId') || '0', 10);
+  const departmentId = parseInt(
+    url.searchParams.get("departmentId") || "0",
+    10
+  );
 
   if (!departmentId) {
-    return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
+    return NextResponse.json({ error: "Invalid parameters" }, { status: 400 });
   }
 
   return getUsersByDepartmentAndPermission(departmentId);
@@ -52,7 +59,7 @@ export async function PUT(req: NextRequest) {
   const { userId, state, toRespond } = await req.json();
 
   if (!userId || state === undefined || toRespond === undefined) {
-    return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
+    return NextResponse.json({ error: "Invalid parameters" }, { status: 400 });
   }
 
   return updateUserState(userId, state, toRespond);

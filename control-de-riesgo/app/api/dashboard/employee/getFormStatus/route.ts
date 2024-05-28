@@ -4,28 +4,16 @@ import prisma from "@/lib/prisma";
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
+    const department = searchParams.get("department");
 
-    if (id === null) {
+    if (department === null) {
       return NextResponse.json({ message: "Invalid ID" }, { status: 400 });
     }
 
     const form = await prisma.axisform.findFirst({
       where: {
-        department: {
-          user: {
-            some: {
-              usu_id: parseInt(id),
-            },
-          },
-          axisform: {
-            some: {
-              form_status: {
-                not: "Pendiente",
-              },
-            },
-          },
-        },
+        DEPARTMENT_dep_id: parseInt(department),
+        form_status: "a",
       },
       select: {
         form_name: true,

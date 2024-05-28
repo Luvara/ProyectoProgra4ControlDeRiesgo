@@ -107,3 +107,29 @@ export interface FormProgressResponse {
   answeredQuestions: number;
   totalQuestions: number;
 }
+
+export interface Project {
+  form_name: string;
+  department: string;
+  form_date_start: string;
+  form_date_finish: string;
+  progress: number;
+}
+
+export interface User {
+  department_dep_id: number;
+  userType_usut_id: number;
+  usu_email: string;
+  usu_id: number;
+  usu_idnumber: string;
+  usu_lastname: string;
+  usu_name: string;
+  usu_slastname: string;
+  usu_permissons: string;
+  usu_torespond: string;
+  usu_version: number;
+  usu_state: string;
+  usertype: {
+    usut_role: string;
+  };
+}

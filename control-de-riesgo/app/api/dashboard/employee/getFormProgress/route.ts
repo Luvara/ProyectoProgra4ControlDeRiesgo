@@ -10,7 +10,6 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: "Invalid ID" }, { status: 400 });
     }
 
-    // Encuentra el formulario activo más reciente para el departamento del usuario
     const activeForm = await prisma.axisform.findFirst({
       where: {
         department: {
