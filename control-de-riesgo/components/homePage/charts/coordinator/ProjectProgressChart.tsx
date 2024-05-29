@@ -49,7 +49,7 @@ const ProjectProgressChart: React.FC = () => {
         beginAtZero: true,
         max: 100,
         ticks: {
-          callback: (value: number) => `${value}%`,
+          callback: (tickValue: number | string) => `${tickValue}%`,
           color: 'white',
         },
       },

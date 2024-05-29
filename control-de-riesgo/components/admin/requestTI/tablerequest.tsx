@@ -52,8 +52,8 @@ const TableRequest: React.FC<TableRequestProps> = ({
     setCurrentPage(0); // Reset to first page when filter changes
   };
 
-  const filteredUsers = users.filter((user) => 
-    filter === "" || user.usertype?.usut_role === filter
+  const filteredUsers = users.filter(
+    (user) => filter === "" || user.usertype?.usut_role === filter
   );
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
@@ -66,19 +66,23 @@ const TableRequest: React.FC<TableRequestProps> = ({
     setCurrentPage(page);
   };
 
-  const uniqueRoles = Array.from(new Set(users.map(user => user.usertype?.usut_role)));
+  const uniqueRoles = Array.from(
+    new Set(users.map((user) => user.usertype?.usut_role))
+  );
 
   return (
     <div>
       <div className="mb-4">
-        <select 
+        <select
           value={filter}
           onChange={handleFilterChange}
           className="p-2 border rounded"
         >
           <option value="">Todos los roles</option>
-          {uniqueRoles.map(role => (
-            <option key={role} value={role}>{role}</option>
+          {uniqueRoles.map((role) => (
+            <option key={role} value={role}>
+              {role}
+            </option>
           ))}
         </select>
       </div>
@@ -105,7 +109,9 @@ const TableRequest: React.FC<TableRequestProps> = ({
                 <td className="py-2 px-4 border-b">{user.usu_name}</td>
                 <td className="py-2 px-4 border-b">{`${user.usu_lastname} ${user.usu_slastname}`}</td>
                 <td className="py-2 px-4 border-b">{user.usu_email}</td>
-                <td className="py-2 px-4 border-b">{user.usertype?.usut_role}</td>
+                <td className="py-2 px-4 border-b">
+                  {user.usertype?.usut_role}
+                </td>
                 <td className="py-2 px-4 border-b">
                   <button
                     className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"

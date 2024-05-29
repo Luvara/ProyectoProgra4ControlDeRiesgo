@@ -63,8 +63,8 @@ const Request: React.FC = () => {
           throw new Error("Network response was not ok");
         }
       }
-      fetchUsers(); 
-      fetchTIRequestCount(); 
+      fetchUsers();
+      fetchTIRequestCount();
     } catch (error) {
       console.error("Error updating user state:", error);
     }
