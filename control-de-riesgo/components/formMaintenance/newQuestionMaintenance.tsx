@@ -43,62 +43,69 @@ const NewQuestionMaintenance: React.FC<NewQuestionMaintenanceProps> = ({
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
+      {/* boton de nueva pregunta */}
       <button
-        className="flex p-2 border rounded-xl text-white w-52 h-12 font-bold justify-center items-center btn-form hover:bg-slate-600"
+        className="flex p-2 border rounded-xl text-white w-52 h-12 font-bold justify-center items-center btn-form hover:bg-slate-600 mb-8"
         onClick={handleNewQuestion}
       >
         Nueva Pregunta
       </button>
-
+      {/* nueva pregunta */}
       {showForm && (
-        <div className="w-full m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
+        <div className=" flex flex-col w-full p-4 bg-gray-800 text-white rounded-lg shadow node-shadow">
           <div className="mb-4">
             <label className="block text-lg font-semibold mb-2">
               Pregunta:
             </label>
             <textarea
               name="quest_question"
-              className="p-2 border rounded w-full h-36 bg-transparent"
+              className="p-2 border rounded w-full h-36 bg-background-4"
               value={questionText}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           </div>
-
-          <div className="flex w-full justify-evenly items-center mb-4">
+          {/* seccion ejes y pocision */}
+          <div className="flex flex-col w-full justify-center items-center mb-4">
             <select
               name="quest_section"
-              className="p-2 border rounded w-1/2 bg-transparent"
+              className="flex bg-transparent text-center border rounded-lg p-2 hover:bg-slate-600"
               value={sectionId ?? ""}
               onChange={(e) => setSectionId(Number(e.target.value))}
             >
-              <option value="" disabled>
-                Seleccionar Sección
+              <option className="bg-background-3" value="" disabled>
+                Seleccionar Eje
               </option>
               {currentForm?.section.map((section) => (
-                <option key={section.sect_id} value={section.sect_id}>
+                <option
+                  className="bg-background-3"
+                  key={section.sect_id}
+                  value={section.sect_id}
+                >
                   {section.sect_name}
                 </option>
               ))}
             </select>
             <div>
-              <label className="block text-lg font-semibold mb-2">
+              <label className="block text-lg font-semibold my-2">
                 Posición:
               </label>
               <input
                 type="text"
                 name="quest_ordern"
-                className="mt-2 p-2 border rounded w-20 bg-transparent"
+                className="w-24 bg-transparent text-center border rounded-lg p-2"
                 value={questionOrder}
                 onChange={(e) => setQuestionOrder(e.target.value)}
               />
             </div>
           </div>
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-500 text-white p-2 rounded-lg"
-          >
-            Crear Pregunta
-          </button>
+          <div className="flex justify-center items-center">
+            <button
+              onClick={handleSubmit}
+              className="flex p-2 border rounded-xl text-white w-52 h-12 font-bold justify-center items-center btn-form hover:bg-slate-600 mb-2"
+            >
+              Crear Pregunta
+            </button>
+          </div>
         </div>
       )}
     </div>

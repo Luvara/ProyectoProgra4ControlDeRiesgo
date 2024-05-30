@@ -10,6 +10,8 @@ import TableFormMaintenance from "./tableFormsMaintenance";
 import NewFormMaintenance from "./newFormMaintenance";
 import NewQuestionMaintenance from "./newQuestionMaintenance";
 import { useUser } from "../../lib/userContext";
+import ButtonToTop from "../util/buttonToTop";
+import MantFormSkeleton from "../skeleton/mantFormSkeleton";
 
 const BodyFormMaintenance: React.FC = () => {
   const [activeDepartment, setActiveDepartment] = useState(0);
@@ -22,6 +24,8 @@ const BodyFormMaintenance: React.FC = () => {
 
   const { setQuestions, questions } = useQuestionStore();
   const { forms, setForms, updateForm } = useFormStore();
+
+  const [loading, setLoading] = useState(true);
 
   const { user } = useUser();
 
@@ -40,8 +44,12 @@ const BodyFormMaintenance: React.FC = () => {
           setForms(data.flatMap((dept: Department) => dept.axisform));
           setSelectedForm(data[0].axisform[0]); // Set initial selected form if data is available
         }
+        setLoading(false);
       })
-      .catch((error) => console.error("Error fetching departments:", error));
+      .catch((error) => {
+        console.error("Error fetching departments:", error);
+        setLoading(false);
+      });
   }, []);
 
   const handleSectionChange = (index: number) => {
@@ -65,6 +73,10 @@ const BodyFormMaintenance: React.FC = () => {
     "/Systems.svg",
     "/Follow-up.svg",
   ];
+
+  if (loading) {
+    return <MantFormSkeleton />;
+  }
 
   return (
     <div className="container px-5 py-7 mx-auto rounded-lg bg-background-2 body-font">
@@ -99,7 +111,7 @@ const BodyFormMaintenance: React.FC = () => {
           />
         </div>
         {/* seccion de formularios existentes */}
-        <div className="flex flex-col w-3/4 items-center">
+        <div className="flex flex-col w-11/12  2xl:w-3/4 2xl:px-0 items-center ">
           <h2 className="text-2xl font-bold m-4 text-white">
             Formularios existentes:
           </h2>
@@ -117,47 +129,50 @@ const BodyFormMaintenance: React.FC = () => {
           <h2 className="text-2xl font-bold m-4 text-white">
             Editar formulario seleccionado:
           </h2>
-          {selectedForm ? (
-            <>
-              <div className="flex w-3/4 mb-5">
-                <FormConfig formId={selectedForm.form_id} />
-              </div>
-              {selectedForm.form_status === "d" ? (
-                <div className="flex flex-col w-full items-center ">
-                  {/* seccion crear preguntas */}
-                  <div className=" flex flex-col w-full items-center">
-                    <h2 className="text-2xl font-bold m-4 text-white">
-                      Crear una nueva pregunta:
+        </div>
+        {/* Seccion si hay un formulario seleccionado */}
+        {selectedForm ? (
+          <>
+            <div className="flex w-11/12 2xl:w-3/4 2xl:px-0 items-center">
+              <FormConfig formId={selectedForm.form_id} />
+            </div>
+            {selectedForm.form_status === "d" ? (
+              <div className="flex flex-col w-full items-center ">
+                {/* seccion crear preguntas */}
+                <div className=" flex flex-col w-11/12 2xl:w-3/4 2xl:px-0 items-center">
+                  <h2 className="text-2xl font-bold m-4 text-white">
+                    Crear una nueva pregunta:
+                  </h2>
+                  <NewQuestionMaintenance formId={selectedForm.form_id} />
+                </div>
+                {/* seccion de preguntas */}
+                <div className=" flex flex-col w-full items-center">
+                  <h2 className="text-2xl font-bold m-4 mt-8 text-white">
+                    Editar preguntas del formulario seleccionado:
+                  </h2>
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={selectedForm.section.length}
+                    onPageChange={handlePageChange}
+                  />
+                  <div className="w-full flex flex-col justify-center items-center mt-4 space-y-8 px-10">
+                    <h2 className="text-4xl font-bold m-4 text-white">
+                      Eje: {selectedForm.section[currentPage].sect_name}
                     </h2>
-                    <NewQuestionMaintenance formId={selectedForm.form_id} />
+                    {questions
+                      .filter(
+                        (q) =>
+                          q.SECTION_sect_id ===
+                          selectedForm.section[currentPage].sect_id
+                      )
+                      .map((question, index) => (
+                        <QuestionMaintenance
+                          key={question.quest_id}
+                          question={question}
+                        />
+                      ))}
                   </div>
-                  {/* seccion de preguntas */}
-                  <div className=" flex flex-col w-full items-center">
-                    <h2 className="text-2xl font-bold m-4 text-white">
-                     Editar preguntas del formulario seleccionado:
-                    </h2>
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={selectedForm.section.length}
-                      onPageChange={handlePageChange}
-                    />
-                    <div className="w-full flex flex-col justify-center items-center">
-                      <h2 className="text-4xl font-bold m-4 text-white">
-                        {selectedForm.section[currentPage].sect_name}
-                      </h2>
-                      {questions
-                        .filter(
-                          (q) =>
-                            q.SECTION_sect_id ===
-                            selectedForm.section[currentPage].sect_id
-                        )
-                        .map((question, index) => (
-                          <QuestionMaintenance
-                            key={question.quest_id}
-                            question={question}
-                          />
-                        ))}
-                    </div>
+                  <div className="mt-10">
                     <Pagination
                       currentPage={currentPage}
                       totalPages={selectedForm.section.length}
@@ -165,14 +180,17 @@ const BodyFormMaintenance: React.FC = () => {
                     />
                   </div>
                 </div>
-              ) : (
-                <p>Seleccione un formulario desactivado para modificarlo</p>
-              )}
-            </>
-          ) : (
-            <p>Loading or no data available...</p>
-          )}
-        </div>
+              </div>
+            ) : (
+              <p className="text-2xl font-bold m-4 text-white">
+                Seleccione un formulario desactivado para modificarlo
+              </p>
+            )}
+          </>
+        ) : (
+          <p>Cargando o no hay datos disponibles...</p>
+        )}
+        <ButtonToTop />
       </div>
     </div>
   );

@@ -68,7 +68,6 @@ const BodyForm: React.FC = () => {
 
   return (
     <div className="container flex flex-col-reverse xl:container xl:flex xl:flex-row px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
-    
       <div className="flex flex-col bg-gray-800 text-center p-4 xl:w-96">
         <h4 className="font-bold text-white text-lg mb-4">
           Preguntas sin responder

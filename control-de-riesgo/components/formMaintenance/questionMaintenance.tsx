@@ -41,21 +41,21 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
 
   const formatDate = (dateString: Date) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toISOString().split("T")[0]
+    return new Date(dateString).toISOString().split("T")[0];
   };
 
   return (
-    <div className="m-4 p-4 md:w-3/4 bg-background-4 text-white rounded-lg shadow">
+    <div className="p-4 w-full bg-background-4 text-white rounded-lg node-shadow">
       <div className="mb-4">
         <label className="text-lg font-semibold">ID:</label>
         <span className="text-2xl font-bold ml-2">{question.quest_id}</span>
       </div>
 
       <div className="mb-4">
-        <label className="block text-lg font-semibold mb-2">Question:</label>
+        <label className="block text-lg font-semibold mb-2">Pregunta:</label>
         <textarea
           name="quest_question"
-          className="p-2 border rounded w-full h-36 bg-transparent"
+          className="p-2 border rounded w-full h-36 bg-gray-800"
           value={tempQuestion}
           onChange={(e) => handleInputChange(e)}
           onBlur={handleBlur}
@@ -64,7 +64,7 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
 
       <div className="flex justify-evenly items-center mb-4">
         <div>
-          <label className="block text-lg font-semibold mb-2">Active:</label>
+          <label className="block text-lg font-semibold mb-2">Activa:</label>
           <input
             type="checkbox"
             name="quest_deactivationdate"
@@ -73,12 +73,10 @@ const QuestionMaintenance = ({ question }: { question: Question }) => {
             onBlur={handleBlur}
             className="accent-white h-5 w-5"
           />
-          <p>
-            {tempDate ? formatDate(tempDate) : ""}
-          </p>
+          <p>{tempDate ? formatDate(tempDate) : ""}</p>
         </div>
         <div>
-          <label className="block text-lg font-semibold mb-2">Order:</label>
+          <label className="block text-lg font-semibold mb-2">Orden:</label>
           <input
             type="text"
             name="quest_ordern"

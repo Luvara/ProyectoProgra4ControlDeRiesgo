@@ -71,25 +71,25 @@ const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-800 w-full  rounded-xl items-center text-white node-shadow pb-3">
+    <div className="flex flex-col bg-gray-800 w-full rounded-xl items-center text-white node-shadow pb-3">
       {/* titulos */}
-      <div className="flex bg-gray-700 w-full h-10 items-center rounded-t-xl border-b font-bold">
+      <div className="hidden lg:flex bg-gray-700 w-full h-10 items-center rounded-t-xl border-b font-bold">
         <p className="w-1/4">Estado</p>
         <p className="w-1/4">Descripción</p>
         <p className="w-1/4">Fecha de Inicio</p>
         <p className="w-1/4">Fecha de Fin</p>
       </div>
       {/* ajustes */}
-      <div className="flex w-full h-14 items-center">
+      <div className="flex flex-col p-5 space-y-4 w-full lg:h-14 lg:flex-row lg:p-0 lg:space-y-0 items-center">
         {/* div estado */}
-        <div className="w-1/4 px-4">
+        <div className=" px-4 lg:w-1/4">
           <select
             className={`flex w-full bg-transparent text-center border rounded-lg p-2 ${
-              form?.form_status === "c" 
+              form?.form_status === "c"
                 ? "cursor-not-allowed"
                 : "hover:bg-slate-600"
             }`}
-            disabled={form?.form_status === "c" }
+            disabled={form?.form_status === "c"}
             value={form?.form_status}
             onChange={(e) => handleChange(e.target.value)}
           >
@@ -101,11 +101,13 @@ const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
           </select>
         </div>
         {/* div descripcion */}
-        <div className="w-1/4">
+        <div className="lg:w-1/4">
+          <p className="mb-2 lg:hidden">Descripción:</p>
           <p className="text-white">{form?.form_description}</p>
         </div>
         {/* div fecha inicio */}
-        <div className="w-1/4 px-4">
+        <div className="px-4 lg:w-1/4">
+          <p className="mb-2 lg:hidden">Fecha de Inicio:</p>
           <input
             type="date"
             className={`flex w-full bg-transparent h-10 text-center border rounded-lg p-2 justify-center  ${
@@ -119,7 +121,8 @@ const FormConfig: React.FC<FormConfigProps> = ({ formId }) => {
           />
         </div>
         {/* div fecha fin */}
-        <div className="w-1/4 px-4">
+        <div className=" px-4 lg:w-1/4">
+          <p className="mb-2 lg:hidden">Fecha de Finalización:</p>
           <input
             type="date"
             className={`flex w-full bg-transparent h-10 text-center border rounded-lg p-2 justify-center  ${

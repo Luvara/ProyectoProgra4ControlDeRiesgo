@@ -27,10 +27,10 @@ const TableFormMaintenance = ({
           <tr className="bg-gray-700 border-b">
             <th className="px-4 py-2">ID</th>
             <th className="px-4 py-2">Nombre</th>
-            <th className="px-4 py-2">Estado</th>
-            <th className="px-4 py-2">Descripción</th>
-            <th className="px-4 py-2">Fecha Inicio</th>
-            <th className="px-4 py-2">Fecha Fin</th>
+            <th className="px-4 py-2 ">Estado</th>
+            <th className="px-4 py-2 hidden 2xl:table-cell">Descripción</th>
+            <th className="px-4 py-2 hidden  md:table-cell ">Fecha Inicio</th>
+            <th className="px-4 py-2 hidden md:table-cell">Fecha Fin</th>
           </tr>
         </thead>
         <tbody className="text-center">
@@ -44,13 +44,16 @@ const TableFormMaintenance = ({
                 <td className="px-4 py-2">{form.form_id}</td>
                 <td className="px-4 py-2">{form.form_name}</td>
                 <td className="px-4 py-2">{getStatusText(form.form_status)}</td>
-                <td className="px-4 py-2">{form.form_description}</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 hidden 2xl:table-cell">
+                  {form.form_description}
+                </td>
+                <td className="px-4 py-2 hidden md:table-cell">
                   {form?.form_date_start
                     ? new Date(form.form_date_start).toISOString().split("T")[0]
                     : ""}
                 </td>
-                <td className="px-4 py-2">
+
+                <td className="px-4 py-2 hidden md:table-cell">
                   {form?.form_date_finish
                     ? new Date(form.form_date_finish)
                         .toISOString()
