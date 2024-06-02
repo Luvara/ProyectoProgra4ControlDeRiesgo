@@ -49,7 +49,31 @@ const Request: React.FC = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
+        
+        try {
+          const response = await fetch(`/api/sendEmailActivateUser`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usu_id: user.usu_id }),
+          });
+          if (!response.ok) throw new Error("Failed to send email notification");
+        } catch (error) {
+          console.error("Error sending email notification:", error);
+        }
+
       } else {
+
+        try {
+          const response = await fetch(`/api/sendEmailRejectUser`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usu_id: user.usu_id }),
+          });
+          if (!response.ok) throw new Error("Failed to send email notification");
+        } catch (error) {
+          console.error("Error sending email notification:", error);
+        }
+
         const response = await fetch("/api/adminRequest", {
           method: "DELETE",
           headers: {
