@@ -1,4 +1,4 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import { Form, Question, Section } from "../components/index";
 import useQuestionStore from "./useQuestionStore";
 
@@ -12,6 +12,8 @@ interface FormState {
   updateForm: (id: number, newData: Partial<Form>) => void;
   createForm: (departmentId: number) => void;
   saveForms: () => Promise<void>;
+  notifyFormUpdate: (formId: number) => Promise<void>;
+  notifyFormDesactivate: (formId: number) => Promise<void>;
 }
 
 const useFormStore = create<FormState>((set, get) => ({
@@ -71,8 +73,44 @@ const useFormStore = create<FormState>((set, get) => ({
       set((state) => ({
         forms: state.forms.map((form) => ({ ...form, isModified: false })),
       }));
+
+      // Notificar actualización de formularios
+      for (const form of savedForms) {
+        console.log("Form status:", form.form_status);
+        if (form.form_status === "a" || form.form_status === "A"){
+          await get().notifyFormUpdate(form.form_id);
+        }
+        if (form.form_status === "d" || form.form_status === "D") {
+          await get().notifyFormDesactivate(form.form_id);
+        }
+        
+      }
     } catch (error) {
       console.error("Error saving forms:", error);
+    }
+  },
+  notifyFormUpdate: async (formId: number) => {
+    try {
+      const response = await fetch(`/api/sendEmail`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formId }),
+      });
+      if (!response.ok) throw new Error("Failed to send email notification");
+    } catch (error) {
+      console.error("Error sending email notification:", error);
+    }
+  },
+  notifyFormDesactivate: async (formId: number) => {
+    try {
+      const response = await fetch(`/api/sendEmailDesactivateForm`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formId }),
+      });
+      if (!response.ok) throw new Error("Failed to send email notification");
+    } catch (error) {
+      console.error("Error sending email notification:", error);
     }
   },
 }));
