@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import prisma from "@/lib/prisma";
-import { EmailTemplateNewForm } from "@/components/emailTemplate/templateNewForm";
+import { EmailTemplateDesactivateForm } from "@/components/emailTemplate/templateDesactivateForm";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       from: "Your Company <noreply@proyectoprogracuatro.site>",
       to: userToRespond.usu_email,
       subject: "Form Update",
-      react: EmailTemplateNewForm({ firstName: userToRespond.usu_name }),
+      react: EmailTemplateDesactivateForm({ firstName: userToRespond.usu_name }),
       text: `This is the text content of the email.`,
     });
 
