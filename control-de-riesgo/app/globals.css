@@ -94,6 +94,10 @@
   width: 100%;
 }
 
+.inputContainer_3e4 {
+  width: 25%;
+}
+
 .inputTxt {
   position: absolute;
   top: 0px;
@@ -107,6 +111,7 @@
   outline: none;
   background: none;
   z-index: 1;
+  color: white;
 }
 
 .inputTxt::placeholder {

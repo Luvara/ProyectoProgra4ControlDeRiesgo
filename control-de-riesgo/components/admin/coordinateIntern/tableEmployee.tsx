@@ -49,8 +49,6 @@ const TableInformationEmployee: React.FC<InformationTableProps> = ({
     setConfirmUser(null);
   };
 
-  
-
   const filteredUsers = users.filter(
     (user) =>
       user.usu_name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -68,44 +66,54 @@ const TableInformationEmployee: React.FC<InformationTableProps> = ({
   };
 
   return (
-    <div>
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Filtrar por nombre o correo"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="p-2 border rounded"
-        />
+    <div className="min-w-fit mt-10 bg-register p-10 border">
+      <div className="w-full max-w-3xl">
+        <div className="mb-4 inputContainer">
+          <input
+            type="text"
+            placeholder="Filtrar por nombre o correo"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="p-2 inputTxt"
+          />
+          <label className="labelFloat">Filtrar por nombre o correo</label>
+        </div>
       </div>
 
-      <table className="w-full text-white text-center">
-        <thead>
-          <tr>
-            <th className="py-2 px-4 border-b">Nombre</th>
-            <th className="py-2 px-4 border-b">Apellido</th>
-            <th className="py-2 px-4 border-b">Email</th>
-            <th className="py-2 px-4 border-b">Estado del Empleado de Área</th>
-            {displayedUsers.some((user) => user.usu_state === "A") && (
-              <th className="py-2 px-4 border-b">Responder Formulario</th>
-            )}
-            <th className="py-2 px-4 border-b">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedUsers.length === 0 ? (
+      <table className="w-full text-white mt-10 text-center">
+        {displayedUsers.length === 0 ? (
+          <></>
+        ) : (
+          <thead>
             <tr>
+              <th className="py-2 px-4 border-b">Nombre</th>
+              <th className="py-2 px-4 border-b">Apellido</th>
+              <th className="py-2 px-4 border-b">Correo</th>
+              <th className="py-2 px-4 border-b">Estado Empleado</th>
+              {displayedUsers.some((user) => user.usu_state === "A") && (
+                <th className="py-2 px-4 border-b">Responder Formulario</th>
+              )}
+              <th className="py-2 px-4 border-b">Acciones</th>
+            </tr>
+          </thead>
+        )}
+
+        {displayedUsers.length === 0 ? (
+          <tbody className="">
+            <tr className="justify-center">
               <td
                 colSpan={
-                  displayedUsers.some((user) => user.usu_state === "A") ? 5 : 4
+                  displayedUsers.some((user) => user.usu_state === "A") ? 5 : 5
                 }
-                className="py-2 px-4 border-b"
+                className="py-8 px-4 border-y w-full"
               >
-                Sin empleados asignados
+                No hay empleados asignados al eje
               </td>
             </tr>
-          ) : (
-            displayedUsers.map((user) => (
+          </tbody>
+        ) : (
+          <tbody className="">
+            {displayedUsers.map((user) => (
               <tr key={user.usu_id}>
                 <td className="py-2 px-4 border-b">{user.usu_name}</td>
                 <td className="py-2 px-4 border-b">{`${user.usu_lastname} ${user.usu_slastname}`}</td>
@@ -136,16 +144,20 @@ const TableInformationEmployee: React.FC<InformationTableProps> = ({
                 )}
                 <td className="py-2 px-4 border-b">
                   <button
-                    onClick={() => router.push(`/admin/adminControlnterno/editUserForm/${user.usu_id}`)}
+                    onClick={() =>
+                      router.push(
+                        `/admin/adminControlnterno/editUserForm/${user.usu_id}`
+                      )
+                    }
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
                   >
                     Editar
                   </button>
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
+            ))}
+          </tbody>
+        )}
       </table>
 
       <div className="w-full flex flex-col items-center mt-8">
