@@ -49,8 +49,6 @@ const TableInformationBoss: React.FC<InformationTableProps> = ({
     setConfirmUser(null);
   };
 
-  
-
   const filteredUsers = users.filter(
     (user) =>
       user.usu_name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -136,7 +134,11 @@ const TableInformationBoss: React.FC<InformationTableProps> = ({
                 )}
                 <td className="py-2 px-4 border-b">
                   <button
-                    onClick={() => router.push(`/admin/adminControlnterno/editUserForm/${user.usu_id}`)}
+                    onClick={() =>
+                      router.push(
+                        `/admin/adminControlnterno/editUserForm/${user.usu_id}`
+                      )
+                    }
                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
                   >
                     Editar
