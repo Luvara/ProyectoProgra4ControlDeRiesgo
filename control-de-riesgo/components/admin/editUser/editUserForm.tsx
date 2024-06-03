@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { User, Department } from "../../index";
 import Header from "@/components/header/header";
 import { useSession } from "next-auth/react";
+import RegisterSkeleton from "../../skeleton/registerSkeleton";
 
 const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
   const { data: session, status } = useSession();
@@ -13,6 +14,7 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
   const [selectedDepartment, setSelectedDepartment] = useState<number | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (status === "unauthenticated" && !session) {
@@ -39,7 +41,9 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
       const res = await fetch(`/api/departments`);
       const data = await res.json();
       setDepartments(data);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error("Error fetching departments:", error);
     }
   };
@@ -84,125 +88,135 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
     }
   };
 
+  if (isLoading) {
+    return <RegisterSkeleton />;
+  }
+
   return (
-    <div className="background_color">
+    <div className="h-full">
       <Header />
-      <section className="p-14 flex flex-col items-center">
-        <h2 className="text-white m-10 text-6xl">Editar Usuario</h2>
-        {user && (
-          <form onSubmit={handleSubmit} className="w-full max-w-lg">
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm font-bold mb-2"
-                htmlFor="usu_idnumber"
-              >
-                Cédula
-              </label>
-              <input
-                type="text"
-                id="usu_idnumber"
-                name="usu_idnumber"
-                value={user.usu_idnumber}
-                onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm font-bold mb-2"
-                htmlFor="usu_name"
-              >
-                Nombre
-              </label>
-              <input
-                type="text"
-                id="usu_name"
-                name="usu_name"
-                value={user.usu_name}
-                onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm font-bold mb-2"
-                htmlFor="usu_lastname"
-              >
-                Apellido
-              </label>
-              <input
-                type="text"
-                id="usu_lastname"
-                name="usu_lastname"
-                value={user.usu_lastname}
-                onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm font-bold mb-2"
-                htmlFor="usu_slastname"
-              >
-                Segundo Apellido
-              </label>
-              <input
-                type="text"
-                id="usu_slastname"
-                name="usu_slastname"
-                value={user.usu_slastname}
-                onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm font-bold mb-2"
-                htmlFor="usu_email"
-              >
-                Correo
-              </label>
-              <input
-                type="text"
-                id="usu_email"
-                name="usu_email"
-                value={user.usu_email}
-                onChange={handleInputChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-white text-sm font-bold mb-2"
-                htmlFor="department"
-              >
-                Departamento
-              </label>
-              <select
-                id="department"
-                name="department"
-                value={selectedDepartment || ""}
-                onChange={handleDepartmentChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              >
-                {departments.map((dept) => (
-                  <option key={dept.dep_id} value={dept.dep_id}>
-                    {dept.dep_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Guardar
-              </button>
-            </div>
-          </form>
-        )}
-      </section>
+      <div className="flex items-center justify-center p-10">
+        <div className="flex flex-col w-full items-center justify-center p-4 bg-background-2 rounded-xl text-white bg-register sm:w-3/4 lg:w-2/5">
+          <h1 className="text-3xl font-bold mb-6">Editar datos de usuario</h1>
+          {user && (
+            <form onSubmit={handleSubmit} className="w-full max-w-lg">
+              <div className="space-y-5">
+                {/* campo cedula */}
+                <div className="inputContainer">
+                  <input
+                    id="cedula"
+                    name="cedula"
+                    type="text"
+                    value={user.usu_idnumber}
+                    onChange={handleInputChange}
+                    className="inputTxt"
+                    placeholder="a"
+                    required
+                  />
+                  <label className="labelFloat" htmlFor="cedula">
+                    Cédula
+                  </label>
+                </div>
+                {/* campo nombre */}
+                <div className="inputContainer">
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    type="text"
+                    value={user.usu_name}
+                    onChange={handleInputChange}
+                    className="inputTxt"
+                    placeholder="a"
+                    required
+                  />
+                  <label className="labelFloat" htmlFor="nombre">
+                    Nombre
+                  </label>
+                </div>
+                {/* campo primer apellido */}
+                <div className="inputContainer">
+                  <input
+                    id="apellido1"
+                    name="apellido1"
+                    type="text"
+                    value={user.usu_lastname}
+                    onChange={handleInputChange}
+                    className="inputTxt"
+                    placeholder="a"
+                    required
+                  />
+                  <label className="labelFloat" htmlFor="apellido1">
+                    Primer Apellido
+                  </label>
+                </div>
+                {/* campo segundo apellido */}
+                <div className="inputContainer">
+                  <input
+                    id="apellido2"
+                    name="apellido2"
+                    type="text"
+                    value={user.usu_slastname}
+                    onChange={handleInputChange}
+                    className="inputTxt"
+                    placeholder="a"
+                    required
+                  />
+                  <label className="labelFloat" htmlFor="apellido2">
+                    Segundo Apellido
+                  </label>
+                </div>
+                {/* campo correo */}
+                <div className="inputContainer">
+                  <input
+                    id="correo"
+                    name="correo"
+                    type="email"
+                    value={user.usu_email}
+                    onChange={handleInputChange}
+                    className="inputTxt"
+                    placeholder="a"
+                    required
+                  />
+                  <label className="labelFloat" htmlFor="correo">
+                    Correo
+                  </label>
+                </div>
+                {/* campo departamento */}
+                <div className="inputContainer">
+                  <select
+                    id="department"
+                    name="department"
+                    value={selectedDepartment || ""}
+                    onChange={handleDepartmentChange}
+                    className="inputTxt"
+                  >
+                    {departments.map((dept) => (
+                      <option
+                        className="bg-background-2"
+                        key={dept.dep_id}
+                        value={dept.dep_id}
+                      >
+                        {dept.dep_name}
+                      </option>
+                    ))}
+                  </select>
+                  <label className="labelFloat" htmlFor="department">
+                    Departamento
+                  </label>
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    className="flex p-2 border rounded-xl text-white w-52 mt-5 font-bold justify-center hover:bg-slate-600"
+                  >
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
