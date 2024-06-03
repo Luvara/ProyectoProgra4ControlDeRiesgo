@@ -87,7 +87,7 @@ const TableInformationEmployee: React.FC<InformationTableProps> = ({
           <thead>
             <tr>
               <th className="py-2 px-4 border-b">Nombre</th>
-              <th className="py-2 px-4 border-b">Apellido</th>
+              <th className="py-2 px-4 border-b">Apellidos</th>
               <th className="py-2 px-4 border-b">Correo</th>
               <th className="py-2 px-4 border-b">Estado Empleado</th>
               {displayedUsers.some((user) => user.usu_state === "A") && (

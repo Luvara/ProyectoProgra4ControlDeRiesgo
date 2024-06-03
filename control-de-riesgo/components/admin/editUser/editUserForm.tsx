@@ -15,6 +15,7 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
     null
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated" && !session) {
@@ -61,6 +62,7 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (user) {
+      setIsSaving(true); // Start saving state
       try {
         const res = await fetch(`/api/adminCoordinateBoss/${usu_id}`, {
           method: "PUT",
@@ -84,11 +86,13 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
         }
       } catch (error) {
         console.error("Error updating user details", error);
+      } finally {
+        setIsSaving(false); // End saving state
       }
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isSaving) {
     return <RegisterSkeleton />;
   }
 
@@ -104,8 +108,8 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
                 {/* campo cedula */}
                 <div className="inputContainer">
                   <input
-                    id="cedula"
-                    name="cedula"
+                    id="usu_idnumber"
+                    name="usu_idnumber"
                     type="text"
                     value={user.usu_idnumber}
                     onChange={handleInputChange}
@@ -120,8 +124,8 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
                 {/* campo nombre */}
                 <div className="inputContainer">
                   <input
-                    id="nombre"
-                    name="nombre"
+                    id="usu_name"
+                    name="usu_name"
                     type="text"
                     value={user.usu_name}
                     onChange={handleInputChange}
@@ -136,8 +140,8 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
                 {/* campo primer apellido */}
                 <div className="inputContainer">
                   <input
-                    id="apellido1"
-                    name="apellido1"
+                    id="usu_lastname"
+                    name="usu_lastname"
                     type="text"
                     value={user.usu_lastname}
                     onChange={handleInputChange}
@@ -152,8 +156,8 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
                 {/* campo segundo apellido */}
                 <div className="inputContainer">
                   <input
-                    id="apellido2"
-                    name="apellido2"
+                    id="usu_slastname"
+                    name="usu_slastname"
                     type="text"
                     value={user.usu_slastname}
                     onChange={handleInputChange}
@@ -168,8 +172,8 @@ const EditUserForm: React.FC<{ usu_id: string }> = ({ usu_id }) => {
                 {/* campo correo */}
                 <div className="inputContainer">
                   <input
-                    id="correo"
-                    name="correo"
+                    id="usu_email"
+                    name="usu_email"
                     type="email"
                     value={user.usu_email}
                     onChange={handleInputChange}

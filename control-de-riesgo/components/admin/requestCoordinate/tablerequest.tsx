@@ -6,7 +6,11 @@ import Pagination from "../../form/pagination";
 interface TableRequestProps {
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
-  handleStateChange: (approved: boolean, user: User, departmentId?: number) => Promise<void>;
+  handleStateChange: (
+    approved: boolean,
+    user: User,
+    departmentId?: number
+  ) => Promise<void>;
   departments: Department[];
 }
 
@@ -20,7 +24,9 @@ const TableRequest: React.FC<TableRequestProps> = ({
   const [action, setAction] = useState<"accept" | "reject" | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [filter, setFilter] = useState("");
-  const [selectedDepartmentId, setSelectedDepartmentId] = useState<number | null>(null);
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState<
+    number | null
+  >(null);
   const itemsPerPage = 20;
 
   const handleApprove = (user: User, departmentId: number) => {
@@ -55,11 +61,11 @@ const TableRequest: React.FC<TableRequestProps> = ({
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(event.target.value);
-    setCurrentPage(0); 
+    setCurrentPage(0);
   };
 
-  const filteredUsers = users.filter((user) => 
-    filter === "" || user.usertype?.usut_role === filter
+  const filteredUsers = users.filter(
+    (user) => filter === "" || user.usertype?.usut_role === filter
   );
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
@@ -70,22 +76,34 @@ const TableRequest: React.FC<TableRequestProps> = ({
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const uniqueRoles = Array.from(new Set(users.map(user => user.usertype?.usut_role)));
+  const uniqueRoles = Array.from(
+    new Set(users.map((user) => user.usertype?.usut_role))
+  );
 
   return (
-    <div>
-      <div className="mb-4">
-        <select 
-          value={filter}
-          onChange={handleFilterChange}
-          className="p-2 border rounded"
-        >
-          <option value="">Todos los roles</option>
-          {uniqueRoles.map(role => (
-            <option key={role} value={role}>{role}</option>
-          ))}
-        </select>
+    <div className="flex flex-col min-w-fit mt-10 bg-register p-10 border items-center">
+      <div className="w-1/4 mb-10">
+        <div className="inputContainer">
+          <select
+            value={filter}
+            onChange={handleFilterChange}
+            className="inputTxt text-center"
+          >
+            <option className="bg-background-2 text-center" value="">
+              Todos los roles
+            </option>
+            {uniqueRoles.map((role) => (
+              <option className="bg-background-2" key={role} value={role}>
+                {role}
+              </option>
+            ))}
+          </select>
+          <label className="labelFloat" htmlFor="rol">
+            Rol
+          </label>
+        </div>
       </div>
+
       <table className="w-full text-white text-center">
         <thead>
           <tr>
@@ -110,12 +128,16 @@ const TableRequest: React.FC<TableRequestProps> = ({
                 <td className="py-2 px-4 border-b">{user.usu_name}</td>
                 <td className="py-2 px-4 border-b">{`${user.usu_lastname} ${user.usu_slastname}`}</td>
                 <td className="py-2 px-4 border-b">{user.usu_email}</td>
-                <td className="py-2 px-4 border-b">{user.usertype?.usut_role}</td>
+                <td className="py-2 px-4 border-b">
+                  {user.usertype?.usut_role}
+                </td>
                 <td className="py-2 px-4 border-b">
                   <select
                     value={selectedDepartmentId || ""}
-                    onChange={(e) => setSelectedDepartmentId(Number(e.target.value))}
-                    className="p-2 border rounded bg-black"
+                    onChange={(e) =>
+                      setSelectedDepartmentId(Number(e.target.value))
+                    }
+                    className="p-2 border rounded bg-black text-center"
                   >
                     <option value="">Seleccionar</option>
                     {departments.map((dept) => (
@@ -125,15 +147,15 @@ const TableRequest: React.FC<TableRequestProps> = ({
                     ))}
                   </select>
                 </td>
-                <td className="py-2 px-4 border-b">
+                <td className=" py-2 px-4 border-b m-0 space-x-0 space-y-2 xl:space-x-2 justify-items-stretch">
                   <button
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
+                    className="bg-green-500  text-white px-4 py-2 rounded hover:bg-green-700"
                     onClick={() => handleApprove(user, selectedDepartmentId!)}
                   >
                     Aceptar
                   </button>
                   <button
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ml-2"
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
                     onClick={() => handleReject(user)}
                   >
                     Rechazar
