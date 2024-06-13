@@ -13,7 +13,7 @@ const UploadButton: React.FC<UploadButtonProps> = ({ answ_id }) => {
       console.log('Upload successful: ', result.info);
       // Aquí puedes enviar el resultado al backend para guardarlo en la base de datos
       fetch('/api/cloudinary', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
