@@ -8,9 +8,9 @@ export const EmailTemplateUserReject: React.FC<
   Readonly<EmailTemplateProps>
 > = ({ firstName }) => (
   <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow-md">
-    <Image
+    <img
       className="my-2"
-      src="/Logo.svg"
+      src="Logo.svg"
       width={125}
       height={125}
       alt="image"
