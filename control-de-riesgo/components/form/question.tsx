@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Question } from "../index";
+import UploadButton from "./UploadButton";
 
 const QuestionAnswer = ({
   question,
@@ -92,16 +93,7 @@ const QuestionAnswer = ({
         onBlur={handleObservationBlur}
       />
       {
-        <input
-          type="file"
-          /*onChange={handleFileChange}*/
-          className="block w-full text-sm text-gray-500 file:cursor-pointer
-             file:mr-4 file:py-2 file:px-4
-             file:rounded-lg file:border file:border-white
-             file:font-semibold
-             file:bg-transparent file:text-white
-             hover:file:bg-blue-100 hover:file:text-black"
-        />
+        <UploadButton answ_id ={question.answer[0]?.answ_id} />
       }
       {/* {question.file && (
         <p className="text-sm text-gray-500">File: {question.file.name}</p>
