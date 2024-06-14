@@ -42,7 +42,7 @@ const Login: React.FC = () => {
               bg-purple-950 rounded-lg hover:bg-purple-900 active:bg-blue-800 transition delay-50 hover:shadow-md hover:shadow-purple-400 hover:scale-125"
               onClick={(e) => {
                 e.preventDefault();
-                signIn();
+                signIn("azure-ad");
               }}
             >
               <img

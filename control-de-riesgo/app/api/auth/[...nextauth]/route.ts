@@ -1,3 +1,4 @@
+// pages/api/auth/[...nextauth].ts
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import prisma from "@/lib/prisma";
@@ -57,6 +58,7 @@ const handler = NextAuth({
     },
   },
   pages: {
+    signIn: "/auth/signin",
     error: "/error",
   },
   debug: process.env.NODE_ENV === "development",
