@@ -1,54 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { Question } from "../index";
+import { Question, Answer } from "../index";
 import UploadButton from "./UploadButton";
+import useFormStore from "../../lib/useFormRespondStore";
 
 const QuestionAnswer = ({
   question,
   index,
   sectionIndex,
-  updateQuestion,
 }: {
   question: Question;
   index: number;
   sectionIndex: number;
-  updateQuestion: (
-    sectionIndex: number,
-    questionIndex: number,
-    newData: Partial<Question["answer"][0]>
-  ) => void;
 }) => {
-  const initialJustification =
-    question.answer.length > 0 ? question.answer[0].answ_justification : "";
-  const [justification, setJustification] = useState(initialJustification);
-  const [lastSavedJustification, setLastSavedJustification] =
-    useState(initialJustification);
+  const { updateAnswer } = useFormStore();
+  const [answer, setAnswer] = useState(question.answer[0] || {} as Answer);
 
   useEffect(() => {
-    setJustification(initialJustification);
-    setLastSavedJustification(initialJustification);
-  }, [initialJustification]);
+    setAnswer(question.answer[0] || {});
+  }, [question]);
 
   const handleResponseChange = (response: string) => {
-    updateQuestion(sectionIndex, index, { answ_answer: response });
+    updateAnswer(sectionIndex, index, { answ_answer: response }, (updatedAnswer) => {
+      setAnswer(updatedAnswer);
+    });
   };
 
   const handleObservationChange = (observation: string) => {
-    setJustification(observation);
+    setAnswer((prev) => ({ ...prev, answ_justification: observation }));
   };
 
   const handleObservationBlur = () => {
-    if (justification !== lastSavedJustification) {
-      updateQuestion(sectionIndex, index, {
-        answ_justification: justification,
+    if (answer?.answ_justification !== question.answer[0]?.answ_justification) {
+      updateAnswer(sectionIndex, index, {
+        answ_justification: answer?.answ_justification || "",
       });
-      setLastSavedJustification(justification);
     }
   };
 
-  const answer =
-    question.answer.length > 0
-      ? question.answer[0]
-      : { answ_answer: "", answ_justification: "", answ_evidence: "", answ_id: null };
+  const handleUploadSuccess = (url: string) => {
+    updateAnswer(sectionIndex, index, { answ_evidence: url }, (updatedAnswer) => {
+      setAnswer(updatedAnswer);
+    });
+  };
 
   return (
     <div
@@ -64,7 +57,7 @@ const QuestionAnswer = ({
             type="checkbox"
             name={`response-${index}`}
             className="w-6 h-6 bg-gray-100 border-gray-300 rounded me-3"
-            checked={answer.answ_answer === "yes"}
+            checked={answer?.answ_answer === "yes"}
             onChange={() => handleResponseChange("yes")}
           />{" "}
           Si.
@@ -74,7 +67,7 @@ const QuestionAnswer = ({
             type="checkbox"
             className="w-6 h-6 bg-gray-100 border-gray-300 rounded me-3"
             name={`response-${index}`}
-            checked={answer.answ_answer === "no"}
+            checked={answer?.answ_answer === "no"}
             onChange={() => handleResponseChange("no")}
           />{" "}
           No.
@@ -83,11 +76,11 @@ const QuestionAnswer = ({
       <textarea
         className="my-2 p-2 border rounded-lg w-full bg-transparent"
         placeholder="Observaciones..."
-        value={justification}
+        value={answer?.answ_justification || ""}
         onChange={(e) => handleObservationChange(e.target.value)}
         onBlur={handleObservationBlur}
       />
-      {answer.answ_evidence && (
+      {answer?.answ_evidence && (
         <div className="my-2">
           <a
             href={answer.answ_evidence}
@@ -99,7 +92,11 @@ const QuestionAnswer = ({
           </a>
         </div>
       )}
-      <UploadButton answ_id={answer.answ_id} answ_evidence={answer.answ_evidence} />
+      <UploadButton
+        answer={answer}
+        answ_evidence={answer?.answ_evidence || ""}
+        onUploadSuccess={handleUploadSuccess}
+      />
     </div>
   );
 };

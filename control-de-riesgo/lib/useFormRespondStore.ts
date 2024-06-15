@@ -1,4 +1,4 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import { Form, Answer } from "../components/index";
 
 interface FormState {
@@ -14,7 +14,8 @@ interface FormState {
   updateAnswer: (
     sectionIndex: number,
     questionIndex: number,
-    newData: Partial<Answer>
+    newData: Partial<Answer>,
+    callback?: (updatedAnswer: Answer) => void
   ) => void;
   checkUnansweredQuestions: () => void;
 }
@@ -25,7 +26,7 @@ const useFormStore = create<FormState>((set, get) => ({
   unansweredQuestions: [],
   setForm: (form: Form) => set({ form }),
   setCurrentPage: (page: number) => set({ currentPage: page }),
-  updateAnswer: (sectionIndex, questionIndex, newData) => {
+  updateAnswer: (sectionIndex, questionIndex, newData, callback) => {
     const form = get().form;
     if (!form) return;
 
@@ -44,16 +45,19 @@ const useFormStore = create<FormState>((set, get) => ({
 
     set({ form });
 
-    // Guardar la respuesta solo si answ_answer está presente
     if (updatedAnswer.answ_answer) {
-      // Llamar a la API para upsert la respuesta en la base de datos
       fetch(`/api/answers`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedAnswer),
-      }).catch((error) => console.error("Error updating the answer", error));
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Answer updated:", data);
+          if (callback) callback(updatedAnswer);
+        })
+        .catch((error) => console.error("Error updating the answer", error));
     }
-
     get().checkUnansweredQuestions();
   },
   checkUnansweredQuestions: () => {

@@ -16,7 +16,6 @@ const BodyForm: React.FC = () => {
     currentPage,
     setForm,
     setCurrentPage,
-    updateAnswer,
   } = useFormStore();
 
   useEffect(() => {
@@ -102,7 +101,6 @@ const BodyForm: React.FC = () => {
                 question={question}
                 index={index}
                 sectionIndex={currentPage}
-                updateQuestion={updateAnswer}
               />
             ))}
           </div>
