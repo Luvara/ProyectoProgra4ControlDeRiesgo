@@ -3,8 +3,6 @@ import prisma from "@/lib/prisma";
 
 export async function PUT(req: NextRequest) {
   const { answ_id, url } = await req.json();
-  console.log("answ_id", answ_id);
-  console.log("url", url);
   try {
     const updatedAnswer = await prisma.answer.update({
       where: { answ_id: answ_id },

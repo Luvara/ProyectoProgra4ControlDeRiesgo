@@ -44,6 +44,7 @@ export interface Answer {
   answ_id: number;
   answ_answer: string;
   answ_justification: string;
+  answ_evidence: string;
   answ_version: number;
   QUESTION_quest_id: number;
   DEPARTMENT_dep_id: number;

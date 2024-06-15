@@ -17,8 +17,6 @@ const BodyForm: React.FC = () => {
     setForm,
     setCurrentPage,
     updateAnswer,
-    unansweredQuestions,
-    checkUnansweredQuestions,
   } = useFormStore();
 
   useEffect(() => {
@@ -32,15 +30,11 @@ const BodyForm: React.FC = () => {
         .then((response) => response.json())
         .then((data: Form) => {
           setForm(data);
-          checkUnansweredQuestions();
-          // Temporizador para simular carga de datos
-          setTimeout(() => {
-            setLoading(false); // Cambia el estado de carga después de 4 segundos
-          }, 2000);
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error loading the data", error);
-          setLoading(false); // Set loading to false even if there is an error
+          setLoading(false);
         });
     }
   }, [user]);
@@ -70,37 +64,26 @@ const BodyForm: React.FC = () => {
     <div className="container flex flex-col-reverse xl:container xl:flex xl:flex-row px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
       <div className="flex flex-col bg-gray-800 text-center p-4 xl:w-96">
         <h4 className="font-bold text-white text-lg mb-4">
-          Preguntas sin responder
+          Navegación por el cuestionario
         </h4>
-        <p className="font-bold text-white text-lg mb-4 xl:hidden">
-          S = Sección / P = Pregunta
-        </p>
-        <ul className="grid grid-cols-4 gap-3 xl:flex xl:flex-col xl:space-y-2 xl:gap-0 cursor-pointer">
-          {unansweredQuestions.map((q, idx) => (
-            <li
-              key={idx}
-              className={`text-white p-2 rounded-md justify-center md:flex md:flex-row hover:bg-slate-500 ${
-                (q.sectionIndex + 1) % 2 === 0 ? "bg-gray-700" : "bg-gray-900"
-              }`}
-              onClick={() => handlePageChange(q.sectionIndex, q.questionIndex)}
-            >
-              <span className="font-semibold">
-                <span className="block xl:hidden">S {q.sectionIndex + 1},</span>
-                <span className="hidden xl:block">
-                  Sección {q.sectionIndex + 1},
-                </span>
-              </span>
-              <span>
-                <span className="block xl:hidden">
-                  &nbsp;P {q.questionOrdern}
-                </span>
-                <span className="hidden xl:block">
-                  &nbsp;Pregunta {q.questionOrdern}
-                </span>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className="grid grid-cols-4 gap-2 cursor-pointer">
+          {form?.section.map((section, sectionIndex) =>
+            section.question.map((question, questionIndex) => {
+              const answered = question.answer[0]?.answ_answer;
+              return (
+                <div
+                  key={question.quest_id}
+                  className={`p-2 rounded-md text-center justify-center hover:bg-slate-500 ${
+                    answered ? "bg-green-500 text-white" : "bg-slate-200 text-black"
+                  }`}
+                  onClick={() => handlePageChange(sectionIndex, questionIndex)}
+                >
+                  {question.quest_ordern}
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
       <div className="p-2 bg-background-3 flex flex-col justify-center items-center w-full">
         <Pagination
@@ -124,9 +107,7 @@ const BodyForm: React.FC = () => {
             ))}
           </div>
         ) : (
-          <p className="my-10 text-white font-bold">
-            No hay datos disponibles...
-          </p>
+          <p className="my-10 text-white font-bold">No hay datos disponibles...</p>
         )}
         <Pagination
           currentPage={currentPage}
@@ -142,11 +123,9 @@ const BodyForm: React.FC = () => {
               src="https://img.icons8.com/ios-filled/50/ffffff/save--v1.png"
               alt="save--v1"
             />
-            {/*implementar la función de guardar*/}
             Guardar
           </button>
         </div>
-
         <ScrollToTopButton />
       </div>
     </div>

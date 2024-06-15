@@ -45,15 +45,10 @@ const QuestionAnswer = ({
     }
   };
 
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files ? event.target.files[0] : null;
-  //   updateQuestion(sectionIndex, index, { file });
-  // };
-
   const answer =
     question.answer.length > 0
       ? question.answer[0]
-      : { answ_answer: "", answ_justification: "" };
+      : { answ_answer: "", answ_justification: "", answ_evidence: "", answ_id: null };
 
   return (
     <div
@@ -68,7 +63,7 @@ const QuestionAnswer = ({
           <input
             type="checkbox"
             name={`response-${index}`}
-            className="w-6 h-6  bg-gray-100 border-gray-300 rounded me-3"
+            className="w-6 h-6 bg-gray-100 border-gray-300 rounded me-3"
             checked={answer.answ_answer === "yes"}
             onChange={() => handleResponseChange("yes")}
           />{" "}
@@ -92,12 +87,19 @@ const QuestionAnswer = ({
         onChange={(e) => handleObservationChange(e.target.value)}
         onBlur={handleObservationBlur}
       />
-      {
-        <UploadButton answ_id ={question.answer[0]?.answ_id} />
-      }
-      {/* {question.file && (
-        <p className="text-sm text-gray-500">File: {question.file.name}</p>
-      )} */}
+      {answer.answ_evidence && (
+        <div className="my-2">
+          <a
+            href={answer.answ_evidence}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Ver evidencia
+          </a>
+        </div>
+      )}
+      <UploadButton answ_id={answer.answ_id} answ_evidence={answer.answ_evidence} />
     </div>
   );
 };
