@@ -147,19 +147,22 @@ const TableRequest: React.FC<TableRequestProps> = ({
                     ))}
                   </select>
                 </td>
-                <td className=" py-2 px-4 border-b m-0 space-x-0 space-y-2 xl:space-x-2 justify-items-stretch">
-                  <button
-                    className="bg-green-500  text-white px-4 py-2 rounded hover:bg-green-700"
-                    onClick={() => handleApprove(user, selectedDepartmentId!)}
-                  >
-                    Aceptar
-                  </button>
-                  <button
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+                <td className="py-2 px-4 border-b m-0 xl:space-x-2 justify-items-stretch">
+                  <div className="flex space-x-2">
+                    <button
+                    className="bg-slate-300 text-black px-4 py-2 rounded hover:bg-slate-500"
                     onClick={() => handleReject(user)}
                   >
                     Rechazar
                   </button>
+                  <button
+                    className="bg-blue-500  text-white px-4 py-2 rounded hover:bg-blue-700"
+                    onClick={() => handleApprove(user, selectedDepartmentId!)}
+                  >
+                    Aceptar
+                  </button>
+                  </div>
+                  
                 </td>
               </tr>
             ))

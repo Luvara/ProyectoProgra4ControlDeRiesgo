@@ -165,16 +165,16 @@ const Header = () => {
                               </Link>
                             </li>
                             <li>
-                              <div className="relative inline-block">
+                              <div className="flex items-center img-hover">
                                 <Link
-                                  className="block px-4 py-2 img-hover"
+                                  className="px-4 py-2"
                                   href="/admin/adminControlnterno/requestCoordinate"
                                 >
                                   Solicitudes
-                                  <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
-                                    {coordinatorRequestCount}
-                                  </span>
                                 </Link>
+                                <span className="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                  {coordinatorRequestCount}
+                                </span>
                               </div>
                             </li>
                           </>
