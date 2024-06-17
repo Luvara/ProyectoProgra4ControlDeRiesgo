@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Question, Answer } from "../index";
 import UploadButton from "./UploadButton";
 import useFormStore from "../../lib/useFormRespondStore";
+import Image from "next/image";
 
 const QuestionAnswer = ({
   question,
@@ -51,28 +52,38 @@ const QuestionAnswer = ({
       <h4 className="font-semibold">
         {question.quest_ordern} - {question.quest_question}
       </h4>
-      <div className="my-2 flex justify-center">
-        <label className="flex items-center p-3 rounded-md img-hover cursor-pointer">
-          <input
-            type="checkbox"
-            name={`response-${index}`}
-            className="w-6 h-6 bg-gray-100 border-gray-300 rounded me-3"
-            checked={answer?.answ_answer === "yes"}
-            onChange={() => handleResponseChange("yes")}
-          />{" "}
-          Si.
-        </label>
-        <label className="flex items-center p-3 rounded-md img-hover cursor-pointer">
-          <input
-            type="checkbox"
-            className="w-6 h-6 bg-gray-100 border-gray-300 rounded me-3"
-            name={`response-${index}`}
-            checked={answer?.answ_answer === "no"}
-            onChange={() => handleResponseChange("no")}
-          />{" "}
-          No.
-        </label>
-      </div>
+      <div className="my-2 flex justify-center space-x-20 md:space-x-40">
+      <button
+        className={`flex p-2 border rounded-xl  w-52 h-12 font-bold justify-center items-center btn-quest hover:bg-red-700  ${
+          answer?.answ_answer === 'no' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600 opacity-30'
+        }`}
+        onClick={() => handleResponseChange('no')}
+      >
+         <img
+              className=" me-3 img-shadow"
+              src="https://img.icons8.com/fluency/48/cancel.png"
+              width={40}
+              height={40}
+              alt="Image"
+            />
+        No
+      </button>
+      <button
+        className={`flex p-2 border rounded-xl w-52 h-12 font-bold justify-center items-center btn-quest hover:bg-green-700  ${
+          answer?.answ_answer === 'yes' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600 opacity-30'
+        }`}
+        onClick={() => handleResponseChange('yes')}
+      >
+        <img
+              className=" me-3 img-shadow"
+              src="https://img.icons8.com/fluency/48/checked.png"
+              width={40}
+              height={40}
+              alt="Image"
+            />
+        Sí
+      </button>
+    </div>
       <textarea
         className="my-2 p-2 border rounded-lg w-full bg-transparent"
         placeholder="Observaciones..."

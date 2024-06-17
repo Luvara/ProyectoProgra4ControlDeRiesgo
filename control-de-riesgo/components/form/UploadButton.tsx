@@ -45,7 +45,7 @@ const UploadButton: React.FC<UploadButtonProps> = ({
     <div>
       {!isButtonDisabled ? (
         <CldUploadButton
-        className="bg-blue-500 text-white py-2 px-4 rounded"
+        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
           uploadPreset="my_upload_preset"
           onSuccess={handleUpload}
           onClose={handleClose}
