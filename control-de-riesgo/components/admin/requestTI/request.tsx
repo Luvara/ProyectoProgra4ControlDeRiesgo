@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from "../../../lib/userContext";
 import { User } from "../../index";
 import { useRequest } from "../../../lib/requestContext"; // Ajusta la ruta según sea necesario
+import TablesSkeleton from "../../skeleton/tablesSkeleton";
 
 const Request: React.FC = () => {
   const { data: session } = useSession();
@@ -14,6 +15,7 @@ const Request: React.FC = () => {
   const { user } = useUser();
   const [users, setUsers] = useState<User[]>([]);
   const { fetchTIRequestCount, fetchCoordinatorRequestCount } = useRequest(); // Asegúrate de llamar a esta función después de aceptar o rechazar
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (typeof window !== "undefined" && !session) {
@@ -28,7 +30,9 @@ const Request: React.FC = () => {
       const response = await fetch(`/api/adminRequest?checkPermissions=true`);
       const data = await response.json();
       setUsers(Array.isArray(data) ? data : []);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching users:", error);
     }
   };
@@ -100,12 +104,16 @@ const Request: React.FC = () => {
       <section className="p-14 flex flex-col items-center">
         <h2 className="text-white m-10 text-6xl">Solicitudes pendientes</h2>
 
-        <div className="w-full mt-10">
+        <div className="w-full">
+        {loading ? (
+            <TablesSkeleton />
+          ) : (
           <TableRequest
             users={users}
             setUsers={setUsers}
             handleStateChange={handleStateChange}
           />
+        )}
         </div>
       </section>
     </div>

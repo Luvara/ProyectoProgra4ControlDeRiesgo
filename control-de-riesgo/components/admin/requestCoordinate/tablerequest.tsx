@@ -161,8 +161,7 @@ const TableRequest: React.FC<TableRequestProps> = ({
                   >
                     Aceptar
                   </button>
-                  </div>
-                  
+                  </div>                  
                 </td>
               </tr>
             ))

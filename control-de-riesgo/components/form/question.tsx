@@ -46,7 +46,7 @@ const QuestionAnswer = ({
   return (
     <div
       id={`question-${sectionIndex}-${index}`}
-      className="mx-10 my-3 p-4 bg-background-4 text-white rounded-lg shadow"
+      className="mx-10 my-3 p-4 bg-background-4 text-white rounded-lg shadow w-full"
     >
       <h4 className="font-semibold">
         {question.quest_ordern} - {question.quest_question}

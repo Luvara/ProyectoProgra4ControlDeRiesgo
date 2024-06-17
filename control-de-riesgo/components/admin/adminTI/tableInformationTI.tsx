@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Switch from "react-switch";
 import { User } from "../../index";
 import Modal from "../../modal";
 import Pagination from "../../form/pagination";
@@ -19,7 +20,7 @@ const TableInformationTI: React.FC<TableInformationTIProps> = ({
   const [filter, setFilter] = useState("");
   const itemsPerPage = 20;
 
-  const handleCheckboxChange = (checked: boolean, user: User) => {
+  const handleSwitchChange = (checked: boolean, user: User) => {
     if (!checked) {
       setConfirmUser(user);
     } else {
@@ -54,16 +55,20 @@ const TableInformationTI: React.FC<TableInformationTIProps> = ({
   };
 
   return (
-    <div>
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Filtrar por nombre o correo"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="p-2 border rounded"
-        />
+    <div className="min-w-fit mt-10 bg-register p-10 border">
+      <div className="w-full max-w-3xl">
+        <div className="mb-4 inputContainer">
+          <input
+            type="text"
+            placeholder="Filtrar por nombre o correo"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="p-2 inputTxt"
+          />
+          <label className="labelFloat">Filtrar por nombre o correo</label>
+        </div>
       </div>
+
       <table className="w-full text-white text-center">
         <thead>
           <tr>
@@ -87,13 +92,15 @@ const TableInformationTI: React.FC<TableInformationTIProps> = ({
                 <td className="py-2 px-4 border-b">{`${user.usu_lastname} ${user.usu_slastname}`}</td>
                 <td className="py-2 px-4 border-b">{user.usu_email}</td>
                 <td className="py-2 px-4 border-b">
-                  <input
-                    className="h-6 w-6"
-                    type="checkbox"
+                <Switch
                     checked={user.usu_state === "A"}
-                    onChange={(e) =>
-                      handleCheckboxChange(e.target.checked, user)
+                    onChange={(checked) =>
+                      handleSwitchChange(checked, user)
                     }
+                    offColor="#888"
+                    onColor="#0f0"
+                    uncheckedIcon={false}
+                    checkedIcon={false}
                   />
                 </td>
               </tr>
