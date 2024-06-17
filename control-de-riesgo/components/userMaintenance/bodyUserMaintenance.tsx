@@ -3,6 +3,7 @@ import { User, UserType, DepartmentType } from "../index";
 import TableUserMaintenance from "./tableUserMaintenance";
 import UserEditor from "./userEditor";
 import { useUser } from "../../lib/userContext";
+import ScrollToTopButton from "../util/buttonToTop";
 
 const BodyFormMaintenance: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<User>({} as User);
@@ -108,6 +109,7 @@ const BodyFormMaintenance: React.FC = () => {
         onSelectUser={setSelectedUser}
         onDeleteUser={(id) => console.log("Deleting user with ID:", id)}
       />
+      <ScrollToTopButton />
     </div>
   );
 };

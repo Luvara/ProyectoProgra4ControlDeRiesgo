@@ -8,6 +8,7 @@ import { useUser } from "../../../lib/userContext";
 import { User } from "../../index";
 import { useRequest } from "../../../lib/requestContext"; // Ajusta la ruta según sea necesario
 import TablesSkeleton from "../../skeleton/tablesSkeleton";
+import ScrollToTopButton from "../../util/buttonToTop";
 
 const Request: React.FC = () => {
   const { data: session } = useSession();
@@ -116,6 +117,7 @@ const Request: React.FC = () => {
         )}
         </div>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };

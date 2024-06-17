@@ -8,6 +8,7 @@ import { useUser } from "../../../lib/userContext";
 import { User, Department } from "../../index";
 import { useRequest } from "../../../lib/requestContext";
 import TablesSkeleton from "../../skeleton/tablesSkeleton";
+import ScrollToTopButton from "../../util/buttonToTop";
 
 const RequestC: React.FC = () => {
   const { data: session } = useSession();
@@ -117,6 +118,7 @@ const RequestC: React.FC = () => {
           )}
         </div>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };

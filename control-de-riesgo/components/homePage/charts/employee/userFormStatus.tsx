@@ -25,20 +25,20 @@ const UserFormStatus = () => {
 
   if (!userFormData) {
     return (
-      <div className="my-4 w-full md:w-2/5 md:flex md:justify-between bg-background-3 shadow-lg rounded-lg p-5 text-white">
+      <div className="my-4 w-full p-5 text-white bg-nodes text-center">
         <div className="w-full">
-          <h3 className="text-lg font-semibold mb-3">Form Status</h3>
-          <p>No form data available</p>
+          <h3 className="text-lg font-semibold mb-3">Estado del formulario</h3>
+          <p>No hay datos de formulario disponibles</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="my-4 bg-background-3 shadow-lg rounded-lg p-5 text-white">
-      <h3 className="text-lg font-semibold mb-3">Form Status</h3>
+    <div className="my-4 w-full p-5 text-white bg-nodes text-center">
+      <h3 className="text-lg font-semibold mb-3">Estado del formulario</h3>
       <p>
-        <strong>Form Name:</strong> {userFormData.form_name}{" "}
+        <strong>Nombre del formulario:</strong> {userFormData.form_name}{": "}
         {userFormData.form_status}
       </p>
     </div>

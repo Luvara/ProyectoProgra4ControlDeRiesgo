@@ -9,6 +9,7 @@ import { User, Department } from "../../index";
 import Card from "../../card";
 import MantFormSkeleton from "../../skeleton/mantFormSkeleton";
 import TablesSkeleton from "../../skeleton/tablesSkeleton";
+import ScrollToTopButton from "../../util/buttonToTop";
 
 const InformationEmployee: React.FC = () => {
   const { data: session } = useSession();
@@ -197,6 +198,7 @@ const InformationEmployee: React.FC = () => {
           )}
         </div>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };

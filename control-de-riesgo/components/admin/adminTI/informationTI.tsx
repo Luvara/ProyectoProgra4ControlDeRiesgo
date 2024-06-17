@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from "../../../lib/userContext";
 import { User } from "../../index";
 import MantFormSkeleton from "../../skeleton/mantFormSkeleton";
+import ScrollToTopButton from "../../util/buttonToTop";
 
 const InformationTI: React.FC = () => {
   const { data: session } = useSession();
@@ -120,6 +121,7 @@ const InformationTI: React.FC = () => {
           />
         </div>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };

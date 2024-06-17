@@ -4,6 +4,8 @@ import BodyHomePage from "./bodyHomePage";
 import { useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import ScrollToTopButton from "../util/buttonToTop";
+
 const HomePage: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -18,6 +20,7 @@ const HomePage: React.FC = () => {
       <section className="">
         <BodyHomePage />
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };

@@ -69,16 +69,16 @@ const ProjectProgressChart: React.FC = () => {
   };
 
   return (
-    <div className="my-4 w-full bg-background-3 shadow-lg rounded-lg p-5 text-white">
+    <div className="w-full bg-background-3 shadow-lg rounded-lg p-5 text-white bg-nodes text-center">
       <h3 className="text-lg font-semibold mb-3">Project Progress by Department</h3>
       <Bar data={data} options={options} />
       <ul className="mt-4">
         {projects.map((project, index) => (
           <li key={index} className="mb-2">
-            <strong>Project:</strong> {project.form_name} <br />
-            <strong>Department:</strong> {project.department} <br />
-            <strong>Start Date:</strong> {new Date(project.form_date_start).toLocaleDateString()} <br />
-            <strong>End Date:</strong> {new Date(project.form_date_finish).toLocaleDateString()} <br />
+            <strong>Proyecto:</strong> {project.form_name} <br />
+            <strong>Departamento:</strong> {project.department} <br />
+            <strong>Fecha de inicio:</strong> {new Date(project.form_date_start).toLocaleDateString()} <br />
+            <strong>Fecha de finalización:</strong> {new Date(project.form_date_finish).toLocaleDateString()} <br />
           </li>
         ))}
       </ul>

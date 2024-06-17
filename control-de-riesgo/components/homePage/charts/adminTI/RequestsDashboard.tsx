@@ -54,10 +54,10 @@ const RequestsDashboard: React.FC = () => {
     <div className="container px-5 py-14 mx-auto rounded-lg bg-background-2 body-font">
       <div className="flex flex-wrap w-full mb-10 flex-col items-center text-center">
         <h1 className="md:text-5xl text-3xl font-bold title-font mb-2 text-white">
-          Admin Dashboard
+          Administrador Dashboard
         </h1>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center md:flex-wrap">
+      <div className="flex flex-col items-center">
         <RequestList
           title="TI Admin Requests"
           count={totalTIRequests}

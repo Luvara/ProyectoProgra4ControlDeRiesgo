@@ -22,14 +22,14 @@ const SubordinatesList: React.FC = () => {
   }, [user]);
 
   return (
-    <div className="my-4 bg-background-3 shadow-lg rounded-lg p-5 text-white">
-      <h3 className="text-lg font-semibold mb-3">Subordinates with Permission to Respond</h3>
+    <div className="my-4 w-full p-5 text-white text-center bg-nodes">
+      <h3 className="text-lg font-semibold mb-3">Usuarios con permiso para responder</h3>
       <ul>
         {subordinates.map((subordinate) => (
           <li key={subordinate.usu_id} className="mb-2">
-            <strong>Name:</strong> {subordinate.usu_name} <br />
-            <strong>Email:</strong> {subordinate.usu_email} <br />
-            <strong>ID Number:</strong> {subordinate.usu_idnumber} <br />
+            <strong>Nombre:</strong> {subordinate.usu_name} <br />
+            <strong>Correo:</strong> {subordinate.usu_email} <br />
+            <strong>ID:</strong> {subordinate.usu_idnumber} <br />
           </li>
         ))}
       </ul>

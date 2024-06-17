@@ -87,10 +87,11 @@ const BodyForm: React.FC = () => {
       </div>
       <div className="p-2 bg-background-3 flex flex-col justify-center items-center w-full">
         <div className=" text-white w-full mb-10 space-x-2">
-        
-          <p><span className="font-bold">* Autoguardado:</span> sus respuestas se guardan automáticamente.</p>
+          <p>
+            <span className="font-bold">* Autoguardado:</span> sus respuestas se
+            guardan automáticamente.
+          </p>
           <p>Preguntas de respuesta única, Si o No.</p>
-          <p></p>
         </div>
         <Pagination
           currentPage={currentPage}

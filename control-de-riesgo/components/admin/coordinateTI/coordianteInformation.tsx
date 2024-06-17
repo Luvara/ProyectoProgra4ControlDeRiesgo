@@ -8,6 +8,7 @@ import { useUser } from "../../../lib/userContext";
 import { User } from "../../index";
 import MantFormSkeleton from "../../skeleton/mantFormSkeleton";
 import TablesSkeleton from "../../skeleton/tablesSkeleton";
+import ScrollToTopButton from "../../util/buttonToTop";
 
 const Coordinate: React.FC = () => {
   const { data: session } = useSession();
@@ -129,6 +130,7 @@ const Coordinate: React.FC = () => {
           />
         </div>
       </section>
+      <ScrollToTopButton />
     </div>
   );
 };

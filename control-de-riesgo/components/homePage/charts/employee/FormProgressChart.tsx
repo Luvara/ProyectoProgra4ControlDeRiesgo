@@ -3,6 +3,7 @@ import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import { useUser } from "../../../../lib/userContext";
 import { FormProgressResponse } from "../../../index";
+import { color } from "chart.js/helpers";
 
 const FormProgressChart = () => {
   const { user } = useUser();
@@ -28,11 +29,12 @@ const FormProgressChart = () => {
   }, [user]);
 
   const data = {
-    labels: ["Completed", "Remaining"],
+    labels: ["Completo", "Restante"],
     datasets: [
       {
-        label: "Form Progress",
+        label: "Progreso del formulario",
         data: [formProgress?.answeredQuestions, formProgress?.totalQuestions],
+        color: ["#FFFFFF"],
         backgroundColor: ["#36A2EB", "#FF6384"],
         hoverBackgroundColor: ["#36A2EB", "#FF6384"],
       },
@@ -40,8 +42,8 @@ const FormProgressChart = () => {
   };
 
   return (
-    <div className="my-4 w-full md:w-2/5 md:flex md:justify-between bg-background-3 shadow-lg rounded-lg p-5 text-white">
-      <div className="w-full">
+    <div className="flex w-full p-5 text-center text-white bg-nodes items-center align-middle justify-center">
+      <div className="w-1/2">
         <h3 className="text-lg font-semibold mb-3">
           {formProgress?.form_name}
         </h3>
