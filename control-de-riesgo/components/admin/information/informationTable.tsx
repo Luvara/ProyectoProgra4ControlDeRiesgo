@@ -64,18 +64,21 @@ const InformationTable: React.FC<InformationTableProps> = ({
   };
 
   return (
-    <div>
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Filtrar por nombre o correo"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="p-2 border rounded"
-        />
+    <div className="min-w-fit mt-10 bg-register p-10 border">
+      <div className="w-full max-w-3xl">
+        <div className="mb-4 inputContainer">
+          <input
+            type="text"
+            placeholder="Filtrar por nombre o correo"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="p-2 inputTxt"
+          />
+          <label className="labelFloat">Filtrar por nombre o correo</label>
+        </div>
       </div>
 
-      <table className="w-full text-white text-center">
+      <table className="w-full text-white mt-10 text-center">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b">Nombre</th>

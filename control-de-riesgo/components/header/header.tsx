@@ -125,17 +125,19 @@ const Header = () => {
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                className="relative block px-4 py-2 img-hover"
-                                href="/admin/adminTI/request"
-                              >
-                                Solicitudes
+                              <div className="flex items-center img-hover">
+                                <Link
+                                  className="px-4 py-2"
+                                  href="/admin/adminTI/request"
+                                >
+                                  Solicitudes
+                                </Link>
                                 {tiRequestCount > 0 && (
-                                  <span className="absolute top-0 right-0 inline-block w-6 h-6 bg-red-500 text-white rounded-full text-center text-xs">
+                                  <span className="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
                                     {tiRequestCount}
                                   </span>
                                 )}
-                              </Link>
+                              </div>
                             </li>
                           </>
                         ) : (
@@ -165,16 +167,16 @@ const Header = () => {
                               </Link>
                             </li>
                             <li>
-                              <div className="relative inline-block">
+                              <div className="flex items-center img-hover">
                                 <Link
-                                  className="block px-4 py-2 img-hover"
+                                  className="px-4 py-2"
                                   href="/admin/adminControlnterno/requestCoordinate"
                                 >
                                   Solicitudes
-                                  <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
-                                    {coordinatorRequestCount}
-                                  </span>
                                 </Link>
+                                <span className="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                  {coordinatorRequestCount}
+                                </span>
                               </div>
                             </li>
                           </>

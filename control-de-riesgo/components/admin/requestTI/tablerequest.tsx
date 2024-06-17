@@ -71,21 +71,24 @@ const TableRequest: React.FC<TableRequestProps> = ({
   );
 
   return (
-    <div>
-      <div className="mb-4">
-        <select
-          value={filter}
-          onChange={handleFilterChange}
-          className="p-2 border rounded"
-        >
-          <option value="">Todos los roles</option>
-          {uniqueRoles.map((role) => (
-            <option key={role} value={role}>
-              {role}
-            </option>
-          ))}
-        </select>
+    <div className="flex flex-col min-w-fit mt-10 bg-register p-10 border items-center">
+      <div className="w-1/4 mb-10">
+        <div className="inputContainer">
+          <select
+            value={filter}
+            onChange={handleFilterChange}
+            className="inputTxt text-center"
+          >
+            <option className="bg-background-2 text-center" value="">Todos los roles</option>
+            {uniqueRoles.map((role) => (
+              <option className="bg-background-2" key={role} value={role}>
+                {role}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
+
       <table className="w-full text-white text-center">
         <thead>
           <tr>
@@ -113,18 +116,20 @@ const TableRequest: React.FC<TableRequestProps> = ({
                   {user.usertype?.usut_role}
                 </td>
                 <td className="py-2 px-4 border-b">
-                  <button
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
-                    onClick={() => handleApprove(user)}
-                  >
-                    Aceptar
-                  </button>
-                  <button
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 ml-2"
-                    onClick={() => handleReject(user)}
-                  >
-                    Rechazar
-                  </button>
+                  <div className="flex space-x-2">
+                    <button
+                      className="bg-slate-300 text-black px-4 py-2 rounded hover:bg-slate-500"
+                      onClick={() => handleReject(user)}
+                    >
+                      Rechazar
+                    </button>
+                    <button
+                      className="bg-blue-500  text-white px-4 py-2 rounded hover:bg-blue-700"
+                      onClick={() => handleApprove(user)}
+                    >
+                      Aceptar
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))
